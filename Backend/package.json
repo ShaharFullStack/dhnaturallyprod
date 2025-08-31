@@ -1,5 +1,5 @@
 {
-    "name": "dhnaturally--backend",
+    "name": "dhnaturally-backend",
     "version": "1.0.0",
     "scripts": {
         "start": "nodemon --legacy-watch --exec ts-node src/app.ts --quiet",

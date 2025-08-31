@@ -61,8 +61,8 @@ class ProductService {
         // Create values array
         const values = [
             productId,
-            product.name,
-            product.description,
+            product.name_en || product.name_he,
+            product.description_en || product.description_he,
             product.price,
             imageName
         ];
@@ -95,8 +95,8 @@ class ProductService {
 
         // Create values array
         const values = [
-            product.name,
-            product.description,
+            product.name_en || product.name_he,
+            product.description_en || product.description_he,
             product.price,
             imageName,
             product.id
