@@ -1,4 +1,4 @@
-import { StatusCode } from "./enums.js";
+import { StatusCode } from "./enums";
 
 abstract class ClientError {
     protected constructor(public status: StatusCode, public message: string) { }
