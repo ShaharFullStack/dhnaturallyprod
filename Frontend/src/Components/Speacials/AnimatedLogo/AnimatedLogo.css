@@ -1,3 +1,21 @@
-.AnimatedLogo {
-	
+/* Animated Logo Styles */
+.animated-logo-base {
+  border-radius: 0.5rem;
+}
+
+.animated-logo-header {
+  width: 3rem;
+  height: 3rem;
+}
+
+.animated-logo-hero {
+  width: 6rem;
+  height: 6rem;
+}
+
+@media (min-width: 1024px) {
+  .animated-logo-hero {
+    width: 15rem;
+    height: 15rem;
+  }
 }

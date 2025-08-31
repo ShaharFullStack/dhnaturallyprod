@@ -1,0 +1,19 @@
+Layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.layout-header {
+  flex: 0 0 auto;
+}
+
+.layout-main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-footer {
+  flex: 0 0 auto;
+}

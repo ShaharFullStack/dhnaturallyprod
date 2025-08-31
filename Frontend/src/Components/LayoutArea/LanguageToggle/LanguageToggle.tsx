@@ -1,6 +1,7 @@
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import { Button } from "../../UI/Button/Button";
+import "./LanguageToggle.css";
 
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage();
@@ -16,25 +17,17 @@ export function LanguageToggle() {
   };
 
   return (
-    <div className="flex items-center bg-dh-pale rounded-full p-1" data-testid="language-toggle">
+    <div className="language-toggle-container" data-testid="language-toggle">
       <Button
-        variant="ghost"
-        size="sm"
         onClick={handleHebrewClick}
-        className={`px-3 py-1 rounded-full text-sm font-medium lang-btn ${
-          language === 'he' ? 'active' : ''
-        }`}
+        className={`lang-btn ${language === 'he' ? 'active' : ''}`}
         data-testid="language-button-he"
       >
         {t('nav.language.he', language)}
       </Button>
       <Button
-        variant="ghost"
-        size="sm"
         onClick={handleEnglishClick}
-        className={`px-3 py-1 rounded-full text-sm font-medium lang-btn ${
-          language === 'en' ? 'active' : ''
-        }`}
+        className={`lang-btn ${language === 'en' ? 'active' : ''}`}
         data-testid="language-button-en"
       >
         {t('nav.language.en', language)}

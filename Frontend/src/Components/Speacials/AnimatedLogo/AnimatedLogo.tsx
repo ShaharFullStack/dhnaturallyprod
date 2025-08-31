@@ -1,4 +1,5 @@
 import { cn } from "../../../lib/utils";
+import "./AnimatedLogo.css";
 
 interface AnimatedLogoProps {
   variant?: 'header' | 'hero';
@@ -12,7 +13,7 @@ export function AnimatedLogo({
   blendMode = 'screen' 
 }: AnimatedLogoProps) {
   const videoSrc = variant === 'header' ? '/assets/animatedLogo2.mp4' : '/assets/animatedLogo5.mp4';
-  const size = variant === 'header' ? 'w-12 h-12' : 'w-24 h-24 lg:w-60 lg:h-60';
+  const sizeClass = variant === 'header' ? 'animated-logo-header' : 'animated-logo-hero';
   
   // Enhanced blend classes based on variant
   const blendClass = variant === 'hero' ? 'logo-hero-blend' : 'logo-screen-blend';
@@ -24,7 +25,7 @@ export function AnimatedLogo({
       loop={false} 
       muted 
       playsInline
-      className={cn(size, 'rounded-lg', blendClass, className)}
+      className={cn(sizeClass, 'animated-logo-base', blendClass, className)}
       aria-label={`DHnaturally ${variant === 'header' ? 'Navigation' : 'Hero'} Animated Logo`}
     />
   );

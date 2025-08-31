@@ -1,0 +1,49 @@
+/* DHnaturally brand colors */
+:root {
+  --dh-pale: hsl(194, 77%, 94%);
+  --dh-ocean: hsl(199, 100%, 36%);
+  --dh-sky: hsl(194, 100%, 42%);
+  --dh-navy: hsl(245, 94%, 18%);
+}
+
+.language-toggle-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--dh-pale);
+  border-radius: 9999px; /* This is equivalent to rounded-full */
+  padding: 4px; /* This is equivalent to p-1 */
+  direction: ltr; /* Ensure buttons are displayed left-to-right */
+}
+
+/* Base button styles */
+.lang-btn {
+  padding: 4px 12px; /* This is equivalent to px-3 py-1 */
+  border-radius: 9999px; /* This is equivalent to rounded-full */
+  font-size: 0.875rem; /* This is equivalent to text-sm */
+  font-weight: 500; /* This is equivalent to font-medium */
+  background-color: transparent;
+  color: var(--dh-ocean);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Active button styles */
+.lang-btn.active {
+  background-color: white;
+  color: var(--dh-navy);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.lang-btn:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.lang-btn.active:hover {
+  background-color: white; /* Prevent hover effect on active button */
+}
+
+/* RTL support */
+[dir="rtl"] .language-toggle-container {
+  direction: ltr;
+}

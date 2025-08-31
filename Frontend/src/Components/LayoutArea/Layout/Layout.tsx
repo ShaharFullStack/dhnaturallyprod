@@ -7,7 +7,9 @@ import "./Layout.css";
 export function Layout(): JSX.Element {
     return (
         <div className="Layout">
+            <div className='layout-header'>
                 <Header />
+            </div>
             <main className="layout-main">
                 <div className="main-content-wrapper">
                     <Routing />

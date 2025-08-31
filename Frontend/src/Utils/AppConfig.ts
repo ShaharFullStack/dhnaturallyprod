@@ -9,25 +9,15 @@ class AppConfig {
     }
 
     // General endpoints
-    public readonly vacationsUrl = `${this.baseUrl}api/vacations`; // All vacations
-    public readonly vacationById = `${this.baseUrl}api/vacations/`; // Single vacation
-    public readonly searchVacationsUrl = `${this.baseUrl}api/vacations/search`; // Search vacations
-    public readonly vacationsImagesUrl = `${this.baseUrl}api/vacations/images`; // Vacation images
+    public readonly productsUrl = `${this.baseUrl}api/products`; // All products
+    public readonly productById = `${this.baseUrl}api/products/`; // Single product
+    public readonly searchproductsUrl = `${this.baseUrl}api/products/search`; // Search products
+    public readonly productsImagesUrl = `${this.baseUrl}api/products/images`; // product images
     public readonly contactUsUrl = `${this.baseUrl}api/contact-us`; // Contact us endpoint
-
-    // Likes endpoints
-    public readonly likesUrl = `${this.baseUrl}api/likes`; // All likes
-    public readonly likeVacationUrl = (vacationId: string) => `${this.baseUrl}api/vacations/${vacationId}/likes`; // Like endpoint
-    public readonly vacationLikesCountUrl = (vacationId: string) => `${this.baseUrl}api/vacations/${vacationId}/likes/count`; // Vacation likes count
-    public readonly userLikesUrl = `${this.baseUrl}api/users/likes`;
 
     // Authentication endpoints
     public readonly registerUrl = `${this.baseUrl}api/register`; // Register endpoint
     public readonly loginUrl = `${this.baseUrl}api/login`; // Login endpoint
-
-    // Reports and contact endpoints
-    public readonly reportsUrl = `${this.baseUrl}api/likes/report`; // Reports endpoint
-    public readonly downloadCSVUrl = `${this.baseUrl}api/likes/report/csv`; // Download CSV report
 }
 
 export const appConfig = new AppConfig();

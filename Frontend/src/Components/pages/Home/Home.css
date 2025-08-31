@@ -1,13 +1,213 @@
-/* Mobile-first styles for the Home component */
+/* Home Page Styles */
+.home-container {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero Section */
+.hero-section {
+  background: url('../../../Assets/Images/heroBg.png');
+
+  padding: 6rem 0 5rem;
+}
+
+.hero-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero-content {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.hero-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.hero-logo {
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.hero-title {
+  font-weight: 700;
+  color: hsl(245, 94%, 18%); /* --dh-navy */
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+}
+
+.hero-title-text {
+  display: block;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  color: hsl(180, 100%, 87%); /* --dh-light */
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: 2.5rem;
+  color: hsl(180, 100%, 87%); /* --dh-light */
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.hero-cta-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.hero-cta-primary {
+  background-color: hsl(199, 100%, 36%); /* --dh-ocean */
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.hero-cta-primary:hover {
+  background-color: hsl(245, 94%, 18%); /* --dh-navy */
+}
+
+.hero-cta-secondary {
+  border: 2px solid white;
+  background-color: hsl(245, 94%, 18%); /* --dh-navy */
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.hero-cta-secondary:hover {
+  background-color: white;
+  color: hsl(199, 100%, 36%); /* --dh-ocean */
+}
+
+/* Feature Cards */
+.features-section {
+  padding: 4rem 1rem;
+  background-color: #f9fafb;
+}
+
+.features-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+  width: 3rem;
+  height: 3rem;
+  color: hsl(199, 100%, 36%); /* --dh-ocean */
+  margin: 0 auto 1rem;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(245, 94%, 18%); /* --dh-navy */
+  margin-bottom: 0.75rem;
+}
+
+.feature-description {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .hero-container {
+    padding: 0 1.5rem;
+  }
+
+  .hero-cta-container {
+    flex-direction: row;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-container {
+    padding: 0 2rem;
+  }
+
+  .features-section {
+    padding: 5rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    padding: 5rem 0;
+  }
+
+  .hero-title-text {
+    font-size: 4rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .features-section {
+    padding: 6rem 2rem;
+  }
+}
+
+/* Legacy styles for compatibility */
 .Home {
   min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-/* Mobile-first hero section - optimized for small screens */
 .hero-bg {
-  background-attachment: scroll; /* Better mobile performance than fixed */
+  background-attachment: scroll;
   min-height: 60vh;
   display: flex;
   align-items: center;
@@ -29,7 +229,6 @@
   }
 }
 
-/* Mobile-first feature cards */
 .Home .feature-card {
   background: white;
   border-radius: 12px;
@@ -50,7 +249,6 @@
   }
 }
 
-/* Touch-optimized buttons for mobile */
 .Home .cta-button {
   min-height: 48px;
   padding: 14px 28px;
@@ -70,7 +268,6 @@
   }
 }
 
-/* Mobile-first typography scaling */
 .Home .section-title {
   font-size: 1.5rem;
   line-height: 1.3;
@@ -117,7 +314,6 @@
   }
 }
 
-/* Mobile-optimized spacing */
 .Home .section {
   padding: 3rem 1rem;
 }
@@ -134,7 +330,6 @@
   }
 }
 
-/* Legacy styles with mobile-first improvements */
 .Home h1 {
     font-size: clamp(1.5rem, 4vw, 3rem);
     font-weight: bold;
@@ -151,7 +346,6 @@
     line-height: 1.6;
 }
 
-/* Mobile navigation optimizations */
 @media (max-width: 767px) {
   .Home .mobile-hidden {
     display: none;
@@ -166,9 +360,108 @@
   }
 }
 
-/* Improved touch targets for mobile */
 .Home button,
 .Home a {
   min-height: 44px;
   min-width: 44px;
+}
+
+/* Helpers added to replace Tailwind utilities used in JSX */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-subtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(245, 94%, 18%);
+  margin-bottom: 1rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.feature-icon .icon,
+.feature-icon .h-8,
+.icon {
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  color: inherit;
+}
+
+.consultation-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.consultation-left {
+  display: block;
+}
+
+.consultation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.consultation-card {
+  padding: 1.25rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.testimonial-cta {
+  background-color: hsl(199, 100%, 36%);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.testimonial-cta-outline {
+  border: 2px solid hsl(199, 100%, 36%);
+  color: hsl(199, 100%, 36%);
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: transparent;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .consultation-grid {
+    grid-template-columns: 1fr 360px;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

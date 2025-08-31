@@ -70,41 +70,41 @@ export function Store(): JSX.Element {
     });
 
     return (
-        <div className="Store min-h-screen bg-gray-50">
+        <div className="store-container">
             {/* Header Section */}
-            <div className="bg-gradient-to-r from-dh-navy to-dh-ocean text-white">
-                <div className="container mx-auto px-4 py-8 lg:py-12">
-                    <div className="text-center">
-                        <h1 className="text-2xl lg:text-4xl font-bold mb-4">
+            <div className="store-header">
+                <div className="store-header-content">
+                    <div className="store-header-text">
+                        <h1 className="store-title">
                             {t("store.title", language)}
                         </h1>
-                        <p className="text-dh-pale text-sm lg:text-lg max-w-3xl mx-auto">
+                        <p className="store-description">
                             {t("store.description", language)}
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-6">
+            <div className="store-content">
                 {/* Mobile-First Filters */}
-                <div className="mb-6 space-y-4">
+                <div className="store-filters">
                     {/* Search Bar */}
-                    <div className="w-full">
+                    <div>
                         <input
                             type="text"
                             placeholder={t("common.search", language) || "Search products..."}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-dh-ocean focus:border-transparent text-sm lg:text-base"
+                            className="search-input"
                         />
                     </div>
 
                     {/* Mobile Filter Row */}
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="filter-row">
                         <select
                             value={selectedCategory}
                             onChange={(e) => setSelectedCategory(e.target.value)}
-                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-dh-ocean text-sm"
+                            className="filter-select"
                         >
                             {categories.map(category => (
                                 <option key={category.value} value={category.value}>
@@ -116,7 +116,7 @@ export function Store(): JSX.Element {
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-dh-ocean text-sm"
+                            className="filter-select"
                         >
                             {sortOptions.map(option => (
                                 <option key={option.value} value={option.value}>
@@ -128,37 +128,37 @@ export function Store(): JSX.Element {
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+                <div className="products-grid">
                     {filteredProducts.map(product => (
-                        <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                            <div className="aspect-square bg-gray-200 relative">
+                        <div key={product.id} className="product-card">
+                            <div className="product-image-container">
                                 {product.imageUrl ? (
                                     <img
                                         src={product.imageUrl}
                                         alt={product.name}
-                                        className="w-full h-full object-cover"
+                                        className="product-image"
                                         loading="lazy"
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                        <span className="text-4xl">📦</span>
+                                    <div className="product-placeholder">
+                                        <span className="product-placeholder-icon">📦</span>
                                     </div>
                                 )}
                             </div>
                             
-                            <div className="p-4">
-                                <h3 className="font-semibold text-gray-900 mb-2 text-sm lg:text-base line-clamp-2">
+                            <div className="product-info">
+                                <h3 className="product-name line-clamp-2">
                                     {product.name}
                                 </h3>
-                                <p className="text-gray-600 text-xs lg:text-sm mb-3 line-clamp-3">
+                                <p className="product-description line-clamp-3">
                                     {product.description}
                                 </p>
                                 
-                                <div className="flex items-center justify-between">
-                                    <span className="text-lg lg:text-xl font-bold text-dh-navy">
+                                <div className="product-footer">
+                                    <span className="product-price">
                                         {t("common.currency", language)}{product.price}
                                     </span>
-                                    <button className="bg-dh-ocean hover:bg-dh-navy text-white px-3 py-2 rounded-md text-xs lg:text-sm font-medium transition-colors">
+                                    <button className="add-to-cart-btn">
                                         {t("store.addToCart", language)}
                                     </button>
                                 </div>
@@ -169,12 +169,12 @@ export function Store(): JSX.Element {
 
                 {/* Empty State */}
                 {filteredProducts.length === 0 && (
-                    <div className="text-center py-12">
-                        <div className="text-6xl mb-4">🔍</div>
-                        <h3 className="text-lg font-medium text-gray-900 mb-2">
+                    <div className="empty-state">
+                        <div className="empty-state-icon">🔍</div>
+                        <h3 className="empty-state-title">
                             No products found
                         </h3>
-                        <p className="text-gray-600">
+                        <p className="empty-state-text">
                             Try adjusting your search or filter criteria
                         </p>
                     </div>
@@ -183,7 +183,7 @@ export function Store(): JSX.Element {
                 {/* Load More Button */}
                 {filteredProducts.length > 0 && (
                     <div className="text-center mt-8">
-                        <button className="bg-white border-2 border-dh-ocean text-dh-ocean hover:bg-dh-ocean hover:text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                        <button className="load-more-btn">
                             {t("store.loadMore", language)}
                         </button>
                     </div>

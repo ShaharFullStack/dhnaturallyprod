@@ -225,6 +225,18 @@ export const translations: Translations = {
   'common.hideAll': { he: 'הסתר הכל', en: 'Hide All' },
 
   // Footer
+  'footer.tagline': { he: 'אותנטי, טבעי, יעיל - לבריאות מיטבית', en: 'Authentic, Natural, Effective - For Optimal Health' },
+  'footer.natural_wellness': { he: 'רפואה טבעית מהלב', en: 'Natural Medicine from the Heart' },
+  'footer.quick_links': { he: 'ניווט מהיר', en: 'Quick Links' },
+  'footer.support': { he: 'תמיכה ויעוץ', en: 'Support & Consultation' },
+  'footer.trust': { he: 'אמינות ואיכות', en: 'Trust & Quality' },
+  'footer.location': { he: 'ישראל - שירות ארצי', en: 'Israel - Nationwide Service' },
+  'footer.natural_ingredients': { he: 'רכיבים טבעיים בלבד', en: 'Natural Ingredients Only' },
+  'footer.quality_assured': { he: 'איכות מובטחת', en: 'Quality Assured' },
+  'footer.authentic_products': { he: 'מוצרים אותנטיים', en: 'Authentic Products' },
+  'footer.rights_reserved': { he: 'כל הזכויות שמורות', en: 'All rights reserved' },
+  'footer.privacy_policy': { he: 'מדיניות פרטיות', en: 'Privacy Policy' },
+  'footer.terms_service': { he: 'תנאי שימוש', en: 'Terms of Service' },
   'footer.quickLinks': { he: 'ניווט מהיר', en: 'Quick Navigation' },
   'footer.categories': { he: 'תחומי טיפול', en: 'Treatment Areas' },
   'footer.contact': { he: 'ייעוץ וקשר', en: 'Consultation & Contact' },

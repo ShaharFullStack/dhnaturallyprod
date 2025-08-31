@@ -89,8 +89,6 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                         
                         <div className="flex items-center space-x-2 rtl:space-x-reverse">
                           <Button
-                            variant="outline"
-                            size="sm"
                             onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
                             disabled={item.quantity <= 1}
                             data-testid={`decrease-quantity-${item.id}`}
@@ -106,8 +104,6 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                           </span>
                           
                           <Button
-                            variant="outline"
-                            size="sm"
                             onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
                             data-testid={`increase-quantity-${item.id}`}
                           >
@@ -116,8 +112,6 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                         </div>
                         
                         <Button
-                          variant="ghost"
-                          size="sm"
                           onClick={() => handleRemoveItem(item.id)}
                           className="text-red-500 hover:text-red-700"
                           data-testid={`remove-item-${item.id}`}
@@ -147,7 +141,6 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                   </Button>
                   
                   <Button 
-                    variant="outline" 
                     className="w-full"
                     onClick={() => clearCart()}
                     data-testid="clear-cart-button"
