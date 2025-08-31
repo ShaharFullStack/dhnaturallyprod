@@ -406,12 +406,7 @@ html {
   filter: contrast(1.3) brightness(1.2) saturate(1.1);
 }
 
-.logo-hero-blend {
-  mix-blend-mode: screen;
-  filter: contrast(3) brightness(0.8) saturate(3);
-  transform: scale(2.68);
-  opacity: 1;
-}
+
 
 h1 {
   font-family: 'Halimun', sans-serif;

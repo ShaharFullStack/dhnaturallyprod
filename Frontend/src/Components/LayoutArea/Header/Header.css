@@ -259,20 +259,3 @@
   }
 }
 
-/* RTL Support */
-[dir="rtl"] .logo-section {
-  flex-direction: row-reverse;
-}
-
-[dir="rtl"] .header-actions {
-  flex-direction: row-reverse;
-}
-
-[dir="rtl"] .desktop-nav {
-  flex-direction: row-reverse;
-}
-
-[dir="rtl"] .cart-badge {
-  right: auto;
-  left: -0.25rem;
-}

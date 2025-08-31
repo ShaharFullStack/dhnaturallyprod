@@ -37,9 +37,12 @@ The backend follows a layered architecture pattern with numbered folders:
 Key patterns:
 - Controllers use dependency injection and async/await error handling
 - Services handle business logic and database operations via DAL
-- All routes prefixed with `/dhnaturally/`
+- All routes prefixed with `/api/` (not `/dhnaturally/` as previously documented)
 - Uses UUID for entity IDs
 - File uploads handled with uploaded-file-saver package
+- Static image serving via `/api/products/images/` endpoint
+- Environment-based configuration with development/production modes
+- HTTPS support in production with SSL certificates
 
 ### Frontend Architecture
 React application with:
@@ -54,12 +57,32 @@ Key features:
 - TailwindCSS with custom design system including dh-* color palette
 - React Router for navigation
 - Custom UI components with shadcn/ui influence
+- Professional medical terminology and health benefit claims in translations
 
 ## Database & Configuration
 
 - Backend uses MySQL2 with environment-based configuration
 - Configuration managed through app-config.ts with dotenv
 - SSL certificates provided for localhost development
+- Environment variables required: ENVIRONMENT, PORT, MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE, JWT_SECRET, HASHING_SALT, DHNATURALLY_IMAGES_WEB_PATH
+
+## Security & Middleware
+
+- Rate limiting with express-rate-limit (1000 requests per 5 seconds)
+- Helmet for security headers
+- CORS configured for localhost development ports
+- Custom security middleware for XSS protection
+- Authentication middleware with JWT tokens
+- Request logging middleware
+
+## Translation System
+
+The application features a comprehensive bilingual system:
+- 440+ translation keys covering all aspects of natural medicine e-commerce
+- Professional medical terminology (homeopathy, naturopathy, phytotherapy)
+- Hebrew (RTL) and English (LTR) support
+- Categories include health benefits, product details, professional certifications
+- Translation function t(key, lang) with fallback to Hebrew
 
 ## Important Notes
 
@@ -68,3 +91,4 @@ Key features:
 - Custom TailwindCSS theme with brand colors (dh-navy, dh-ocean, dh-sky, etc.)
 - Backend API uses structured error handling and validation
 - Image management with file upload capabilities
+- Professional focus on homeopathic remedies, natural healing, and integrative medicine

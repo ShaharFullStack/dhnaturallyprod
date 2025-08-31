@@ -241,41 +241,103 @@ export function About(): JSX.Element {
                 </div>
             </section>
 
-            {/* Treatment Approach */}
-            <section className="about-section" data-scroll-animate id="approach">
-                <div className="container">
-                    <div className="section-inner">
-                        <div className="section-header">
-                            <h2 className="section-title text-center">{t("about.work.title", language)}</h2>
-                            <div className="section-divider center"></div>
-                            <p className="section-subtitle text-center">{t("about.work.subtitle", language)}</p>
+            {/* Professional Consultation Section */}
+            <section className="consultation-section" data-testid="consultation-section">
+                <div className="hero-container">
+                    <div className="section-header">
+                        <h2 className="section-title">
+                            {language === 'he' ? 'ייעוץ מקצועי בנטורופתיה' : 'Professional Naturopathy Consultation'}
+                        </h2>
+                        <p className="section-description">
+                            {language === 'he'
+                                ? 'ייעוץ אישי מנטורופתית מוסמכת להתאמת תכשירים טבעיים.'
+                                : 'Personalized consultation from a certified naturopath to find the most suitable natural remedies.'
+                            }
+                        </p>
+                    </div>
+                    
+                    <div className="consultation-grid">
+                        <div className="consultation-left">
+                            <h3 className="section-subtitle">
+                                {language === 'he' ? 'מה כולל הייעוץ?' : 'What Does the Consultation Include?'}
+                            </h3>
+                            <div className="consultation-list">
+                                <div className="list-item">
+                                    <CheckCircle className="icon" />
+                                    <div>
+                                        <h4 className="feature-title">
+                                            {language === 'he' ? 'הערכה מקיפה' : 'Comprehensive Assessment'}
+                                        </h4>
+                                        <p className="feature-description">
+                                            {language === 'he'
+                                                ? 'בחינה מפורטת של המצב הבריאותי והתסמינים'
+                                                : 'Detailed examination of health condition and symptoms'
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="list-item">
+                                    <CheckCircle className="icon" />
+                                    <div>
+                                        <h4 className="feature-title">
+                                            {language === 'he' ? 'המלצות מותאמות אישית' : 'Personalized Recommendations'}
+                                        </h4>
+                                        <p className="feature-description">
+                                            {language === 'he'
+                                                ? 'תכשירים טבעיים מותאמים לצרכים האישיים שלכם'
+                                                : 'Natural remedies tailored to your individual needs'
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="list-item">
+                                    <CheckCircle className="icon" />
+                                    <div>
+                                        <h4 className="feature-title">
+                                            {language === 'he' ? 'מעקב ותמיכה' : 'Follow-up & Support'}
+                                        </h4>
+                                        <p className="feature-description">
+                                            {language === 'he'
+                                                ? 'ליווי מקצועי לאורך תהליך הטיפול'
+                                                : 'Professional guidance throughout the treatment process'
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="cards-grid">
-                            <div className="approach-card" style={{ animationDelay: '0.1s' }}>
-                                <div className="card-number">01</div>
-                                <h3 className="card-title">{t("about.work.cards.assessment.title", language)}</h3>
-                                <p className="card-desc">{t("about.work.cards.assessment.desc", language)}</p>
-                            </div>
-
-                            <div className="approach-card" style={{ animationDelay: '0.2s' }}>
-                                <div className="card-number">02</div>
-                                <h3 className="card-title">{t("about.work.cards.personalized.title", language)}</h3>
-                                <p className="card-desc">{t("about.work.cards.personalized.desc", language)}</p>
-                            </div>
-
-                            <div className="approach-card" style={{ animationDelay: '0.3s' }}>
-                                <div className="card-number">03</div>
-                                <h3 className="card-title">{t("about.work.cards.support.title", language)}</h3>
-                                <p className="card-desc">{t("about.work.cards.support.desc", language)}</p>
-                            </div>
-
-                            <div className="approach-card" style={{ animationDelay: '0.4s' }}>
-                                <div className="card-number">04</div>
-                                <h3 className="card-title">{t("about.work.cards.quality.title", language)}</h3>
-                                <p className="card-desc">{t("about.work.cards.quality.desc", language)}</p>
+                        <div className="feature-card consultation-card">
+                            <div className="card-content">
+                                <h3 className="section-subtitle">
+                                    {language === 'he' ? 'היעצו עכשיו' : 'Consult Now'}
+                                </h3>
+                                <p className="feature-description">
+                                    {language === 'he'
+                                        ? 'ייעוץ ראשוני ללא עלות - בדקו אם הנטורופתיה מתאימה לכם'
+                                        : 'Initial consultation at no cost - see if naturopathy is right for you'
+                                    }
+                                </p>
+                                <Button className="primary full-width" data-testid="consultation-cta">
+                                    {language === 'he' ? 'התחל בייעוץ חינם' : 'Start Free Consultation'}
+                                </Button>
                             </div>
                         </div>
+                    </div>
+
+                    {/* Call to Action in testimonials */}
+                    <div className="text-center mt-16">
+                        <h3 className="section-subtitle">
+                            {language === 'he' ? 'התחילו את הדרך לבריאות טובה יותר.' : 'Begin your path to better health.'}
+                        </h3>
+                        <Button className="primary" data-testid="testimonials-consultation-cta">
+                            {language === 'he' ? 'קבלו ייעוץ מקצועי חינם' : 'Get Free Professional Consultation'}
+                        </Button>
+                        <Button className="outline" data-testid="testimonials-shop-cta">
+                            {language === 'he' ? 'התחילו את המסע לבריאות' : 'Start Your Health Journey'}
+                        </Button>
                     </div>
                 </div>
             </section>
