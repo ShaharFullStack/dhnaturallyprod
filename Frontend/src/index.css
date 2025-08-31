@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import './styles/mobile-utilities.css';
 
 /* Halimun Font */
 @font-face {
@@ -101,8 +102,6 @@
   }
 
   body {
-    margin: 0;
-    padding: 0;
     @apply font-sans antialiased bg-background text-foreground;
     font-family: 'Inter', sans-serif;
   }
@@ -264,9 +263,30 @@
     --tw-ring-dh-ocean: var(--dh-ocean);
   }
 }
-  .text-shadow-sm{ text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)};
-  .text-shadow-md{ text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4)};
-  .text-shadow-lg{ text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7)};
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.text-shadow-sm {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
+}
+
+;
+
+.text-shadow-md {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4)
+}
+
+;
+
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7)
+}
+
+;
 
 /* Custom Scrollbar Styling - DHnaturally Theme */
 /* Webkit browsers (Chrome, Safari, newer Edge) */

@@ -5,10 +5,10 @@ import {
     Clock,
     Globe,
     Heart,
-    Link,
     Shield,
     Users
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { JSX } from "react";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
@@ -98,7 +98,7 @@ export function Home(): JSX.Element {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Link href="/store">
+              <Link to="/store">
                 <Button 
                   className="bg-dh-ocean text-white px-8 py-4 rounded-full font-semibold hover:bg-dh-navy transition-colors shadow-lg"
                   data-testid="hero-cta-products"
@@ -230,7 +230,7 @@ export function Home(): JSX.Element {
           )}
 
           <div className="text-center mt-12">
-            <Link href="/store">
+            <Link to="/store">
               <Button 
                 className="bg-dh-ocean text-white px-10 py-4 rounded-full font-semibold hover:bg-dh-navy transition-colors shadow-lg"
                 data-testid="featured-cta"
@@ -322,7 +322,7 @@ export function Home(): JSX.Element {
                     : 'Initial consultation at no cost - see if naturopathy is right for you'
                   }
                 </p>
-                <Link href="/contact">
+                <Link to="/contact">
                   <Button 
                     className="w-full bg-dh-ocean text-white px-8 py-4 rounded-full font-semibold hover:bg-dh-navy transition-colors shadow-lg"
                     data-testid="consultation-cta"
@@ -339,7 +339,7 @@ export function Home(): JSX.Element {
             <h3 className="text-2xl font-bold text-dh-navy mb-4">
               {language === 'he' ? 'התחילו את הדרך לבריאות טובה יותר.' : 'Begin your path to better health.'}
             </h3>
-            <Link href="/contact">
+            <Link to="/contact">
               <Button 
                 className="bg-dh-ocean text-white px-10 py-4 rounded-full font-semibold hover:bg-dh-navy transition-colors shadow-lg mr-4"
                 data-testid="testimonials-consultation-cta"
@@ -347,7 +347,7 @@ export function Home(): JSX.Element {
                 {language === 'he' ? 'קבלו ייעוץ מקצועי חינם' : 'Get Free Professional Consultation'}
               </Button>
             </Link>
-            <Link href="/store">
+            <Link to="/store">
               <Button 
                 className="border-2 border-dh-ocean text-dh-ocean px-10 py-4 rounded-full font-semibold hover:bg-dh-ocean hover:text-white transition-colors"
                 data-testid="testimonials-shop-cta"

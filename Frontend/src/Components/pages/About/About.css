@@ -1,0 +1,32 @@
+/* About Page Styles */
+.About {
+    /* Mobile-first responsive design */
+}
+
+/* Prose styles for content sections */
+.About .prose {
+    max-width: none;
+}
+
+.About .prose p {
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+}
+
+/* Testimonial cards */
+.About .testimonial-card {
+    transition: all 0.3s ease;
+}
+
+.About .testimonial-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Value cards hover effect */
+.About .value-card {
+    transition: all 0.3s ease;
+}
+
+.About .value-card:hover {
+    transform: translateY(-4px);
+}

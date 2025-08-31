@@ -1,10 +1,9 @@
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../../UI/Sheet/Sheet';
+import { Button } from '../../UI/Button/Button';
 import { Trash2, Plus, Minus } from 'lucide-react';
-import { useCart } from '@/hooks/use-cart';
-import { useLanguage } from '@/contexts/language-context';
-import { t } from '@/lib/i18n';
+import { useCart } from '../../../hooks/use-cart';
+import { useLanguage } from '../../../Contexts/language-context';
+import { t } from '../../../lib/i18b';
 
 interface ShoppingCartSidebarProps {
   isOpen: boolean;
@@ -58,7 +57,7 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
               <div className="flex-1 overflow-y-auto py-4">
                 <div className="space-y-4">
                   {cartItems.map((item) => {
-                    const productName = language === 'he' ? item.product.name_he : item.product.name_en;
+                    const productName = item.product.name;
                     
                     return (
                       <div 
@@ -67,9 +66,9 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                         data-testid={`cart-item-${item.id}`}
                       >
                         <img
-                          src={item.product.image_url}
+                          src={item.product.imageUrl || '/images/products/default.jpg'}
                           alt={productName}
-                          className="w-16 h-16 object-cover rounded-md"
+                          className="w-16 h-16 object-cover rounded-md bg-gray-200"
                           data-testid={`cart-item-image-${item.id}`}
                         />
                         

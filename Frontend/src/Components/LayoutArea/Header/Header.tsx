@@ -14,9 +14,7 @@ import logoImage from "../../../Assets/Images/logo.png";
 
 export function Header(): JSX.Element {
     return (
-        <div className="Header">
-            <h1>DH Naturally</h1>
-        </div>
+        <Navigation />
     );
 }
 

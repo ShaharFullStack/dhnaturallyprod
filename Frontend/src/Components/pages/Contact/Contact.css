@@ -1,0 +1,31 @@
+/* Contact Page Styles */
+.Contact {
+    /* Mobile-first responsive design */
+}
+
+/* Form focus styles */
+.Contact input:focus,
+.Contact select:focus,
+.Contact textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
+}
+
+/* WhatsApp CTA hover effects */
+.Contact .whatsapp-cta {
+    transition: all 0.3s ease;
+}
+
+.Contact .whatsapp-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Contact info cards */
+.Contact .contact-info-card {
+    transition: all 0.3s ease;
+}
+
+.Contact .contact-info-card:hover {
+    transform: translateY(-2px);
+}

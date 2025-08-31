@@ -1,9 +1,22 @@
 import { useState, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { type Product, type CartItem } from '@shared/schema';
-import { apiRequest } from '@/lib/queryClient';
+import { useLanguage } from '../Contexts/language-context';
+import { useToast } from './use-toast';
+import { t } from '../lib/i18b';
 
-type CartItemWithProduct = CartItem & { product: Product };
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl?: string;
+}
+
+interface CartItem {
+  id: string;
+  productId: string;
+  quantity: number;
+  product: Product;
+}
 
 function getSessionId(): string {
   let sessionId = localStorage.getItem('dh-session-id');
@@ -17,87 +30,81 @@ function getSessionId(): string {
 export function useCart() {
   const { toast } = useToast();
   const { language } = useLanguage();
-  const queryClient = useQueryClient();
-  const sessionId = getSessionId();
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { data: cartItems = [], isLoading } = useQuery<CartItemWithProduct[]>({
-    queryKey: ['/api/cart', sessionId],
-  });
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    const savedCart = localStorage.getItem('dh-cart');
+    if (savedCart) {
+      try {
+        setCartItems(JSON.parse(savedCart));
+      } catch (error) {
+        console.error('Failed to parse saved cart:', error);
+      }
+    }
+  }, []);
 
-  const addToCartMutation = useMutation({
-    mutationFn: async ({ productId, quantity = 1 }: { productId: string; quantity?: number }) => {
-      return apiRequest('POST', '/api/cart', {
-        session_id: sessionId,
-        product_id: productId,
-        quantity,
+  // Save cart to localStorage when cart changes
+  useEffect(() => {
+    localStorage.setItem('dh-cart', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const addToCart = (product: Product, quantity: number = 1) => {
+    setIsLoading(true);
+    try {
+      setCartItems(prevItems => {
+        const existingItem = prevItems.find(item => item.productId === product.id);
+        if (existingItem) {
+          return prevItems.map(item =>
+            item.productId === product.id
+              ? { ...item, quantity: item.quantity + quantity }
+              : item
+          );
+        } else {
+          const newItem: CartItem = {
+            id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+            productId: product.id,
+            quantity,
+            product
+          };
+          return [...prevItems, newItem];
+        }
       });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/cart'] });
+      
       toast({
         title: t('success.cart.added', language),
         variant: 'default',
       });
-    },
-    onError: (error) => {
+    } catch (error) {
       toast({
         title: t('common.error', language),
-        description: error.message,
+        description: 'Failed to add item to cart',
         variant: 'destructive',
       });
-    },
-  });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  const updateQuantityMutation = useMutation({
-    mutationFn: async ({ id, quantity }: { id: string; quantity: number }) => {
-      return apiRequest('PUT', `/api/cart/${id}`, { quantity });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/cart'] });
-    },
-    onError: (error) => {
-      toast({
-        title: t('common.error', language),
-        description: error.message,
-        variant: 'destructive',
-      });
-    },
-  });
+  const updateQuantity = ({ id, quantity }: { id: string; quantity: number }) => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id ? { ...item, quantity } : item
+      )
+    );
+  };
 
-  const removeItemMutation = useMutation({
-    mutationFn: async (id: string) => {
-      return apiRequest('DELETE', `/api/cart/${id}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/cart'] });
-    },
-    onError: (error) => {
-      toast({
-        title: t('common.error', language),
-        description: error.message,
-        variant: 'destructive',
-      });
-    },
-  });
+  const removeItem = (id: string) => {
+    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+  };
 
-  const clearCartMutation = useMutation({
-    mutationFn: async () => {
-      return apiRequest('DELETE', `/api/cart/session/${sessionId}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/cart'] });
-    },
-    onError: (error) => {
-      toast({
-        title: t('common.error', language),
-        description: error.message,
-        variant: 'destructive',
-      });
-    },
-  });
+  const clearCart = () => {
+    setCartItems([]);
+  };
 
   const totalPrice = cartItems.reduce((sum, item) => {
-    return sum + (parseFloat(item.product.price) * item.quantity);
+    return sum + (item.product.price * item.quantity);
   }, 0);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -107,10 +114,10 @@ export function useCart() {
     isLoading,
     totalPrice,
     totalItems,
-    addToCart: addToCartMutation.mutate,
-    updateQuantity: updateQuantityMutation.mutate,
-    removeItem: removeItemMutation.mutate,
-    clearCart: clearCartMutation.mutate,
-    isAddingToCart: addToCartMutation.isPending,
+    addToCart,
+    updateQuantity,
+    removeItem,
+    clearCart,
+    isAddingToCart: isLoading,
   };
 }
