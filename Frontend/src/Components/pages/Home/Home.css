@@ -1,0 +1,18 @@
+.Home {
+    margin: 0;
+    padding: 0;
+}
+
+.Home h1 {
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: bold;
+    text-shadow: var(--text-shadow-lg);
+    color: var(--primary);
+    margin: var(--spacing-md) 0;
+}
+
+.Home p {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-secondary);
+    margin: var(--spacing-sm) 0;
+}
