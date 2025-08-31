@@ -10,7 +10,7 @@
 
 /* Header Navigation */
 .header-nav {
-  background: linear-gradient(to right, var(--dh-pale), #f0f8ff);
+  background: linear-gradient(to right, var(--dh-pale), var(--dh-pale));
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   position: sticky;

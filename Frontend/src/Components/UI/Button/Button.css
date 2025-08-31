@@ -1,3 +1,13 @@
+/* DHnaturally brand colors */
+:root {
+  --dh-navy: hsl(245, 94%, 18%);
+  --dh-ocean: hsl(199, 100%, 36%);
+  --dh-sky: hsl(194, 100%, 42%);
+  --dh-light: hsl(180, 100%, 87%);
+  --dh-pale: hsl(194, 77%, 94%);
+  --dh-sage: hsl(154, 25%, 50%);
+}
+
 .dh-button {
   display: inline-flex;
   align-items: center;
@@ -20,24 +30,24 @@
 
 /* variants */
 .dh-button.primary {
-  background: #0ea5a4; /* teal-ish */
+  background: var(--dh-ocean);
   color: white;
   box-shadow: 0 1px 2px rgba(0,0,0,0.06);
 }
-.dh-button.primary:hover { filter: brightness(0.95); box-shadow: 0 6px 18px rgba(14,165,164,0.12); }
+.dh-button.primary:hover { filter: brightness(0.95); box-shadow: 0 6px 18px rgba(25, 118, 210, 0.12); }
 
 .dh-button.outline {
   background: transparent;
-  color: #0f172a;
-  border-color: #e6e9ee;
+  color: var(--dh-navy);
+  border-color: var(--dh-pale);
 }
 .dh-button.ghost {
   background: transparent;
-  color: #0f172a;
+  color: var(--dh-navy);
 }
 .dh-button.link {
   background: transparent;
-  color: #0ea5a4;
+  color: var(--dh-ocean);
   text-decoration: underline;
 }
 

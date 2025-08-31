@@ -1,9 +1,9 @@
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../../UI/Sheet/Sheet';
-import { Button } from '../../UI/Button/Button';
-import { Trash2, Plus, Minus } from 'lucide-react';
-import { useCart } from '../../../hooks/use-cart';
+import { Minus, Plus, Trash2 } from 'lucide-react';
 import { useLanguage } from '../../../Contexts/language-context';
+import { useCart } from '../../../hooks/use-cart';
 import { t } from '../../../lib/i18b';
+import { Button } from '../../UI/Button/Button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../../UI/Sheet/Sheet';
 
 interface ShoppingCartSidebarProps {
   isOpen: boolean;
@@ -11,7 +11,7 @@ interface ShoppingCartSidebarProps {
 }
 
 export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProps) {
-  const { cartItems, totalPrice, totalItems, updateQuantity, removeItem, clearCart, isLoading } = useCart();
+  const { cartItems, totalPrice, updateQuantity, removeItem, clearCart, isLoading } = useCart();
   const { language } = useLanguage();
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {

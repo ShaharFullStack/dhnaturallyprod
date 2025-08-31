@@ -1,248 +1,279 @@
-import { JSX } from "react";
+import { JSX, useState, useEffect } from "react";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import "./About.css";
+import { ShieldCheck, RefreshCw, Scale, Microscope, CheckCircle, User, Star, Award, ArrowRight, Quote } from 'lucide-react';
+import { Button } from '../../UI/Button/Buttons';
+import cert1 from '../../../Assets/Images/certifications/IMG_0003.jpg';
+import cert2 from '../../../Assets/Images/certifications/IMG_0004.jpg';
+import cert3 from '../../../Assets/Images/certifications/IMG_0005.jpg';
+import cert4 from '../../../Assets/Images/certifications/IMG_0006.jpg';
+import cert5 from '../../../Assets/Images/certifications/IMG_0007.jpg';
+import cert6 from '../../../Assets/Images/certifications/IMG_0008.jpg';
 
 export function About(): JSX.Element {
     const { language } = useLanguage();
+    const [lightbox, setLightbox] = useState<{ src: string; title?: string; description?: string } | null>(null);
+
+    // Intersection Observer for scroll animations
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        const sections = document.querySelectorAll('[data-scroll-animate]');
+        sections.forEach((section) => observer.observe(section));
+
+        return () => observer.disconnect();
+    }, []);
 
     const certifications = [
         {
             title: t("about.certifications.naturopathy.title", language),
-            description: t("about.certifications.naturopathy.description", language),
-            image: "/images/certifications/naturopathy-cert.jpg"
+        description: t("about.certifications.naturopathy.description", language),
+        image: cert1
         },
         {
             title: t("about.certifications.integrative.title", language),
-            description: t("about.certifications.integrative.description", language),
-            image: "/images/certifications/integrative-cert.jpg"
+        description: t("about.certifications.integrative.description", language),
+        image: cert2
         },
         {
             title: t("about.certifications.homeopathy.title", language),
-            description: t("about.certifications.homeopathy.description", language),
-            image: "/images/certifications/homeopathy-cert.jpg"
+        description: t("about.certifications.homeopathy.description", language),
+        image: cert3
         }
+    ];
+
+    // gallery items (primary certifications + extra visual badges)
+    const galleryItems: { src: string; title?: string; description?: string }[] = [
+        ...certifications.map((c) => ({ src: c.image as string, title: c.title, description: c.description })),
+        { src: cert4 },
+        { src: cert5 },
+        { src: cert6 }
     ];
 
     const values = [
         {
-            icon: "🛡️",
+            icon: ShieldCheck,
             title: t("about.values.prevention", language),
-            description: "Focus on preventing illness through natural health maintenance"
+            description: t("about.values.prevention.description", language)
         },
         {
-            icon: "🔄",
+            icon: RefreshCw,
             title: t("about.values.restoration", language),
-            description: "Restoring natural balance and healing capacity"
+            description: t("about.values.restoration.description", language)
         },
         {
-            icon: "⚖️",
+            icon: Scale,
             title: t("about.values.balance", language),
-            description: "Achieving harmony between mind, body, and spirit"
+            description: t("about.values.balance.description", language)
         },
         {
-            icon: "🔬",
+            icon: Microscope,
             title: t("about.values.evidence", language),
-            description: "Combining traditional wisdom with modern research"
+            description: t("about.values.evidence.description", language)
         },
         {
-            icon: "✨",
+            icon: CheckCircle,
             title: t("about.values.safety", language),
-            description: "Ensuring purity and safety in all our remedies"
+            description: t("about.values.safety.description", language)
         },
         {
-            icon: "👤",
+            icon: User,
             title: t("about.values.individualized", language),
-            description: "Personalized treatment approaches for each individual"
+            description: t("about.values.individualized.description", language)
         }
     ];
 
     const testimonials = [
         {
-            name: "Dr. Sarah Cohen",
-            role: "Integrative Medicine Physician",
-            text: "DHnaturally provides the highest quality homeopathic remedies I've found. My patients consistently report excellent results.",
+            name: t("about.testimonials.1.name", language),
+            role: t("about.testimonials.1.role", language),
+            text: t("about.testimonials.1.text", language),
             rating: 5
         },
         {
-            name: "Rachel Levi",
-            role: "Patient",
-            text: "After years of conventional treatments, the natural approach at DHnaturally finally helped me find lasting relief from chronic digestive issues.",
+            name: t("about.testimonials.2.name", language),
+            role: t("about.testimonials.2.role", language),
+            text: t("about.testimonials.2.text", language),
             rating: 5
         },
         {
-            name: "Dr. Michael Rosen",
-            role: "Naturopathic Doctor",
-            text: "The expertise and quality of products from DHnaturally makes them my go-to recommendation for patients seeking natural solutions.",
+            name: t("about.testimonials.3.name", language),
+            role: t("about.testimonials.3.role", language),
+            text: t("about.testimonials.3.text", language),
             rating: 5
         }
     ];
 
     return (
-        <div className="About min-h-screen bg-gray-50">
+        <div className="about">
             {/* Hero Section */}
-            <div className="bg-gradient-to-r from-dh-navy to-dh-ocean text-white">
-                <div className="container mx-auto px-4 py-12 lg:py-20">
-                    <div className="text-center max-w-4xl mx-auto">
-                        <h1 className="text-3xl lg:text-5xl font-bold mb-6">
-                            {t("about.title", language)}
-                        </h1>
-                        <p className="text-dh-pale text-lg lg:text-xl leading-relaxed">
-                            {t("about.subtitle", language)}
-                        </p>
+            <div className="about-hero">
+                <div className="hero-background"></div>
+                <div className="about-hero-inner">
+
+                    <h1 className="about-hero-title" data-scroll-animate>{t("about.title", language)}</h1>
+                    <p className="about-hero-subtitle" data-scroll-animate>{t("about.subtitle", language)}</p>
+                    <div className="hero-cta" data-scroll-animate>
+                        <Button className="primary lg">
+                            {t("cta.getConsultation", language)}
+                            <ArrowRight size={18} />
+                        </Button>
                     </div>
                 </div>
             </div>
 
             {/* Story Section */}
-            <section className="py-12 lg:py-16">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-8">
-                            {t("about.story.title", language)}
-                        </h2>
-                        <div className="prose prose-lg mx-auto text-gray-600 leading-relaxed">
-                            <p className="text-base lg:text-lg mb-6">
-                                DHnaturally was founded with a vision to bridge the gap between traditional healing wisdom 
-                                and modern scientific understanding. Our journey began with a deep appreciation for the 
-                                natural healing capabilities of the human body and a commitment to supporting this process 
-                                through carefully selected, high-quality natural remedies.
-                            </p>
-                            <p className="text-base lg:text-lg mb-6">
-                                With years of clinical experience and extensive training in homeopathy, naturopathy, and 
-                                integrative medicine, we have helped thousands of individuals achieve optimal health through 
-                                natural, gentle, and effective treatment approaches.
-                            </p>
+            <section className="about-section" data-scroll-animate id="story">
+                <div className="container">
+                    <div className="section-inner">
+                        <div className="section-header">
+                            <h2 className="section-title">{t("about.story.title", language)}</h2>
+                            <div className="section-divider"></div>
+                        </div>
+                        <div className="story-content">
+                            <div className="story-text">
+                                <p className="lead-text">{t("about.story.paragraph1", language)}</p>
+                                <p>{t("about.story.paragraph2", language)}</p>
+                            </div>
+                            <div className="story-visual">
+                                <div className="story-card">
+                                    <div className="story-icon">
+                                        <Microscope size={32} />
+                                    </div>
+                                    <h3>Evidence-Based Practice</h3>
+                                    <p>Combining traditional wisdom with modern research</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Mission Section */}
-            <section className="py-12 lg:py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
-                            {t("about.mission.title", language)}
-                        </h2>
-                        <p className="text-lg lg:text-xl text-gray-600 leading-relaxed">
-                            {t("about.mission.subtitle", language)}
-                        </p>
+            <section className="about-section about-mission" data-scroll-animate id="mission">
+                <div className="container">
+                    <div className="section-inner text-center">
+                        <div className="mission-icon">
+                            <ShieldCheck size={48} />
+                        </div>
+                        <h2 className="section-title">{t("about.mission.title", language)}</h2>
+                        <p className="section-subtitle large">{t("about.mission.subtitle", language)}</p>
                     </div>
                 </div>
             </section>
 
             {/* Values Grid */}
-            <section className="py-12 lg:py-16">
-                <div className="container mx-auto px-4">
-                    <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-12">
-                        Our Core Values
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <section className="about-section" data-scroll-animate id="values">
+                <div className="container">
+                    <div className="section-header">
+                        <h2 className="section-title text-center">{t("about.values.title", language)}</h2>
+                        <div className="section-divider center"></div>
+                    </div>
+                    <div className="values-grid">
                         {values.map((value, index) => (
-                            <div key={index} className="bg-white rounded-lg p-6 shadow-md text-center hover:shadow-lg transition-shadow">
-                                <div className="text-4xl mb-4">{value.icon}</div>
-                                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                                    {value.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm lg:text-base">
-                                    {value.description}
-                                </p>
-                            </div>
+                            <article key={index} className="value-card" style={{ animationDelay: `${index * 0.1}s` }}>
+                                <div className="value-icon">{
+                                    (() => {
+                                        const Icon = value.icon as any;
+                                        return <Icon size={28} />;
+                                    })()
+                                }</div>
+                                <h3 className="value-title">{value.title}</h3>
+                                <p className="value-desc">{value.description}</p>
+                                <div className="value-accent"></div>
+                            </article>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* Certifications */}
-            <section className="py-12 lg:py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-                            {t("about.certifications.title", language)}
-                        </h2>
-                        <p className="text-gray-600 max-w-2xl mx-auto">
-                            {t("about.certifications.subtitle", language)}
-                        </p>
+            <section className="about-section about-certifications" data-scroll-animate id="certifications">
+                <div className="container">
+                    <div className="text-center">
+                        <div className="section-header">
+                            <h2 className="section-title">{t("about.certifications.title", language)}</h2>
+                            <div className="section-divider center"></div>
+                            <p className="section-subtitle">{t("about.certifications.subtitle", language)}</p>
+                        </div>
                     </div>
-                    
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        {certifications.map((cert, index) => (
-                            <div key={index} className="text-center">
-                                <div className="bg-gray-100 rounded-lg aspect-square w-32 h-32 mx-auto mb-4 flex items-center justify-center">
-                                    {cert.image ? (
-                                        <img
-                                            src={cert.image}
-                                            alt={cert.title}
-                                            className="w-full h-full object-cover rounded-lg"
-                                            loading="lazy"
-                                        />
-                                    ) : (
-                                        <span className="text-4xl text-gray-400">🏆</span>
-                                    )}
+
+                    <div className="cert-grid">
+                        {galleryItems.map((item, i) => (
+                            <button
+                                key={i}
+                                className="cert-thumb"
+                                onClick={() => setLightbox(item)}
+                                aria-label={item.title || t("about.certifications.alt", language)}
+                                style={{ animationDelay: `${i * 0.1}s` }}
+                            >
+                                <div className="cert-image-wrap">
+                                    <img src={item.src} alt={item.title || t("about.certifications.alt", language)} className="cert-image" loading="lazy" />
+                                    <div className="cert-overlay">
+                                        <Award size={24} />
+                                    </div>
                                 </div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                                    {cert.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm">
-                                    {cert.description}
-                                </p>
-                            </div>
+                                {item.title && <div className="cert-thumb-caption">{item.title}</div>}
+                            </button>
                         ))}
                     </div>
+
+                    {lightbox && (
+                        <div className="lightbox" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
+                            <div className="lightbox-inner" onClick={(e) => e.stopPropagation()}>
+                                <button className="lightbox-close" onClick={() => setLightbox(null)} aria-label="Close">×</button>
+                                <img src={lightbox.src} alt={lightbox.title || t("about.certifications.alt", language)} className="lightbox-image" />
+                                {lightbox.title && <div className="lightbox-caption">{lightbox.title}</div>}
+                                {lightbox.description && <div className="lightbox-desc">{lightbox.description}</div>}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
 
             {/* Treatment Approach */}
-            <section className="py-12 lg:py-16">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-8">
-                            {t("about.work.title", language)}
-                        </h2>
-                        <p className="text-gray-600 text-center mb-12 text-base lg:text-lg">
-                            {t("about.work.subtitle", language)}
-                        </p>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="bg-white rounded-lg p-6 shadow-md">
-                                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                                    Individual Assessment
-                                </h3>
-                                <p className="text-gray-600 text-sm lg:text-base">
-                                    Each person is unique, and so is their path to healing. We conduct thorough 
-                                    assessments to understand your individual constitution, lifestyle, and health challenges.
-                                </p>
+            <section className="about-section" data-scroll-animate id="approach">
+                <div className="container">
+                    <div className="section-inner">
+                        <div className="section-header">
+                            <h2 className="section-title text-center">{t("about.work.title", language)}</h2>
+                            <div className="section-divider center"></div>
+                            <p className="section-subtitle text-center">{t("about.work.subtitle", language)}</p>
+                        </div>
+
+                        <div className="cards-grid">
+                            <div className="approach-card" style={{ animationDelay: '0.1s' }}>
+                                <div className="card-number">01</div>
+                                <h3 className="card-title">{t("about.work.cards.assessment.title", language)}</h3>
+                                <p className="card-desc">{t("about.work.cards.assessment.desc", language)}</p>
                             </div>
-                            
-                            <div className="bg-white rounded-lg p-6 shadow-md">
-                                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                                    Personalized Treatment
-                                </h3>
-                                <p className="text-gray-600 text-sm lg:text-base">
-                                    Based on your individual needs, we create customized treatment plans using 
-                                    the most appropriate natural remedies and therapeutic approaches.
-                                </p>
+
+                            <div className="approach-card" style={{ animationDelay: '0.2s' }}>
+                                <div className="card-number">02</div>
+                                <h3 className="card-title">{t("about.work.cards.personalized.title", language)}</h3>
+                                <p className="card-desc">{t("about.work.cards.personalized.desc", language)}</p>
                             </div>
-                            
-                            <div className="bg-white rounded-lg p-6 shadow-md">
-                                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                                    Ongoing Support
-                                </h3>
-                                <p className="text-gray-600 text-sm lg:text-base">
-                                    Healing is a journey, not a destination. We provide continuous guidance and 
-                                    adjustments to ensure you achieve and maintain optimal health.
-                                </p>
+
+                            <div className="approach-card" style={{ animationDelay: '0.3s' }}>
+                                <div className="card-number">03</div>
+                                <h3 className="card-title">{t("about.work.cards.support.title", language)}</h3>
+                                <p className="card-desc">{t("about.work.cards.support.desc", language)}</p>
                             </div>
-                            
-                            <div className="bg-white rounded-lg p-6 shadow-md">
-                                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                                    Quality Assurance
-                                </h3>
-                                <p className="text-gray-600 text-sm lg:text-base">
-                                    All our remedies undergo rigorous quality control and are sourced from 
-                                    reputable suppliers who share our commitment to purity and potency.
-                                </p>
+
+                            <div className="approach-card" style={{ animationDelay: '0.4s' }}>
+                                <div className="card-number">04</div>
+                                <h3 className="card-title">{t("about.work.cards.quality.title", language)}</h3>
+                                <p className="card-desc">{t("about.work.cards.quality.desc", language)}</p>
                             </div>
                         </div>
                     </div>
@@ -250,30 +281,25 @@ export function About(): JSX.Element {
             </section>
 
             {/* Testimonials */}
-            <section className="py-12 lg:py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-12">
-                        {t("home.testimonials.title", language)}
-                    </h2>
-                    
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <section className="about-section about-testimonials" data-scroll-animate id="testimonials">
+                <div className="container">
+                    <div className="section-header">
+                        <h2 className="section-title text-center">{t("home.testimonials.title", language)}</h2>
+                        <div className="section-divider center"></div>
+                    </div>
+                    <div className="testimonials-grid">
                         {testimonials.map((testimonial, index) => (
-                            <div key={index} className="bg-gray-50 rounded-lg p-6">
-                                <div className="flex text-yellow-400 mb-4">
-                                    {[...Array(testimonial.rating)].map((_, i) => (
-                                        <span key={i}>⭐</span>
-                                    ))}
+                            <div key={index} className="testimonial-card" style={{ animationDelay: `${index * 0.15}s` }}>
+                                <div className="testimonial-quote">
+                                    <Quote size={24} />
                                 </div>
-                                <p className="text-gray-600 mb-4 text-sm lg:text-base italic">
-                                    "{testimonial.text}"
-                                </p>
-                                <div>
-                                    <div className="font-semibold text-gray-900">
-                                        {testimonial.name}
-                                    </div>
-                                    <div className="text-sm text-gray-500">
-                                        {testimonial.role}
-                                    </div>
+                                <div className="testimonial-rating">{[...Array(testimonial.rating)].map((_, i) => (
+                                    <Star key={i} size={16} className="testimonial-star" />
+                                ))}</div>
+                                <p className="testimonial-text">"{testimonial.text}"</p>
+                                <div className="testimonial-meta">
+                                    <div className="testimonial-name">{testimonial.name}</div>
+                                    <div className="testimonial-role">{testimonial.role}</div>
                                 </div>
                             </div>
                         ))}
@@ -282,22 +308,17 @@ export function About(): JSX.Element {
             </section>
 
             {/* CTA Section */}
-            <section className="py-12 lg:py-16 bg-gradient-to-r from-dh-navy to-dh-ocean text-white">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-2xl lg:text-3xl font-bold mb-6">
-                        Ready to Start Your Natural Healing Journey?
-                    </h2>
-                    <p className="text-dh-pale mb-8 text-base lg:text-lg max-w-2xl mx-auto">
-                        Get personalized guidance from our natural medicine experts and discover 
-                        the right remedies for your unique health needs.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button className="bg-dh-light hover:bg-white text-dh-navy px-6 py-3 rounded-lg font-medium transition-colors">
+            <section className="about-cta" data-scroll-animate id="cta">
+                <div className="cta-background"></div>
+                <div className="container text-center">
+                    <h2 className="cta-title">{t("about.cta.title", language)}</h2>
+                    <p className="cta-subtitle">{t("about.cta.subtitle", language)}</p>
+                    <div className="cta-buttons">
+                        <Button className="primary lg">
                             {t("cta.getConsultation", language)}
-                        </button>
-                        <button className="border-2 border-dh-light hover:bg-dh-light hover:text-dh-navy text-dh-light px-6 py-3 rounded-lg font-medium transition-colors">
-                            {t("cta.shopNow", language)}
-                        </button>
+                            <ArrowRight size={18} />
+                        </Button>
+                        <Button className="outline lg">{t("cta.shopNow", language)}</Button>
                     </div>
                 </div>
             </section>

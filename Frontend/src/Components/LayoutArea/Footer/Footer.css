@@ -1,6 +1,16 @@
+/* DHnaturally brand colors */
+:root {
+  --dh-navy: hsl(245, 94%, 18%);
+  --dh-ocean: hsl(199, 100%, 36%);
+  --dh-sky: hsl(194, 100%, 42%);
+  --dh-light: hsl(180, 100%, 87%);
+  --dh-pale: hsl(194, 77%, 94%);
+  --dh-sage: hsl(154, 25%, 50%);
+}
+
 /* Footer Styles */
 .footer {
-  background-color: hsl(245, 94%, 18%); /* --dh-navy */
+  background-color: var(--dh-navy);
   color: white;
   margin-top: auto;
 }
@@ -27,11 +37,11 @@
 .footer-brand-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: hsl(180, 100%, 87%); /* --dh-light */
+  color: var(--dh-light);
 }
 
 .footer-tagline {
-  color: #d1d5db;
+  color: var(--dh-pale);
   font-size: 0.875rem;
   line-height: 1.6;
 }
@@ -41,20 +51,20 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
-  color: #d1d5db;
+  color: var(--dh-pale);
 }
 
 .heart-icon {
   width: 1rem;
   height: 1rem;
-  color: #f87171;
+  color: var(--dh-ocean);
 }
 
 /* Section Titles */
 .footer-section-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: hsl(180, 100%, 87%); /* --dh-light */
+  color: var(--dh-light);
 }
 
 /* Links */
@@ -66,14 +76,14 @@
 
 .footer-link {
   display: block;
-  color: #d1d5db;
+  color: var(--dh-pale);
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.2s ease;
 }
 
 .footer-link:hover {
-  color: hsl(180, 100%, 87%); /* --dh-light */
+  color: var(--dh-light);
 }
 
 /* Contact Section */
@@ -88,7 +98,7 @@
   align-items: center;
   gap: 0.75rem;
   font-size: 0.875rem;
-  color: #d1d5db;
+  color: var(--dh-pale);
 }
 
 .contact-item:has(.contact-icon-location) {
@@ -98,7 +108,7 @@
 .contact-icon {
   width: 1rem;
   height: 1rem;
-  color: hsl(194, 100%, 42%); /* --dh-sky */
+  color: var(--dh-sky);
   flex-shrink: 0;
 }
 
@@ -113,11 +123,11 @@
 }
 
 .contact-link:hover {
-  color: hsl(180, 100%, 87%); /* --dh-light */
+  color: var(--dh-light);
 }
 
 .contact-text {
-  color: #d1d5db;
+  color: var(--dh-pale);
 }
 
 /* Trust Section */
@@ -126,12 +136,12 @@
   flex-direction: column;
   gap: 0.5rem;
   font-size: 0.875rem;
-  color: #d1d5db;
+  color: var(--dh-pale);
 }
 
 /* Bottom Section */
 .footer-bottom {
-  border-top: 1px solid #374151;
+  border-top: 1px solid var(--dh-sage);
   margin-top: 2rem;
   padding-top: 1.5rem;
 }
@@ -146,7 +156,7 @@
 
 .footer-copyright {
   font-size: 0.875rem;
-  color: #9ca3af;
+  color: var(--dh-sage);
   margin: 0;
 }
 
@@ -157,13 +167,13 @@
 
 .footer-legal-link {
   font-size: 0.875rem;
-  color: #9ca3af;
+  color: var(--dh-sage);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .footer-legal-link:hover {
-  color: hsl(180, 100%, 87%); /* --dh-light */
+  color: var(--dh-light);
 }
 
 /* Responsive Design */

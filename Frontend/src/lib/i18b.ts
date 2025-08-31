@@ -137,10 +137,28 @@ export const translations: Translations = {
   'articles.newsletter.subscribe': { he: 'הירשמו לעדכונים מקצועיים', en: 'Subscribe to Professional Updates' },
   'articles.expert.authored': { he: 'נכתב על ידי מומחים', en: 'Expert Authored' },
   'articles.evidence.based': { he: 'מבוסס ראיות', en: 'Evidence Based' },
+  'articles.category.all': { he: 'כל הקטגוריות', en: 'All Categories' },
+
+  // Article mock content (placeholders)
+  'articles.mock.1.title': { he: 'הבנת עוצמות הומיאופתיות', en: 'Understanding Homeopathic Potencies' },
+  'articles.mock.1.excerpt': { he: 'מדריך למטפלים ולמתעניינים לעקרונות העוצמה בהומיאופתיה.', en: 'A guide for practitioners and enthusiasts on potency principles in homeopathy.' },
+  'articles.mock.1.content': { he: 'תוכן מלא על עקרונות המינון, התאמת עוצמות וטכניקות מעשיות בשימוש בתכשירים הומיאופתיים.', en: 'Full article on dosing principles, potency selection, and practical techniques for using homeopathic remedies.' },
+
+  'articles.mock.2.title': { he: 'ניהול מתחים באמצעים טבעיים', en: 'Managing Stress with Natural Approaches' },
+  'articles.mock.2.excerpt': { he: 'אסטרטגיות טבעיות להקטנת רמות לחץ ושיפור איכות השינה.', en: 'Natural strategies to reduce stress levels and improve sleep quality.' },
+  'articles.mock.2.content': { he: 'שיטות מוכחות מבוססות צמחי מרפא, הרפיה וטיפולים הומיאופתיים ליצירת שקט פנימי.', en: 'Evidence-based approaches using herbal support, relaxation, and homeopathic treatments to foster inner calm.' },
+
+  'articles.mock.3.title': { he: 'צמחי מרפא לשיפור העיכול', en: 'Herbal Support for Digestive Health' },
+  'articles.mock.3.excerpt': { he: 'מהם הצמחים היעילים ביותר לתמיכה בעיכול ומה המנגנונים שלהם?', en: 'Which herbs are most effective for digestive support and how they work.' },
+  'articles.mock.3.content': { he: 'סקירה על צמחים פופולריים, מחקרים עדכניים והמלצות שימוש בטוח לעיכול בריא.', en: 'Overview of popular botanicals, recent research and safe usage recommendations for healthy digestion.' },
+
+  'articles.mock.4.title': { he: 'עדכון מחקרים ברפואה טבעית', en: 'Research Update in Natural Medicine' },
+  'articles.mock.4.excerpt': { he: 'סיכום ממצאי מחקר עדכניים בתחום הנטורופתיה והרפואה המשלימה.', en: 'Summary of recent research findings in naturopathy and complementary medicine.' },
+  'articles.mock.4.content': { he: 'ניתוח מאמרים מדעיים, פירושים קליניים והשלכות פרקטיות לטיפול מבוסס ראיות.', en: 'Analysis of scientific articles, clinical interpretations, and practical implications for evidence-based practice.' },
 
   // About page
-  'about.title': { he: 'DHnaturally - מרכז מומחיות לרפואה טבעית', en: 'DHnaturally - Natural Medicine Expertise Center' },
-  'about.subtitle': { he: 'מסע מקצועי בפיתוח תכשירים הומיאופתיים מתקדמים וטיפול הוליסטי מבוסס מחקר לבריאות מיטבית', en: 'Professional journey in developing advanced homeopathic formulations and research-based holistic treatment for optimal health' },
+  'about.title': { he: 'DHnaturally\nתמצית בריאות מהטבע', en: 'DHnaturally\nNatural Medicine' },
+  'about.subtitle': { he: 'תכשירים הומיאופתיים מתקדמים וטיפול הוליסטי מבוסס מחקר לבריאות מיטבית', en: 'Advanced homeopathic formulations and research-based holistic treatment for optimal health' },
   'about.story.title': { he: 'המומחיות והניסיון שלנו', en: 'Our Expertise & Experience' },
   'about.mission.title': { he: 'המשימה המקצועית שלנו', en: 'Our Professional Mission' },
   'about.mission.subtitle': { he: 'לחבר בין חכמת הרפואה המסורתית למחקר המודרני, ולספק פתרונות טבעיים יעילים ובטוחים המותאמים לצרכים הבריאותיים הייחודיים של כל מטופל', en: 'To bridge traditional medical wisdom with modern research, providing effective and safe natural solutions tailored to each patient\'s unique health needs' },
@@ -161,6 +179,47 @@ export const translations: Translations = {
   'about.certifications.homeopathy.title': { he: 'הכשרה בהומיאופתיה ואירידולוגיה', en: 'Homeopathy & Iridology Training' },
   'about.certifications.homeopathy.description': { he: 'תעודות BSY בהומיאופתיה ואירידולוגיה המעידות על הכשרה מקצועית בתחומי האבחון והטיפול הטבעיים', en: 'BSY certificates in Homeopathy and Iridology demonstrating professional training in natural diagnosis and treatment methods' },
   'about.team.title': { he: 'הצוות המקצועי', en: 'Professional Team' },
+  'about.values.title': { he: 'ערכי הליבה שלנו', en: 'Our Core Values' },
+  'about.values.prevention.description': { he: 'מניעה דרך חיזוק מערכות הגוף ואורח חיים בריא', en: 'Focusing on prevention by strengthening body systems and healthy lifestyle' },
+  'about.values.restoration.description': { he: 'שיקום היכולת הטבעית של הגוף לריפוי ושיקום תפקוד', en: 'Restoring the body’s natural healing and functional capacity' },
+  'about.values.balance.description': { he: 'שימור איזון בין גוף ונפש להשגת בריאות ארוכת טווח', en: 'Maintaining mind–body balance for long-term wellness' },
+  'about.values.evidence.description': { he: 'שילוב ידע מסורתי עם ממצאי מחקר עדכניים', en: 'Combining traditional knowledge with up-to-date research findings' },
+  'about.values.safety.description': { he: 'תקני איכות ובטיחות קפדניים עבור כל תכשיר', en: 'Strict quality and safety standards applied to every formulation' },
+  'about.values.individualized.description': { he: 'טיפול מותאם לצרכים הייחודיים של כל מטופל', en: 'Personalized treatment tailored to each patient’s unique needs' },
+
+  // About - Story & Testimonials
+  'about.story.paragraph1': { he: 'DHnaturally נוסדה במטרה לחבר בין תורת הריפוי המסורתית לבין עדויות מדעיות מודרניות ולהציע טיפול מותאם אישית לכל מטופל.', en: 'DHnaturally was founded to bridge traditional healing wisdom with modern scientific evidence and provide personalized care for every patient.' },
+  'about.story.paragraph2': { he: 'עם ניסיון של שנים בתחום הנטורופתיה והומיאופתיה, אנו משקיעים במחקר ופיתוח תכשירים איכותיים ובבנייה של פרוטוקולים טיפוליים מבוססי עדות.', en: 'With years of experience in naturopathy and homeopathy, we invest in research and develop high-quality formulations and evidence-based therapeutic protocols.' },
+
+  // Certifications alt text
+  'about.certifications.alt': { he: 'תעודה מקצועית', en: 'Certification image' },
+
+  // Work / Treatment cards
+  'about.work.cards.assessment.title': { he: 'אבחון פרטני', en: 'Individual Assessment' },
+  'about.work.cards.assessment.desc': { he: 'אבחון מעמיק לבחינת החוזקות, התסמינים והצרכים הייחודיים של המטופל', en: 'Thorough assessment to understand strengths, symptoms and the patient’s unique needs' },
+  'about.work.cards.personalized.title': { he: 'טיפול מותאם אישי', en: 'Personalized Treatment' },
+  'about.work.cards.personalized.desc': { he: 'תוכניות טיפול אישיות הכוללות תכשירים מותאמים ושינויים באורח החיים', en: 'Individualized plans including tailored remedies and lifestyle adjustments' },
+  'about.work.cards.support.title': { he: 'תמיכה ומעקב', en: 'Support & Follow-up' },
+  'about.work.cards.support.desc': { he: 'ליווי צמוד לאורך התהליך והיערכות להתאמות טיפוליות במידת הצורך', en: 'Close support throughout the process and adjustments when needed' },
+  'about.work.cards.quality.title': { he: 'בקרת איכות', en: 'Quality Control' },
+  'about.work.cards.quality.desc': { he: 'ביצוע בדיקות איכות קפדניות לכל תכשיר כדי להבטיח בטיחות ויעילות', en: 'Rigorous quality testing for every formulation to ensure safety and efficacy' },
+
+  // Testimonials (sample placeholders)
+  'about.testimonials.1.name': { he: 'דנה ל.', en: 'Dana L.' },
+  'about.testimonials.1.role': { he: 'מטופלת', en: 'Patient' },
+  'about.testimonials.1.text': { he: 'הטיפול ב-DHnaturally שיפר את איכות חיי והחזיר אותי לאיזון.', en: 'Treatment at DHnaturally improved my quality of life and restored my balance.' },
+
+  'about.testimonials.2.name': { he: 'ד״ר איתן פ.', en: 'Dr. Eitan P.' },
+  'about.testimonials.2.role': { he: 'מטפל מקצועי', en: 'Practitioner' },
+  'about.testimonials.2.text': { he: 'שיתוף פעולה מקצועי ותכשירים מבוססי ראיות המסייעים לתמוך בטיפול הכוללני.', en: 'A professional collaboration and evidence-based formulations that support comprehensive care.' },
+
+  'about.testimonials.3.name': { he: 'שרה מ.', en: 'Sarah M.' },
+  'about.testimonials.3.role': { he: 'מטופלת', en: 'Patient' },
+  'about.testimonials.3.text': { he: 'שירות מקצועי, יחס אישי ותוצאות ברורות לאורך הטיפול.', en: 'Professional service, personal attention and clear results over the course of treatment.' },
+
+  // About CTA
+  'about.cta.title': { he: 'התחילו את מסע ההבראה שלכם', en: 'Start Your Healing Journey' },
+  'about.cta.subtitle': { he: 'פגישה מקצועית תתחיל את התהליך לעבר בריאות מיטבית וטיפול מותאם אישית.', en: 'A professional consultation will begin the process toward optimal health and personalized care.' },
 
   // Contact page
   'contact.title': { he: 'ייעוץ מקצועי ותמיכה', en: 'Professional Consultation & Support' },
@@ -171,8 +230,8 @@ export const translations: Translations = {
   'contact.form.email': { he: 'כתובת דוא"ל', en: 'Email Address' },
   'contact.form.phone': { he: 'מספר טלפון', en: 'Phone Number' },
   'contact.form.subject': { he: 'נושא הפנייה', en: 'Inquiry Subject' },
-  'contact.form.message': { he: 'תיאור הצרכים הבריאותיים', en: 'Health Needs Description' },
-  'contact.form.submit': { he: 'שלח בקשה לייעוץ', en: 'Submit Consultation Request' },
+  'contact.form.message': { he: 'אני זקוק לייעוץ מקצועי בנוגע ל...', en: 'I need professional consultation regarding...' },
+  'contact.form.submit': { he: 'שליחה', en: 'Submit' },
   'contact.form.required': { he: 'שדה חובה', en: 'Required field' },
   'contact.form.healthConcern': { he: 'תחום בריאותי עיקרי', en: 'Primary Health Concern' },
   'contact.form.experience': { he: 'ניסיון קודם ברפואה טבעית', en: 'Previous Natural Medicine Experience' },
@@ -182,8 +241,11 @@ export const translations: Translations = {
   'contact.info.whatsapp.note': { he: 'זמין לייעוץ מיידי ושאלות מקצועיות', en: 'Available for immediate consultation and professional questions' },
   'contact.consultation.title': { he: 'שירותי ייעוץ מקצועיים', en: 'Professional Consultation Services' },
   'contact.consultation.individual': { he: 'ייעוץ אישי מותאם', en: 'Personalized Individual Consultation' },
+  'contact.consultation.individual.description': { he: 'ייעוץ אישי אחד על אחד לתכנון טיפול מותאם אישית', en: 'One-on-one consultation for personalized treatment planning' },
   'contact.consultation.product': { he: 'ייעוץ בחירת מוצרים', en: 'Product Selection Guidance' },
+  'contact.consultation.product.description': { he: 'הכוונה מקצועית בבחירת המוצרים הטבעיים הנכונים', en: 'Expert guidance in selecting the right natural remedies' },
   'contact.consultation.followup': { he: 'מעקב טיפולי', en: 'Treatment Follow-up' },
+  'contact.consultation.followup.description': { he: 'פגישות מעקב להערכת התקדמות והתאמת הטיפול', en: 'Follow-up sessions to assess progress and adjust treatment' },
   'contact.hours.title': { he: 'שעות הייעוץ המקצועי', en: 'Professional Consultation Hours' },
   'contact.hours.weekdays': { he: 'ראשון - חמישי', en: 'Sunday - Thursday' },
   'contact.hours.friday': { he: 'יום שישי', en: 'Friday' },
