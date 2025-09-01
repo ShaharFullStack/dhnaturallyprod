@@ -235,7 +235,7 @@ export function Home(): JSX.Element {
         <div className="hero-container">
           <div className="section-header">
             <h2 className="section-title">
-              {language === 'he' ? 'בטיחות ויעילות - המחויבות שלנו אליכם' : 'Safety & Efficacy - Our Commitment to You'}
+              {language === 'he' ? 'המחויבות שלנו אליכם' : 'Our Commitment to You'}
             </h2>
             <p className="section-description">
               {language === 'he'

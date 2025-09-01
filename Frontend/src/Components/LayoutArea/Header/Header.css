@@ -10,7 +10,7 @@
 
 /* Header Navigation */
 .header-nav {
-  background: hsla(180, 100%, 87%, 0.633);
+  background: hsla(180, 71%, 68%, 0.353);
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   position: sticky;
