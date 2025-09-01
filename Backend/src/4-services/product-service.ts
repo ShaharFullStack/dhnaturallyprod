@@ -12,8 +12,10 @@ class ProductService {
         const sql = `
         SELECT
             id,
-            name,
-            description,
+            name AS name_en,
+            name_he,
+            description AS description_en,
+            description_he,
             price,
             CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName) AS imageUrl 
         FROM products

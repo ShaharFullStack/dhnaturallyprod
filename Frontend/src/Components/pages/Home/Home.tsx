@@ -153,26 +153,26 @@ export function Home(): JSX.Element {
       </div>
 
       {/* Clean Hero Section */}
-      <section className="hero-section" data-testid="hero-section" data-scroll-animate>
+      <section className="hero-section" data-testid="hero-section">
         <div className="hero-container">
           <div className="hero-content">
-            <div className="hero-logo-container">
+            <div className="hero-logo-container" data-scroll-animate>
               <AnimatedLogo
                 variant="hero"
                 className="hero-logo"
               />
             </div>
 
-            <h1 className="hero-title" data-testid="hero-title">
+            <h1 className="hero-title" data-testid="hero-title" data-scroll-animate>
               <span className="hero-title-text">
                 {t('home.hero.title', language)}
               </span>
             </h1>
-            <p className="hero-subtitle" data-testid="hero-description">
+            <p className="hero-subtitle" data-testid="hero-description" data-scroll-animate>
               {t('home.hero.subtitle', language)}
             </p>
 
-            <div className="hero-cta-container">
+            <div className="hero-cta-container" data-scroll-animate>
               <Link to="/store">
                 <Button
                   className="hero-cta-primary"

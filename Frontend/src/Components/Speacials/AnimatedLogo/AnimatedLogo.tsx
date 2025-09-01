@@ -22,8 +22,8 @@ export function AnimatedLogo({
   return (
     <video 
       src={videoSrc}
-      autoPlay 
-      loop={true} 
+      autoPlay={true}
+      loop={false} 
       muted 
       playsInline
       className={cn(sizeClass, 'animated-logo-base', blendClass, className)}

@@ -1,4 +1,5 @@
 import { JSX, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import "./Articles.css";
@@ -19,10 +20,22 @@ interface Article {
 
 export function Articles(): JSX.Element {
     const { language } = useLanguage();
+    const navigate = useNavigate();
     const [selectedCategory, setSelectedCategory] = useState<string>("all");
     const [email, setEmail] = useState<string>("");
 
     const [articles] = useState<Article[]>([
+        {
+            id: "similia-similibus-curenter",
+            title: language === 'he' ? 'העיקרון ההומיאופתי של סימיליה סימיליבוס קורנטור - "דומה מרפא דומה"' : 'The Homeopathic Principle of Similia Similibus Curentur - "Like Cures Like"',
+            excerpt: language === 'he' ? 'חקירה לעיקרון המרכזי של ההומיאופתיה, מערכת רפואית שהוקמה בסוף המאה ה-18 על ידי ד"ר סמואל האנמן' : 'An exploration into the central principle of homeopathy, a medical system founded in the late 18th century by Dr. Samuel Hahnemann',
+            content: "",
+            category: "homeopathy",
+            readTime: 12,
+            publishedDate: "2024-01-20",
+            featured: true,
+            imageUrl: "/images/articles/homeopathy-principle.jpg"
+        },
         {
             id: "1",
             title: t("articles.mock.1.title", language),
@@ -31,7 +44,7 @@ export function Articles(): JSX.Element {
             category: "homeopathy",
             readTime: 8,
             publishedDate: "2024-01-15",
-            featured: true,
+            featured: false,
             imageUrl: "/images/articles/homeopathy-potencies.jpg"
         },
         {
@@ -117,7 +130,7 @@ export function Articles(): JSX.Element {
                                 </div>
                                 <h2 className="featured-title">{featuredArticle.title}</h2>
                                 <p className="featured-excerpt">{featuredArticle.excerpt}</p>
-                                <Button className="primary">{t("articles.readMore", language)}</Button>
+                                <Button className="primary" onClick={() => navigate(`/articles/${featuredArticle.id}`)}>{t("articles.readMore", language)}</Button>
                             </div>
                         </div>
                     </section>
@@ -155,7 +168,7 @@ export function Articles(): JSX.Element {
                                 <h3 className="article-title">{article.title}</h3>
                                 <p className="article-excerpt">{article.excerpt}</p>
                                 <div className="article-actions">
-                                    <Button className="link">{t("articles.readMore", language)} <ArrowRight size={14} /></Button>
+                                    <Button className="link" onClick={() => navigate(`/articles/${article.id}`)}>{t("articles.readMore", language)} <ArrowRight size={14} /></Button>
                                 </div>
                             </div>
                         </article>

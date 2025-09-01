@@ -48,7 +48,7 @@ class App {
 
         this.server.use(fileUpload());
 
-        const absolutePath = path.join(__dirname, "1-assets", "images");
+        const absolutePath = path.join(__dirname, "1-assets", "images", "products");
         fileSaver.config(absolutePath);
         this.server.use("/api/products/images", express.static(absolutePath));
 

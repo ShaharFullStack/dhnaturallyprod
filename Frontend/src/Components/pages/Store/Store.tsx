@@ -1,4 +1,5 @@
 import { JSX, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import "./Store.css";
@@ -6,8 +7,10 @@ import { appConfig } from "../../../Utils/AppConfig";
 
 interface Product {
     id: string;
-    name: string;
-    description: string;
+    name_en: string;
+    name_he: string;
+    description_en: string;
+    description_he: string;
     price: number;
     imageUrl?: string;
     category?: string;
@@ -15,6 +18,7 @@ interface Product {
 
 export function Store(): JSX.Element {
     const { language } = useLanguage();
+    const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [sortBy, setSortBy] = useState("popular");
@@ -59,11 +63,51 @@ export function Store(): JSX.Element {
     ];
 
     const filteredProducts = products.filter(product => {
-        const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            product.description.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
+        const currentName = language === 'he' ? (product.name_he || product.name_en || '') : (product.name_en || '');
+        const currentDescription = language === 'he' ? (product.description_he || product.description_en || '') : (product.description_en || '');
+
+        // Split search term by commas and trim whitespace
+        const searchTerms = searchTerm.split(',').map(term => term.trim()).filter(term => term.length > 0);
+
+        // If no search terms, show all products (matchesSearch = true)
+        const matchesSearch = searchTerms.length === 0 ||
+            searchTerms.some(term => {
+                const searchTermLower = term.toLowerCase();
+                const nameMatch = currentName.toLowerCase().includes(searchTermLower);
+                const descMatch = currentDescription.toLowerCase().includes(searchTermLower);
+                return nameMatch || descMatch;
+            });
+
+        // For now, since there's no category field in the database,
+        // we'll skip category filtering or implement basic categorization
+        const matchesCategory = selectedCategory === "all" ||
+            getProductCategory(product).includes(selectedCategory);
+
         return matchesSearch && matchesCategory;
     });
+
+    // Helper function to categorize products based on their content
+    const getProductCategory = (product: Product): string => {
+        const content = `${product.name_en || ''} ${product.description_en || ''}`.toLowerCase();
+
+        if (content.includes('homeopathy') || content.includes('homeopathic')) {
+            return 'homeopathic';
+        }
+        if (content.includes('herbal') || content.includes('plant') || content.includes('extract')) {
+            return 'herbal';
+        }
+        if (content.includes('diabetes') || content.includes('blood sugar') || content.includes('insulin')) {
+            return 'immunity'; // Using immunity as a catch-all for now
+        }
+        if (content.includes('digest') || content.includes('stomach') || content.includes('gut')) {
+            return 'digestion';
+        }
+        if (content.includes('stress') || content.includes('anxiety') || content.includes('relax')) {
+            return 'stress';
+        }
+
+        return 'homeopathic'; // Default category
+    };
 
     return (
         <div className="store-container">
@@ -88,7 +132,7 @@ export function Store(): JSX.Element {
                     <div>
                         <input
                             type="text"
-                            placeholder={t("common.search", language) || "Search products..."}
+                            placeholder={t("common.search", language) || "Search products... (use commas to separate terms)"}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="search-input"
@@ -128,40 +172,52 @@ export function Store(): JSX.Element {
                     {loading && <div className="loading">Loading products...</div>}
                     {error && <div className="error">{error}</div>}
                     {filteredProducts.map(product => (
-                        <div key={product.id} className="product-card">
-                            <div className="product-image-container">
-                                {product.imageUrl ? (
-                                    <img
-                                        src={product.imageUrl}
-                                        alt={product.name}
-                                        className="product-image"
-                                        loading="lazy"
-                                    />
-                                ) : (
-                                    <div className="product-placeholder">
-                                        <span className="product-placeholder-icon">📦</span>
-                                    </div>
-                                )}
-                            </div>
-                            
-                            <div className="product-info">
-                                <h3 className="product-name line-clamp-2">
-                                    {product.name}
-                                </h3>
-                                <p className="product-description line-clamp-3">
-                                    {product.description}
-                                </p>
+                            <div
+                                key={product.id}
+                                className="product-card"
+                                onClick={() => navigate(`/product/${product.id}`)}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                <div className="product-image-container">
+                                    {product.imageUrl ? (
+                                        <img
+                                            src={product.imageUrl}
+                                            alt={language === 'he' ? (product.name_he || product.name_en) : (product.name_en || '')}
+                                            className="product-image"
+                                            loading="lazy"
+                                        />
+                                    ) : (
+                                        <div className="product-placeholder">
+                                            <span className="product-placeholder-icon">📦</span>
+                                        </div>
+                                    )}
+                                </div>
                                 
-                                <div className="product-footer">
-                                    <span className="product-price">
-                                        {t("common.currency", language)}{product.price}
-                                    </span>
-                                    <button className="add-to-cart-btn">
-                                        {t("store.addToCart", language)}
-                                    </button>
+                                <div className="product-info">
+                                    <h3 className="product-name line-clamp-2">
+                                        {language === 'he' ? (product.name_he || product.name_en) : (product.name_en || '')}
+                                    </h3>
+                                    <p className="product-description line-clamp-3">
+                                        {language === 'he' ? (product.description_he || product.description_en) : (product.description_en || '')}
+                                    </p>
+                                    
+                                    <div className="product-footer">
+                                        <span className="product-price">
+                                            {t("common.currency", language)}{product.price}
+                                        </span>
+                                        <button
+                                            className="add-to-cart-btn"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                // Add to cart functionality here
+                                                console.log('Add to cart:', product.id);
+                                            }}
+                                        >
+                                            {t("store.addToCart", language)}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     ))}
                 </div>
 
