@@ -7,9 +7,10 @@ import "./Footer.css";
 
 export function Footer(): JSX.Element {
     const { language } = useLanguage();
-    
+    const year = new Date().getFullYear();
+
     return (
-        <footer className="footer">
+        <div className="footer">
             <div className="footer-container">
                 <div className="footer-grid">
                     {/* Brand Section */}
@@ -87,7 +88,7 @@ export function Footer(): JSX.Element {
                 <div className="footer-bottom">
                     <div className="footer-bottom-content">
                         <p className="footer-copyright">
-                            © 2024 DHnaturally. {t('footer.rights_reserved', language)}
+                            © {year} DHnaturally. {t('footer.rights_reserved', language)}
                         </p>
                         <div className="footer-legal-links">
                             <Link to="/privacy" className="footer-legal-link">
@@ -100,6 +101,6 @@ export function Footer(): JSX.Element {
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
     );
 }

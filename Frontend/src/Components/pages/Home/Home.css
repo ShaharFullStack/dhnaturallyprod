@@ -22,6 +22,20 @@
 /* Hero Section */
 .hero-section {
   background: url('../../../Assets/Images/heroBg.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-section h1 {
+  z-index: 20;
 }
 
 .hero-container {
@@ -42,7 +56,7 @@
   justify-content: center;
   margin-bottom: 0.5rem;
   position: relative;
-  z-index: 10;
+  z-index: 5;
 }
 
 .hero-logo {
@@ -181,7 +195,10 @@
 /* Feature Cards */
 .features-section {
   padding: 4rem 1rem;
-  background-color: var(--dh-pale);
+  background-color: hsla(193, 74%, 94%, 0.818);
+  backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 5;
 }
 
 .features-container {
@@ -202,6 +219,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   text-align: center;
+  position: relative;
+  z-index: 5;
 }
 
 .feature-card:hover {
@@ -302,7 +321,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: -1;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -320,103 +339,131 @@
   width: auto;
   height: 300px;
   opacity: 0.8;
-  transition: transform 0.3s ease-out;
-  
-  /* Alternative approach - uncomment if multiply doesn't work */
-  /* mix-blend-mode: screen; */
-  /* filter: invert(1) brightness(0.3) contrast(2); */
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: transform;
+  z-index: 1;
+
 }
 
 .leaf-1 {
   top: 10%;
   left: -50px;
-  transform-origin: center bottom;
+  transform-origin: 70% 90%;
+  animation: gentleFloat 8s ease-in-out infinite;
+  animation-delay: 0s;
+  z-index: 2;
 }
 
 .leaf-2 {
   top: 30%;
   right: -50px;
-  transform: scaleX(-1);
-  transform-origin: center bottom;
+  transform-origin: 30% 90%;
+  animation: gentleFloat 9s ease-in-out infinite;
+  animation-delay: -2s;
+  z-index: 2;
 }
 
 .leaf-3 {
   bottom: 20%;
   left: -60px;
   height: 180px;
-  transform-origin: center bottom;
+  transform-origin: 70% 90%;
+  animation: gentleFloat 10s ease-in-out infinite;
+  animation-delay: -4s;
+  z-index: 2;
 }
 
 .leaf-4 {
   bottom: 40%;
   right: -60px;
   height: 180px;
-  transform: scaleX(-1);
-  transform-origin: center bottom;
+  transform-origin: 30% 90%;
+  animation: gentleFloat 11s ease-in-out infinite;
+  animation-delay: -6s;
+  z-index: 2;
 }
 
-/* Scroll-based bending animation */
+/* Scroll-based bending animation - Enhanced for realistic leaf bending */
 .Home[data-scroll="0"] .floating-leaf {
-  transform: rotate(0deg);
+  transform: rotate(0deg) skew(0deg, 0deg);
 }
 
+/* Left side leaves (1,3) - bend toward center (clockwise rotation + right skew) */
 .Home[data-scroll="small"] .leaf-1,
 .Home[data-scroll="small"] .leaf-3 {
-  transform: rotate(5deg);
+  transform: rotate(3deg) skew(2deg, 1deg);
+  transform-origin: 70% 90%;
 }
 
+/* Right side leaves (2,4) - bend toward center (counter-clockwise rotation + left skew) */
 .Home[data-scroll="small"] .leaf-2,
 .Home[data-scroll="small"] .leaf-4 {
-  transform: scaleX(-1) rotate(-5deg);
+  transform: scaleX(-1) rotate(-3deg) skew(-2deg, 1deg);
+  transform-origin: 30% 90%;
 }
 
 .Home[data-scroll="medium"] .leaf-1,
 .Home[data-scroll="medium"] .leaf-3 {
-  transform: rotate(10deg);
+  transform: rotate(8deg) skew(4deg, 2deg);
+  transform-origin: 70% 90%;
 }
 
 .Home[data-scroll="medium"] .leaf-2,
 .Home[data-scroll="medium"] .leaf-4 {
-  transform: scaleX(-1) rotate(-10deg);
+  transform: scaleX(-1) rotate(-8deg) skew(-4deg, 2deg);
+  transform-origin: 30% 90%;
 }
 
 .Home[data-scroll="large"] .leaf-1,
 .Home[data-scroll="large"] .leaf-3 {
-  transform: rotate(15deg);
+  transform: rotate(15deg) skew(7deg, 3deg);
+  transform-origin: 70% 90%;
 }
 
 .Home[data-scroll="large"] .leaf-2,
 .Home[data-scroll="large"] .leaf-4 {
-  transform: scaleX(-1) rotate(-15deg);
+  transform: scaleX(-1) rotate(-15deg) skew(-7deg, 3deg);
+  transform-origin: 30% 90%;
 }
 
-/* Subtle floating animation */
+/* Subtle floating animation - optimized for scroll interaction */
 @keyframes gentleFloat {
-  0%, 100% {
-    transform: translateY(0px);
+
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
   }
+
+  25% {
+    transform: translateY(-3px) translateX(1px);
+  }
+
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-6px) translateX(0px);
+  }
+
+  75% {
+    transform: translateY(-3px) translateX(-1px);
   }
 }
 
 .leaf-1 {
-  animation: gentleFloat 6s ease-in-out infinite;
+  animation: gentleFloat 8s ease-in-out infinite;
   animation-delay: 0s;
 }
 
 .leaf-2 {
-  animation: gentleFloat 7s ease-in-out infinite;
+  animation: gentleFloat 9s ease-in-out infinite;
   animation-delay: -2s;
 }
 
 .leaf-3 {
-  animation: gentleFloat 8s ease-in-out infinite;
+  animation: gentleFloat 10s ease-in-out infinite;
   animation-delay: -4s;
 }
 
 .leaf-4 {
-  animation: gentleFloat 9s ease-in-out infinite;
+  animation: gentleFloat 11s ease-in-out infinite;
   animation-delay: -6s;
 }
 
@@ -424,13 +471,19 @@
   .floating-leaf {
     height: 120px;
   }
-  .leaf-3, .leaf-4 {
+
+  .leaf-3,
+  .leaf-4 {
     height: 100px;
   }
-  .leaf-1, .leaf-3 {
+
+  .leaf-1,
+  .leaf-3 {
     left: -40px;
   }
-  .leaf-2, .leaf-4 {
+
+  .leaf-2,
+  .leaf-4 {
     right: -40px;
   }
 }
@@ -465,6 +518,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   text-align: center;
+  position: relative;
+  z-index: 5;
 }
 
 .Home .feature-card:hover {
@@ -560,30 +615,30 @@
 }
 
 .Home h1 {
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    font-weight: bold;
-    text-shadow: var(--text-shadow-lg);
-    color: var(--primary);
-    margin: 1rem 0;
-    text-align: center;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: bold;
+  text-shadow: var(--text-shadow-lg);
+  color: var(--primary);
+  margin: 1rem 0;
+  text-align: center;
 }
 
 .Home p {
-    font-size: clamp(0.875rem, 2vw, 1.125rem);
-    color: var(--text-secondary);
-    margin: 1rem 0;
-    line-height: 1.6;
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  color: var(--text-secondary);
+  margin: 1rem 0;
+  line-height: 1.6;
 }
 
 @media (max-width: 767px) {
   .Home .mobile-hidden {
     display: none;
   }
-  
+
   .Home .mobile-stack {
     flex-direction: column;
   }
-  
+
   .Home .mobile-full-width {
     width: 100%;
   }
@@ -612,15 +667,18 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  position: relative;
+  z-index: 5;
 }
 
 .feature-card {
   background: white;
   border-radius: 0.75rem;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   text-align: left;
-  z-index: 1;
+  position: relative;
+  z-index: 5;
 }
 
 .feature-icon .icon,
@@ -684,6 +742,7 @@
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .consultation-grid {
     grid-template-columns: 1fr 360px;
     align-items: start;
@@ -694,11 +753,12 @@
 .trust-cta {
   background: linear-gradient(135deg, var(--dh-navy) 0%, var(--dh-ocean) 50%, var(--dh-sky) 100%);
   border-radius: 1.5rem;
-  padding: 2.5rem 2rem;
+  padding: 1.5rem 1rem;
   margin-top: 3rem;
   text-align: center;
   position: relative;
   overflow: hidden;
+  z-index: 5;
 }
 
 .trust-cta::before {
@@ -714,16 +774,24 @@
 }
 
 @keyframes heroFloat {
-  0%, 100% { transform: rotate(-15deg) translateY(0px); }
-  50% { transform: rotate(-15deg) translateY(-20px); }
+
+  0%,
+  100% {
+    transform: rotate(-15deg) translateY(0px);
+  }
+
+  50% {
+    transform: rotate(-15deg) translateY(-20px);
+  }
 }
 
 .trust-cta-title {
-  color: white;
+  color: var(--dh-pale);
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   position: relative;
+  padding: 0;
   z-index: 2;
 }
 
@@ -778,6 +846,7 @@
   background: linear-gradient(135deg, var(--dh-pale) 0%, rgba(255, 255, 255, 0.8) 100%);
   position: relative;
   overflow: hidden;
+  z-index: 5;
 }
 
 .results-section::before {
@@ -905,15 +974,15 @@
   .features-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .trust-cta {
     padding: 3rem 2.5rem;
   }
-  
+
   .trust-cta-title {
     font-size: 2rem;
   }
-  
+
   .results-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -924,7 +993,7 @@
     flex-direction: column;
     align-items: center;
   }
-  
+
   .trust-cta-primary,
   .trust-cta-secondary {
     width: 100%;
@@ -938,21 +1007,52 @@
   padding: 4rem 0;
   background-color: white;
   position: relative;
+  z-index: 5;
 }
 
 .trust-section {
   padding: 4rem 0;
-  background-color: var(--dh-pale);
+  background-color: hsla(193, 74%, 94%, 0.518);;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(14, 9, 9, 0.8);
+  position: relative;
+  z-index: 5;
+}
+
+/* Scoped layout for the trust section to center the three cards */
+.trust-section .features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  /* center items inside each grid cell */
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+  /* center the grid in the container */
+  padding: 0 1rem;
+}
+
+.trust-section .feature-card {
+  width: 100%;
+  max-width: 380px;
+  /* keep card width reasonable */
+  text-align: center;
+  /* center card content for trust cards */
+  margin: 0 auto;
 }
 
 .consultation-section {
   padding: 4rem 0;
   background-color: white;
+  position: relative;
+  z-index: 5;
 }
 
 .about-section {
   padding: 2rem 0;
   position: relative;
+  z-index: 5;
 }
 
 .container {
@@ -1019,33 +1119,43 @@
 
 /* Timeline Mobile Responsive */
 @media (max-width: 768px) {
-  .cards-grid {
-    padding: 0 1rem;
+  /* Stack approach cards and remove timeline line on small screens */
+
+  .section-inner {
+    width: 100%;
+    
   }
 
+  .cards-grid {
+    left: 0;
+    right: 0;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  /* hide the central vertical timeline used on desktop */
   .cards-grid::before {
-    left: 2rem;
+    display: none;
   }
 
   .approach-card {
-    width: calc(100% - 4rem);
-    margin-left: 4rem !important;
-    margin-right: 0 !important;
-    min-height: 160px;
+    width: 100%;
+    margin: 0;
+    min-height: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-radius: 0.75rem;
   }
 
-  .approach-card::before {
-    left: -10px !important;
-    right: auto !important;
-  }
-
+  /* Remove timeline pseudo-elements on cards for mobile */
+  .approach-card::before,
   .approach-card::after {
-    left: 0 !important;
-    right: auto !important;
+    display: none !important;
   }
 
   .card-title {
-    padding-right: 3rem;
+    padding-right: 0;
+    font-size: 1.125rem;
   }
 }
 
@@ -1060,6 +1170,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1071,4 +1182,61 @@
 .testimonial-card,
 .cert-thumb {
   animation: slideInUp 0.6s ease-out both;
+  position: relative;
+  z-index: 5;
+}
+
+/* Force stacked approach layout for tablets and narrow desktops */
+@media (max-width: 1024px) {
+  .about-section .cards-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    padding: 0 0 0 3rem !important;
+    gap: 1rem !important;
+    margin: 0 !important;
+  }
+
+  /* Use a left-aligned timeline line instead of the centered desktop line */
+  .about-section .cards-grid::before {
+    display: block !important;
+    left: 1rem !important;
+    top: 1rem !important;
+    bottom: 1rem !important;
+    width: 3px !important;
+    transform: none !important;
+    background: linear-gradient(to bottom, var(--dh-ocean), var(--dh-sky)) !important;
+    border-radius: 2px !important;
+  }
+
+  .about-section .cards-grid .approach-card {
+    float: none !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    width: calc(100% - 3rem) !important;
+    max-width: none !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
+    border-radius: 0.75rem !important;
+    padding: 1rem !important;
+    background: white !important;
+    clear: both !important;
+  }
+
+  /* ensure card markers sit correctly */
+  .about-section .cards-grid .approach-card::before {
+    left: -2.25rem !important;
+    top: 1.25rem !important;
+    display: block !important;
+  }
+
+  /* ensure card-number is inline inside the card on smaller screens */
+  .about-section .cards-grid .approach-card .card-number {
+    position: relative !important;
+    left: 0 !important;
+    transform: none !important;
+    margin-bottom: 0.5rem !important;
+    display: inline-block !important;
+  }
 }

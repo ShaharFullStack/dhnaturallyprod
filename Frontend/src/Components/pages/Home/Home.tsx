@@ -9,7 +9,6 @@ import {
   Mail,
   Phone,
   Shield,
-  Star,
   Users
 } from 'lucide-react';
 import { JSX, useEffect } from "react";
@@ -45,23 +44,40 @@ export function Home(): JSX.Element {
     return () => observer.disconnect();
   }, []);
 
-  // Scroll-based leaf bending
+  // Enhanced scroll-based leaf bending with smoother transitions
   useEffect(() => {
     const homeElement = document.querySelector('.Home');
+    let ticking = false;
     
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const scrollPercent = Math.min(scrollY / (windowHeight * 2), 1);
-      
-      if (scrollPercent < 0.2) {
-        homeElement?.setAttribute('data-scroll', '0');
-      } else if (scrollPercent < 0.5) {
-        homeElement?.setAttribute('data-scroll', 'small');
-      } else if (scrollPercent < 0.8) {
-        homeElement?.setAttribute('data-scroll', 'medium');
-      } else {
-        homeElement?.setAttribute('data-scroll', 'large');
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const windowHeight = window.innerHeight;
+          
+          // Calculate scroll percentage with better precision
+          const scrollPercent = Math.min(scrollY / (windowHeight * 1.5), 1);
+          
+          // More granular scroll states for smoother leaf bending
+          let scrollState = '0';
+          if (scrollPercent < 0.1) {
+            scrollState = '0';
+          } else if (scrollPercent < 0.3) {
+            scrollState = 'small';
+          } else if (scrollPercent < 0.6) {
+            scrollState = 'medium';
+          } else {
+            scrollState = 'large';
+          }
+          
+          homeElement?.setAttribute('data-scroll', scrollState);
+          
+          // Debug: log scroll state changes
+          console.log('Scroll percent:', scrollPercent.toFixed(2), 'State:', scrollState);
+          
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -130,10 +146,10 @@ export function Home(): JSX.Element {
     <div className="Home">
       {/* Floating Leaves */}
       <div className="floating-leaves">
-        <img src={wormwoodImage} alt="" className="floating-leaf leaf-1" />
-        <img src={celandineImage} alt="" className="floating-leaf leaf-2" />
-        <img src={wormwoodImage} alt="" className="floating-leaf leaf-3" />
-        <img src={celandineImage} alt="" className="floating-leaf leaf-4" />
+        <img src={wormwoodImage} alt="wormwood" className="floating-leaf leaf-1" />
+        <img src={celandineImage} alt="celandine" className="floating-leaf leaf-2" />
+        <img src={wormwoodImage} alt="wormwood" className="floating-leaf leaf-3" />
+        <img src={celandineImage} alt="celandine" className="floating-leaf leaf-4" />
       </div>
 
       {/* Clean Hero Section */}
@@ -251,7 +267,7 @@ export function Home(): JSX.Element {
           {/* Call to Action */}
           <div className="trust-cta" data-scroll-animate>
             <h3 className="trust-cta-title">
-              {language === 'he' ? 'מוכנים להתחיל את המסע לבריאות טובה יותר?' : 'Ready to Begin Your Journey to Better Health?'}
+              {language === 'he' ? 'הזמינו עכשיו שיחת ייעוץ חינם עם נטורופתית מוסמכת' : 'Book Your Free Consultation with a Certified Naturopath Now'}
             </h3>
             <div className="trust-cta-buttons">
               <Button className="trust-cta-primary">
@@ -263,71 +279,6 @@ export function Home(): JSX.Element {
                 {language === 'he' ? 'שלחו הודעה' : 'Send Message'}
               </Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Results & Success Stories */}
-      <section className="results-section" data-scroll-animate>
-        <div className="hero-container">
-          <div className="section-header">
-            <h2 className="section-title">
-              {language === 'he' ? 'תוצאות מוכחות - סיפורי הצלחה אמיתיים' : 'Proven Results - Real Success Stories'}
-            </h2>
-            <p className="section-description">
-              {language === 'he'
-                ? 'אלפי לקוחות מרוצים שמצאו פתרון טבעי לבעיות הבריאות שלהם'
-                : 'Thousands of satisfied customers who found natural solutions to their health problems'
-              }
-            </p>
-          </div>
-          
-          <div className="results-grid">
-            <div className="result-card" style={{ animationDelay: '0.1s' }}>
-              <div className="result-stat">95%</div>
-              <h3 className="result-title">
-                {language === 'he' ? 'שיפור בתסמינים' : 'Symptom Improvement'}
-              </h3>
-              <p className="result-description">
-                {language === 'he' 
-                  ? 'מהמטופלים מדווחים על שיפור משמעותי תוך 30 ימים'
-                  : 'of patients report significant improvement within 30 days'
-                }
-              </p>
-            </div>
-
-            <div className="result-card" style={{ animationDelay: '0.2s' }}>
-              <div className="result-stat">15+</div>
-              <h3 className="result-title">
-                {language === 'he' ? 'שנות ניסיון' : 'Years of Experience'}
-              </h3>
-              <p className="result-description">
-                {language === 'he' 
-                  ? 'במחקר ופיתוח תכשירים טבעיים מתקדמים'
-                  : 'in researching and developing advanced natural remedies'
-                }
-              </p>
-            </div>
-
-            <div className="result-card" style={{ animationDelay: '0.3s' }}>
-              <div className="result-stat">10K+</div>
-              <h3 className="result-title">
-                {language === 'he' ? 'מטופלים מרוצים' : 'Satisfied Patients'}
-              </h3>
-              <p className="result-description">
-                {language === 'he' 
-                  ? 'ברחבי הארץ מעידים על יעילות הטיפולים'
-                  : 'across the country attest to the effectiveness of treatments'
-                }
-              </p>
-            </div>
-          </div>
-
-          <div className="results-cta">
-            <Button className="results-cta-button">
-              <Star size={16} className="cta-icon" />
-              {language === 'he' ? 'הצטרפו למשפחת DHnaturally' : 'Join the DHnaturally Family'}
-            </Button>
           </div>
         </div>
       </section>

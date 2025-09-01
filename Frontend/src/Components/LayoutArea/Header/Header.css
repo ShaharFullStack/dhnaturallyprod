@@ -10,7 +10,7 @@
 
 /* Header Navigation */
 .header-nav {
-  background: linear-gradient(to right, var(--dh-pale), var(--dh-pale));
+  background: hsla(180, 100%, 87%, 0.633);
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   position: sticky;
@@ -256,6 +256,48 @@
 
   .mobile-menu {
     display: none;
+  }
+}
+
+/* Mobile fixes: ensure menu button stays on-screen */
+@media (max-width: 640px) {
+  .header-container {
+    padding: 0 0.75rem;
+  }
+
+  .header-content {
+    height: 3.6rem;
+    gap: 0.5rem;
+  }
+
+  /* Allow flex children to shrink to avoid pushing the actions off-screen */
+  .header-content > .logo-section,
+  .header-content > .desktop-nav,
+  .header-content > .header-actions {
+    min-width: 0;
+  }
+
+  .logo-image {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+    max-width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .mobile-menu-button,
+  .cart-button {
+    padding: 0.4rem;
   }
 }
 
