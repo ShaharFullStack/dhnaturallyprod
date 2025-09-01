@@ -1,7 +1,8 @@
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import "./Store.css";
+import { appConfig } from "../../../Utils/AppConfig";
 
 interface Product {
     id: string;
@@ -18,33 +19,28 @@ export function Store(): JSX.Element {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [sortBy, setSortBy] = useState("popular");
 
-    // Mock products data - will be replaced with API call
-    const [products] = useState<Product[]>([
-        {
-            id: "1",
-            name: "Arnica Montana",
-            description: "Premier homeopathic remedy for trauma, bruising, and muscle soreness.",
-            price: 95.90,
-            category: "homeopathic",
-            imageUrl: "/images/products/arnica-montana.jpg"
-        },
-        {
-            id: "2", 
-            name: "Calendula Officinalis",
-            description: "Healing remedy for wounds, cuts, and skin conditions.",
-            price: 76.90,
-            category: "homeopathic",
-            imageUrl: "/images/products/calendula.jpg"
-        },
-        {
-            id: "3",
-            name: "Ginkgo Biloba Premium",
-            description: "Standardized extract for cognitive enhancement and circulation.",
-            price: 119.90,
-            category: "herbal",
-            imageUrl: "/images/products/ginkgo-biloba.jpg"
-        }
-    ]);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        let isMounted = true;
+        const fetchProducts = async () => {
+            try {
+                setLoading(true);
+                const res = await fetch(appConfig.productsUrl, { method: 'GET' });
+                if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+                const data = await res.json();
+                if (isMounted) setProducts(data || []);
+            } catch (err: any) {
+                if (isMounted) setError(err.message || 'Failed to fetch products');
+            } finally {
+                if (isMounted) setLoading(false);
+            }
+        };
+        fetchProducts();
+        return () => { isMounted = false; };
+    }, []);
 
     const categories = [
         { value: "all", label: t("store.filter.all", language) },
@@ -129,6 +125,8 @@ export function Store(): JSX.Element {
 
                 {/* Products Grid */}
                 <div className="products-grid">
+                    {loading && <div className="loading">Loading products...</div>}
+                    {error && <div className="error">{error}</div>}
                     {filteredProducts.map(product => (
                         <div key={product.id} className="product-card">
                             <div className="product-image-container">

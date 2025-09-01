@@ -275,6 +275,7 @@ export const translations: Translations = {
   'features.innovation': { he: 'חדשנות בתחום', en: 'Industry Innovation' },
 
   // Common
+  'common.search': { he: 'חיפוש', en: 'Search' },
   'common.loading': { he: 'טוען מוצרים טבעיים...', en: 'Loading natural products...' },
   'common.error': { he: 'אירעה שגיאה - נסו שוב', en: 'An error occurred - please try again' },
   'common.tryAgain': { he: 'נסו שוב', en: 'Try Again' },

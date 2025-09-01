@@ -35,7 +35,7 @@ class App {
 
         // Enable CORS: 
         const corsOrigins = [
-            "http://localhost:3000",
+            "https://localhost:3000",
             "http://localhost:3000",
             "http://localhost:3100",
             "https://localhost:3100"];
