@@ -45,9 +45,9 @@
 .about-hero{
     position: relative;
     background: var(--gradient-primary);
-    color: #fff;
+    color: var(--dh-light);
     overflow: hidden;
-    min-height: 70vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
 }
@@ -55,7 +55,7 @@
 .hero-background {
     position: absolute;
     inset: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    background-image: url('../../../Assets/Images/makingMeds.png');
     opacity: 0.6;
 }
 
@@ -85,15 +85,15 @@
 }
 
 .about-hero-title{
-    font-size: 3rem;
-    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+    font-size: 2.5rem;
+    color: var(--dh-light);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
     animation: fadeInUp 1s ease-out 0.4s both;
     padding-top: 1rem;
-    line-height: 1.1;
+    line-height: 1.2;
     white-space: pre-line;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
 }
 
 .about-hero-subtitle{
@@ -246,6 +246,129 @@
 .about-mission {
     position: relative;
     overflow: hidden;
+}
+
+/* Dafna personal section layout */
+.about-dafna .dafna-features-grid{
+    display:flex;
+    gap:2rem;
+    align-items: flex-start;
+    margin-top:2rem;
+    flex-direction: column;
+}
+
+.dafna-photo-wrap{
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    border-radius: 1rem;
+    overflow: hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.75rem;
+}
+
+.dafna-photo{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: saturate(0.95) contrast(1.02);
+}
+
+.dafna-photo-wrap:hover .dafna-photo{
+    transform: translateY(-6px) scale(1.02);
+    filter: saturate(1) contrast(1.05);
+}
+
+/* Circular transparent profile frame */
+.dafna-photo-frame{
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    overflow: hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: transparent;
+    position: relative;
+    transition: transform 0.35s ease;
+}
+
+.dafna-photo-frame::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px rgba(255,255,255,0.06) inset;
+    pointer-events: none;
+}
+
+.dafna-photo-frame img.dafna-photo{
+    width: 110%;
+    height: 110%;
+    transform: translateY(-4%);
+    mix-blend-mode: normal;
+}
+
+.dafna-photo-frame:hover{ transform: translateY(-6px) scale(1.02); }
+
+.dafna-photo-caption{
+    text-align: center;
+}
+
+.dafna-name{
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--dh-navy);
+}
+
+.dafna-title{
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.dafna-features{
+    display:grid;
+    gap:1.25rem;
+    width:100%;
+}
+
+.dafna-feature-card{
+    background: var(--card-bg);
+    padding:1.25rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(14,165,164,0.06);
+    display:flex;
+    gap:1rem;
+    align-items: flex-start;
+}
+
+.dafna-feature-card .feature-icon{
+    width:56px;
+    height:56px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(14,165,164,0.12), rgba(42,127,143,0.08));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--dh-ocean);
+    flex-shrink:0;
+}
+
+.dafna-feature-card h3{
+    margin:0 0 0.25rem 0;
+    font-size:1.05rem;
+}
+
+.dafna-feature-card .feature-description{
+    margin:0;
+    color:var(--muted);
+    font-size:0.95rem;
 }
 
 .about-mission::before {
@@ -778,20 +901,40 @@
     .story-content {
         grid-template-columns: 2fr 1fr;
     }
+
+    .about-dafna .dafna-features-grid{
+        flex-direction: row;
+    }
 }
 
 @media (min-width: 768px) {
-    .about-hero-title{font-size: 4rem}
+    .about-hero{min-height: 55vh}
+    .about-hero-title{font-size: 3.5rem}
     .section-title{font-size: 3rem}
 }
 
 @media (min-width: 1024px){
-    .about-hero{padding:6rem 0 5rem}
-    .about-hero-title{font-size:4.5rem}
+    .about-hero{padding:6rem 0 5rem; min-height: 60vh}
+    .about-hero-title{font-size: 4rem}
     .values-grid{grid-template-columns: repeat(3,1fr)}
     .testimonials-grid{grid-template-columns: repeat(3,1fr)}
     .cert-grid{grid-template-columns: repeat(6,1fr); gap:1.5rem}
     .about-section{padding: 5rem 0}
+
+    .about-dafna .dafna-features-grid{
+        align-items: flex-start;
+        gap:3rem;
+    }
+
+    .dafna-photo-wrap{
+        flex: 0 0 360px;
+    }
+
+    .dafna-features{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap:1rem 1.5rem;
+        align-content: start;
+    }
 }
 
 /* Utility classes */

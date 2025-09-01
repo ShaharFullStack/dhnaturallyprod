@@ -25,7 +25,7 @@
 
 /* Hero */
 .articles-hero {
-    background: linear-gradient(90deg, var(--dh-navy), var(--dh-ocean));
+    background-image: url('../../../Assets/Images/nature1.png');
     color: #fff;
     padding: 2.5rem 0;
     text-align: center

@@ -22,6 +22,18 @@ export const translations: Translations = {
   'home.hero.cta.products': { he: 'רכישת תכשירים טבעיים', en: 'Shop Natural Remedies' },
   'home.hero.cta.about': { he: 'למד על טיפול טבעי', en: 'Learn Natural Healing' },
 
+  // Expertise Section - Updated with Dafna's story
+  'home.expertise.title': { he: 'פגשו את דפנה חליוה-מרקוס: הלב הפועם של DHnaturally', en: 'Meet Dafna Haliwa-Marcus: The Heart Behind DHnaturally' },
+  'home.expertise.description': { he: 'דפנה חליוה-מרקוס, נטורופתית מוסמכת עם למעלה מ-15 שנות ניסיון, הקימה את DHnaturally מתוך הבנה עמוקה בצורך בפתרונות טבעיים יעילים. לאחר חוויה אישית עם מגבלות הרפואה המודרנית, היא יצרה תכשירים המחברים בין חכמת הרפואה המסורתית לבין מחקר מדעי עדכני', en: 'Dafna Haliwa-Marcus, a certified naturopath with over 15 years of experience, founded DHnaturally from a deep understanding of the need for effective natural solutions. After a personal experience with modern medicine\'s limitations, she created formulations that bridge traditional healing wisdom with current scientific research' },
+  'home.expertise.dafna.education': { he: 'השכלה והכשרה מקצועית', en: 'Professional Education & Training' },
+  'home.expertise.dafna.education.desc': { he: 'בוגרת אוניברסיטת דורצ\'סטר אנגליה ומכללת מעינות ירושלים. מומחית בהומיאופתיה, אירידיולוגיה, רפואה קוריאנית ופתולוגיה', en: 'Graduate of University of Dorset England and Maayanot Jerusalem College. Expert in homeopathy, iridology, Korean medicine, and pathology' },
+  'home.expertise.personal.journey': { he: 'מנסיוני האישי לטובת הרבית', en: 'Personal Journey to Vision' },
+  'home.expertise.personal.journey.desc': { he: 'חוותה בעצמה את מגבלות הרפואה המודרנית והקימה קליניקה פרטית המספקת פתרונות טבעיים יעילים מאז 2006', en: 'Experienced modern medicine\'s limitations firsthand and established a private clinic providing effective natural solutions since 2006' },
+  'home.expertise.unique.formulas': { he: 'נוסחאות ייחודיות', en: 'Unique Formulations' },
+  'home.expertise.unique.formulas.desc': { he: 'פיתחה נוסחאות מתקדמות המטפלות במגוון בעיות נפוצות בו-זמנית, כולל סוכרת, בעיות כבד וקשב וריכוז', en: 'Developed advanced formulations addressing multiple concurrent health issues, including diabetes, liver problems, and attention/focus' },
+  'home.expertise.patient.success': { he: 'הצלחות מטופלים', en: 'Patient Success Stories' },
+  'home.expertise.patient.success.desc': { he: 'אלפי מטופלים בישראל ובעולם חוו שיפור משמעותי בבריאותם באמצעות הגישה ההוליסטית והתכשירים הטבעיים', en: 'Thousands of patients in Israel and worldwide have experienced significant health improvements through holistic approach and natural remedies' },
+
   'home.features.title': { he: 'למה DHnaturally הבחירה המקצועית לטיפול טבעי?', en: 'Why DHnaturally is the Professional Choice for Natural Healing?' },
   'home.features.description': { he: 'מתמחים ברפואה הומיאופתית ופיתוסרפיה מקצועית. תכשירינה מבוססי מחקר ופועלים בעדינות ללא תופעות לוואי', en: 'Specializing in professional homeopathic medicine and phytotherapy. Our research-based formulations work gently without side effects' },
 
@@ -191,6 +203,12 @@ export const translations: Translations = {
   // About - Story & Testimonials
   'about.story.paragraph1': { he: 'DHnaturally נוסדה במטרה לחבר בין תורת הריפוי המסורתית לבין עדויות מדעיות מודרניות ולהציע טיפול מותאם אישית לכל מטופל.', en: 'DHnaturally was founded to bridge traditional healing wisdom with modern scientific evidence and provide personalized care for every patient.' },
   'about.story.paragraph2': { he: 'עם ניסיון של שנים בתחום הנטורופתיה והומיאופתיה, אנו משקיעים במחקר ופיתוח תכשירים איכותיים ובבנייה של פרוטוקולים טיפוליים מבוססי עדות.', en: 'With years of experience in naturopathy and homeopathy, we invest in research and develop high-quality formulations and evidence-based therapeutic protocols.' },
+
+
+  // About - Dafna
+  'about.dafna.name': { he: 'דפנה חליוה-מרכוס', en: 'Dafna Haliwa-Marcus' },
+  'about.dafna.title': { he: 'מומחית לרפואה משלימה', en: 'Complementary Medicine Specialist' },
+  'about.dafna.photoAlt': { he: 'דפנה חליוה-מרכוס', en: 'Dafna Haliwa-Marcus' },
 
   // Certifications alt text
   'about.certifications.alt': { he: 'תעודה מקצועית', en: 'Certification image' },

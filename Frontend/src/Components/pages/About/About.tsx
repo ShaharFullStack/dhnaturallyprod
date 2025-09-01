@@ -2,7 +2,7 @@ import { JSX, useState, useEffect } from "react";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import "./About.css";
-import { ShieldCheck, RefreshCw, Scale, Microscope, CheckCircle, User, Star, Award, ArrowRight, Quote } from 'lucide-react';
+import { ShieldCheck, RefreshCw, Scale, Microscope, CheckCircle, User, Star, Award, ArrowRight, Quote, Heart, BookOpen, Users } from 'lucide-react';
 import { Button } from '../../UI/Button/Buttons';
 import cert1 from '../../../Assets/Images/certifications/IMG_0003.jpg';
 import cert2 from '../../../Assets/Images/certifications/IMG_0004.jpg';
@@ -10,6 +10,7 @@ import cert3 from '../../../Assets/Images/certifications/IMG_0005.jpg';
 import cert4 from '../../../Assets/Images/certifications/IMG_0006.jpg';
 import cert5 from '../../../Assets/Images/certifications/IMG_0007.jpg';
 import cert6 from '../../../Assets/Images/certifications/IMG_0008.jpg';
+import womanImg from '../../../Assets/Images/woman.png';
 
 export function About(): JSX.Element {
     const { language } = useLanguage();
@@ -152,6 +153,65 @@ export function About(): JSX.Element {
                                     </div>
                                     <h3>Evidence-Based Practice</h3>
                                     <p>Combining traditional wisdom with modern research</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Dafna's Personal Story Section */}
+            <section className="about-section about-dafna" data-scroll-animate id="dafna">
+                <div className="container">
+                    <div className="section-inner">
+                        <div className="section-header">
+                            <h2 className="section-title text-center">{t("home.expertise.title", language)}</h2>
+                            <div className="section-divider center"></div>
+                            <p className="section-subtitle">{t("home.expertise.description", language)}</p>
+                        </div>
+                        
+                        <div className="dafna-features-grid">
+                            <div className="dafna-photo-wrap" style={{ animationDelay: '0.05s' }}>
+                                <div className="dafna-photo-frame">
+                                    <img src={womanImg} alt={t("about.dafna.photoAlt", language) || 'Dafna'} className="dafna-photo" />
+                                </div>
+                                <div className="dafna-photo-caption">
+                                    <h3 className="dafna-name">{t("about.dafna.name", language) || 'Dafna Haliwa-Marcus'}</h3>
+                                    <p className="dafna-title">{t("about.dafna.title", language) || t("home.expertise.dafna.title", language) || 'Naturopath & Homeopath'}</p>
+                                </div>
+                            </div>
+
+                            <div className="dafna-features">
+                                <div className="dafna-feature-card" style={{ animationDelay: '0.1s' }}>
+                                    <div className="feature-icon">
+                                        <Award size={28} />
+                                    </div>
+                                    <h3 className="feature-title">{t("home.expertise.dafna.education", language)}</h3>
+                                    <p className="feature-description">{t("home.expertise.dafna.education.desc", language)}</p>
+                                </div>
+
+                                <div className="dafna-feature-card" style={{ animationDelay: '0.2s' }}>
+                                    <div className="feature-icon">
+                                        <Heart size={28} />
+                                    </div>
+                                    <h3 className="feature-title">{t("home.expertise.personal.journey", language)}</h3>
+                                    <p className="feature-description">{t("home.expertise.personal.journey.desc", language)}</p>
+                                </div>
+
+                                <div className="dafna-feature-card" style={{ animationDelay: '0.3s' }}>
+                                    <div className="feature-icon">
+                                        <BookOpen size={28} />
+                                    </div>
+                                    <h3 className="feature-title">{t("home.expertise.unique.formulas", language)}</h3>
+                                    <p className="feature-description">{t("home.expertise.unique.formulas.desc", language)}</p>
+                                </div>
+
+                                <div className="dafna-feature-card" style={{ animationDelay: '0.4s' }}>
+                                    <div className="feature-icon">
+                                        <Users size={28} />
+                                    </div>
+                                    <h3 className="feature-title">{t("home.expertise.patient.success", language)}</h3>
+                                    <p className="feature-description">{t("home.expertise.patient.success.desc", language)}</p>
                                 </div>
                             </div>
                         </div>
@@ -336,7 +396,7 @@ export function About(): JSX.Element {
                             {language === 'he' ? 'קבלו ייעוץ מקצועי חינם' : 'Get Free Professional Consultation'}
                         </Button>
                         <Button className="outline" data-testid="testimonials-shop-cta">
-                            {language === 'he' ? 'התחילו את המסע לבריאות' : 'Start Your Health Journey'}
+                            {language === 'he' ? 'החיים הטבעיים שלך מחכים' : 'Your Natural Life Awaits'}
                         </Button>
                     </div>
                 </div>

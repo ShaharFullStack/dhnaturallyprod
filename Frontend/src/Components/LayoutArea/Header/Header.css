@@ -10,7 +10,7 @@
 
 /* Header Navigation */
 .header-nav {
-  background: hsla(180, 71%, 68%, 0.353);
+  background: hsla(180, 71%, 68%, 0.3);
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   position: sticky;
@@ -56,8 +56,8 @@
 
 .brand-name {
   font-size: 1.55rem;
-  font-weight: 700;
-  color: var(--dh-sky);
+  font-weight: 100;
+  color: var(--dh-navy);
   font-family: 'Halimun', sans-serif;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }

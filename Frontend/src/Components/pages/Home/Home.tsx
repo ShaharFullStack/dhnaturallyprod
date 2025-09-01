@@ -168,9 +168,9 @@ export function Home(): JSX.Element {
                 {t('home.hero.title', language)}
               </span>
             </h1>
-            <p className="hero-subtitle" data-testid="hero-description" data-scroll-animate>
+            <h2 className="hero-subtitle" data-testid="hero-description" data-scroll-animate>
               {t('home.hero.subtitle', language)}
-            </p>
+            </h2>
 
             <div className="hero-cta-container" data-scroll-animate>
               <Link to="/store">
@@ -198,9 +198,9 @@ export function Home(): JSX.Element {
       <section className="features-section" data-testid="expertise-section" data-scroll-animate>
         <div className="hero-container">
           <div className="section-header">
-            <h2 className="section-title">
+            <h1 className="section-title feature-headline">
               {language === 'he' ? ' DHnaturally מובילה בטיפול טבעי' : 'Why DHnaturally is Considered the Leading Authority in Natural Treatment?'}
-            </h2>
+            </h1>
             <p className="section-description">
               {language === 'he'
                 ? 'עשרות שנות מחקר, פיתוח ולמידה בתחום הנטורופתיה וההומיאופתיה הביאו אותנו למעמד של מומחים מובילים בישראל ובעולם'

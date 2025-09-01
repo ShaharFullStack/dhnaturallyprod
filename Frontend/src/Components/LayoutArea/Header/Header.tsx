@@ -6,7 +6,7 @@ import { useHapticFeedback } from '../../../hooks/use-haptic-feedback';
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
-import logoImage from "../../../Assets/Images/logo.png";
+import logoImage from "../../../Assets/Images/darkLogo.png";
 import { LanguageToggle } from "../LanguageToggle/LanguageToggle";
 import { ShoppingCartSidebar } from "../ShoppingCart/ShoppingCart";
 

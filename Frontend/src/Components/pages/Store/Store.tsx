@@ -3,18 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import "./Store.css";
-import { appConfig } from "../../../Utils/AppConfig";
+import { ProductModel } from "../../../Models/ProductModel";
+import { productService } from "../../../Services/ProductService";
 
-interface Product {
-    id: string;
-    name_en: string;
-    name_he: string;
-    description_en: string;
-    description_he: string;
-    price: number;
-    imageUrl?: string;
-    category?: string;
-}
 
 export function Store(): JSX.Element {
     const { language } = useLanguage();
@@ -23,7 +14,7 @@ export function Store(): JSX.Element {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [sortBy, setSortBy] = useState("popular");
 
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<ProductModel[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -32,9 +23,7 @@ export function Store(): JSX.Element {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(appConfig.productsUrl, { method: 'GET' });
-                if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-                const data = await res.json();
+                const data = await productService.getAllProducts();
                 if (isMounted) setProducts(data || []);
             } catch (err: any) {
                 if (isMounted) setError(err.message || 'Failed to fetch products');
@@ -45,6 +34,40 @@ export function Store(): JSX.Element {
         fetchProducts();
         return () => { isMounted = false; };
     }, []);
+
+    // Handle search with debouncing
+    useEffect(() => {
+        if (!searchTerm.trim()) {
+            // If search is cleared, reload all products
+            const fetchAllProducts = async () => {
+                try {
+                    setLoading(true);
+                    const data = await productService.getAllProducts();
+                    setProducts(data || []);
+                } catch (err: any) {
+                    setError(err.message || 'Failed to fetch products');
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchAllProducts();
+            return;
+        }
+        
+        const timeoutId = setTimeout(async () => {
+            try {
+                setLoading(true);
+                const searchResults = await productService.searchProducts(searchTerm);
+                setProducts(searchResults.products || []);
+            } catch (err: any) {
+                setError(err.message || 'Search failed');
+            } finally {
+                setLoading(false);
+            }
+        }, 500); // 500ms debounce
+
+        return () => clearTimeout(timeoutId);
+    }, [searchTerm]);
 
     const categories = [
         { value: "all", label: t("store.filter.all", language) },
@@ -84,10 +107,26 @@ export function Store(): JSX.Element {
             getProductCategory(product).includes(selectedCategory);
 
         return matchesSearch && matchesCategory;
+    }).sort((a, b) => {
+        switch (sortBy) {
+            case "price-asc":
+                return (a.price || 0) - (b.price || 0);
+            case "price-desc":
+                return (b.price || 0) - (a.price || 0);
+            case "newest":
+                // Since we don't have a createdAt field, sort by id (assuming newer products have higher ids)
+                return b.id.localeCompare(a.id);
+            case "popular":
+            default:
+                // Default sort - could be by name or any other criteria
+                const nameA = language === 'he' ? (a.name_he || a.name_en || '') : (a.name_en || '');
+                const nameB = language === 'he' ? (b.name_he || b.name_en || '') : (b.name_en || '');
+                return nameA.localeCompare(nameB);
+        }
     });
 
     // Helper function to categorize products based on their content
-    const getProductCategory = (product: Product): string => {
+    const getProductCategory = (product: ProductModel): string => {
         const content = `${product.name_en || ''} ${product.description_en || ''}`.toLowerCase();
 
         if (content.includes('homeopathy') || content.includes('homeopathic')) {
@@ -237,9 +276,6 @@ export function Store(): JSX.Element {
                 {/* Load More Button */}
                 {filteredProducts.length > 0 && (
                     <div className="text-center mt-8">
-                        <button className="load-more-btn">
-                            {t("store.loadMore", language)}
-                        </button>
                     </div>
                 )}
             </div>

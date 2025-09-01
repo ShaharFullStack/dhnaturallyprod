@@ -34,7 +34,7 @@ export function Articles(): JSX.Element {
             readTime: 12,
             publishedDate: "2024-01-20",
             featured: true,
-            imageUrl: "/images/articles/homeopathy-principle.jpg"
+            imageUrl: "images/makingMeds.png"
         },
         {
             id: "1",
