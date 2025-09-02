@@ -147,9 +147,9 @@ export function Home(): JSX.Element {
       {/* Floating Leaves */}
       <div className="floating-leaves">
         <img src={wormwoodImage} alt="wormwood" className="floating-leaf leaf-1" />
-        <img src={wormwoodImage} alt="wormwood" className="floating-leaf leaf-3" />
+        {/* <img src={wormwoodImage} alt="wormwood" className="floating-leaf leaf-3" /> */}
         {/* <img src={celandineImage} alt="celandine" className="floating-leaf leaf-2" /> */}
-        <img src={celandineImage} alt="wormwood" className="floating-leaf leaf-4" />
+        <img src={celandineImage} alt="celandine" className="floating-leaf leaf-4" />
       </div>
 
       {/* Clean Hero Section */}

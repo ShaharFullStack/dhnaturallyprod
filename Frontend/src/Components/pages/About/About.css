@@ -18,8 +18,8 @@
 
 .about {
     color: var(--dh-navy);
-    background: var(--dh-pale);
     overflow: hidden;
+    z-index: -1;
 }
 
 /* Container utility */
@@ -54,8 +54,9 @@
 
 .h1-title {
     font-family: 'Halimun', sans-serif;
-    font-size: 2.5rem;
+    font-size: 5.6rem;
     z-index: 20;
+    text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.7);
 }
 
 .hero-background {
@@ -103,7 +104,7 @@
 .about-hero-title {
     font-size: 2.5rem;
     color: var(--dh-light);
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.7);
     animation: fadeInUp 1s ease-out 0.4s both;
     padding-top: 1rem;
     line-height: 1.2;
@@ -114,6 +115,7 @@
 
 .about-hero-subtitle {
     color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.7);
     font-size: 1.45rem;
     margin-bottom: 2.5rem;
     max-width: 700px;
@@ -124,6 +126,7 @@
 
 .hero-cta {
     animation: fadeInUp 1s ease-out 0.8s both;
+    text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.7);
 }
 
 @keyframes fadeInUp {
@@ -144,6 +147,7 @@
 .section-inner {
     max-width: 1100px;
     margin: 0 auto;
+    opacity: 1 !important;
 }
 
 .section-header {
@@ -154,6 +158,7 @@
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: var(--dh-navy);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     line-height: 1.2;
 }
 
@@ -167,6 +172,7 @@
     background: var(--gradient-primary);
     border-radius: 2px;
     margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(140, 243, 243, 0.3);
 }
 
 .section-divider.center {
@@ -175,7 +181,8 @@
 }
 
 .section-subtitle {
-    color: var(--dh-sky);
+    color: var(--dh-sage);
+    text-shadow: 0 1px 1px black;
     font-size: 1.1rem;
     line-height: 1.7;
     margin-bottom: 1.25rem;
@@ -189,10 +196,22 @@
 }
 
 /* Story Section Enhancement */
-.story-content {
+.story-container {
+    background-image: linear-gradient(white, var(--dh-pale), #f0f0f0);
     display: grid;
-    gap: 3rem;
+    gap: 2rem;
     align-items: center;
+}
+.story-section-inner {
+    display: grid;
+}
+
+
+
+@media (min-width: 768px) {
+    .story-content {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .lead-text {
@@ -215,10 +234,8 @@
 }
 
 .story-card {
-    background: var(--card-bg);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: var(--shadow-md);
     text-align: center;
     max-width: 300px;
     position: relative;
@@ -232,19 +249,20 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--gradient-primary);
 }
 
-.story-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--dh-accent), var(--dh-ocean));
-    border-radius: 50%;
-    display: flex;
+
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.story-image {
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
-    color: white;
+    margin: 0;
+    padding: 0;
 }
 
 .story-card h3 {
@@ -257,6 +275,12 @@
 .story-card p {
     color: var(--dh-navy);
     font-size: 0.95rem;
+}
+
+.story-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Mission Section Enhancement */
@@ -355,11 +379,9 @@
     border-radius: 0.75rem;
     box-shadow: var(--shadow-sm);
     border: 1px solid rgba(14, 165, 164, 0.06);
-    /* Use grid so the icon stays in column 1 and the title + description stack in column 2 */
-    display: grid;
-    grid-template-columns: 56px 1fr;
+    display: flex;
     gap: 1rem;
-    align-items: start;
+    align-items: flex-start;
 }
 
 .dafna-feature-card .feature-icon {
@@ -374,26 +396,15 @@
     flex-shrink: 0;
 }
 
-/* Ensure icon occupies the first column and spans rows for vertical centering */
-.dafna-feature-card .feature-icon {
-    grid-column: 1;
-    grid-row: 1 / 3;
-}
-
 .dafna-feature-card h3 {
     margin: 0 0 0.25rem 0;
     font-size: 1.05rem;
-    grid-column: 2;
 }
 
 .dafna-feature-card .feature-description {
     margin: 0;
     color: var(--muted);
     font-size: 0.95rem;
-}
-
-.dafna-feature-card .feature-description {
-    grid-column: 2;
 }
 
 .about-mission::before {
@@ -403,7 +414,29 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(14, 165, 164, 0.05) 0%, transparent 70%);
+    z-index: 1;
+    
+}
+
+.about-mission h2 {
+    color: var(--dh-sage);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.707);
+    
+}
+.about-mission p {
+    color: var(--dh-navy);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.707);
+    font-size: 1rem;
+    line-height: 1.7;
+
+}
+
+.about-mission {
+    background-size: cover;
+    position: relative;
+    background: url('../../../Assets/Images/leaf.png') 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .mission-icon {

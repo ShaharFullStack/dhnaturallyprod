@@ -23,7 +23,7 @@ export const translations: Translations = {
   'home.hero.cta.about': { he: 'למד על טיפול טבעי', en: 'Learn Natural Healing' },
 
   // Expertise Section - Updated with Dafna's story
-  'home.expertise.title': { he: 'פגשו את דפנה חליוה-מרקוס: הלב הפועם של DHnaturally', en: 'Meet Dafna Haliwa-Marcus: The Heart Behind DHnaturally' },
+  'home.expertise.title': { he: ' דפנה חליוה-מרקוס: הלב הפועם של DHnaturally', en: 'Meet Dafna Haliwa-Marcus: The Heart Behind DHnaturally' },
   'home.expertise.description': { he: 'דפנה חליוה-מרקוס, נטורופתית מוסמכת עם למעלה מ-15 שנות ניסיון, הקימה את DHnaturally מתוך הבנה עמוקה בצורך בפתרונות טבעיים יעילים. לאחר חוויה אישית עם מגבלות הרפואה המודרנית, היא יצרה תכשירים המחברים בין חכמת הרפואה המסורתית לבין מחקר מדעי עדכני', en: 'Dafna Haliwa-Marcus, a certified naturopath with over 15 years of experience, founded DHnaturally from a deep understanding of the need for effective natural solutions. After a personal experience with modern medicine\'s limitations, she created formulations that bridge traditional healing wisdom with current scientific research' },
   'home.expertise.dafna.education': { he: 'השכלה והכשרה מקצועית', en: 'Professional Education & Training' },
   'home.expertise.dafna.education.desc': { he: 'בוגרת אוניברסיטת דורצ\'סטר אנגליה ומכללת מעינות ירושלים. מומחית בהומיאופתיה, אירידיולוגיה, רפואה קוריאנית ופתולוגיה', en: 'Graduate of University of Dorset England and Maayanot Jerusalem College. Expert in homeopathy, iridology, Korean medicine, and pathology' },

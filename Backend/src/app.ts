@@ -28,7 +28,7 @@ class App {
         this.server.use(rateLimit({
             windowMs: 5000,
             limit: 1000,
-            skip: (request: Request) => request.originalUrl.startsWith("/api/products/images/")
+            skip: (request: Request) => request.originalUrl.startsWith("/api/products/images/") || request.originalUrl.startsWith("/api/articles/images/")
         }));
 
         // Prevent problematic response headers: 

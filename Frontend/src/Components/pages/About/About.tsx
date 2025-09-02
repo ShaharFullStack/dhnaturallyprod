@@ -11,7 +11,7 @@ import cert4 from '../../../Assets/Images/certifications/IMG_0006.jpg';
 import cert5 from '../../../Assets/Images/certifications/IMG_0007.jpg';
 import cert6 from '../../../Assets/Images/certifications/IMG_0008.jpg';
 import dafnaImg from '../../../Assets/Images/dafna.png';
-
+import storyImage from '../../../Assets/Images/logo.png';
 export function About(): JSX.Element {
     const { language } = useLanguage();
     const [lightbox, setLightbox] = useState<{ src: string; title?: string; description?: string } | null>(null);
@@ -38,18 +38,18 @@ export function About(): JSX.Element {
     const certifications = [
         {
             title: t("about.certifications.naturopathy.title", language),
-        description: t("about.certifications.naturopathy.description", language),
-        image: cert1
+            description: t("about.certifications.naturopathy.description", language),
+            image: cert1
         },
         {
             title: t("about.certifications.integrative.title", language),
-        description: t("about.certifications.integrative.description", language),
-        image: cert2
+            description: t("about.certifications.integrative.description", language),
+            image: cert2
         },
         {
             title: t("about.certifications.homeopathy.title", language),
-        description: t("about.certifications.homeopathy.description", language),
-        image: cert3
+            description: t("about.certifications.homeopathy.description", language),
+            image: cert3
         }
     ];
 
@@ -135,9 +135,9 @@ export function About(): JSX.Element {
             </div>
 
             {/* Story Section */}
-            <section className="about-section" data-scroll-animate id="story">
-                <div className="container">
-                    <div className="section-inner">
+            <section className="about-section about-story" data-scroll-animate id="story">
+                <div className="story-container">
+                    <div className="story-section-inner">
                         <div className="section-header">
                             <h2 className="section-title">{t("about.story.title", language)}</h2>
                             <div className="section-divider"></div>
@@ -149,13 +149,21 @@ export function About(): JSX.Element {
                             </div>
                             <div className="story-visual">
                                 <div className="story-card">
-                                    <div className="story-icon">
-                                        <Microscope size={32} />
-                                    </div>
-                                    <h3>Evidence-Based Practice</h3>
-                                    <p>Combining traditional wisdom with modern research</p>
+                                    <img src={storyImage} alt={t("about.story.imageAlt", language)} />
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Mission Section */}
+            <section className="about-section" >
+                <div className="about-mission" data-scroll-animate id="mission">
+                    <div className="container">
+                        <div className="section-inner text-center">
+                            <h2 className="section-title">{t("about.mission.title", language)}</h2>
+                            <p className="section-subtitle large">{t("about.mission.subtitle", language)}</p>
                         </div>
                     </div>
                 </div>
@@ -170,7 +178,7 @@ export function About(): JSX.Element {
                             <div className="section-divider center"></div>
                             <p className="section-subtitle">{t("home.expertise.description", language)}</p>
                         </div>
-                        
+
                         <div className="dafna-features-grid">
                             <div className="dafna-photo-wrap" style={{ animationDelay: '0.05s' }}>
                                 <div className="dafna-photo-frame">
@@ -216,19 +224,6 @@ export function About(): JSX.Element {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Mission Section */}
-            <section className="about-section about-mission" data-scroll-animate id="mission">
-                <div className="container">
-                    <div className="section-inner text-center">
-                        <div className="mission-icon">
-                            <ShieldCheck size={48} />
-                        </div>
-                        <h2 className="section-title">{t("about.mission.title", language)}</h2>
-                        <p className="section-subtitle large">{t("about.mission.subtitle", language)}</p>
                     </div>
                 </div>
             </section>
@@ -316,7 +311,7 @@ export function About(): JSX.Element {
                             }
                         </p>
                     </div>
-                    
+
                     <div className="consultation-grid">
                         <div className="consultation-left">
                             <h3 className="section-subtitle">
