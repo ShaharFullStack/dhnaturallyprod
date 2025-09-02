@@ -9,6 +9,7 @@ import path from "path";
 import { fileSaver } from "uploaded-file-saver";
 import { appConfig } from "./2-utils/app-config";
 import { userController } from "./5-controllers/user-controller";
+import { articleController } from "./5-controllers/article-controller";
 import { errorMiddleware } from "./6-middleware/error-middleware";
 import { loggerMiddleware } from "./6-middleware/logger-middleware";
 import { securityMiddleware } from "./6-middleware/security-middleware";
@@ -48,9 +49,14 @@ class App {
 
         this.server.use(fileUpload());
 
-        const absolutePath = path.join(__dirname, "1-assets", "images", "products");
-        fileSaver.config(absolutePath);
-        this.server.use("/api/products/images", express.static(absolutePath));
+    const productsPath = path.join(__dirname, "1-assets", "images", "products");
+    fileSaver.config(productsPath);
+    this.server.use("/api/products/images", express.static(productsPath));
+
+    // Configure separate static path for article images
+    const articlesPath = path.join(__dirname, "1-assets", "images", "articles");
+    // Note: fileSaver can be re-configured per usage; here we also ensure express serves article images
+    this.server.use("/api/articles/images", express.static(articlesPath));
 
 
         // Register custom middleware:
@@ -58,8 +64,9 @@ class App {
         this.server.use(securityMiddleware.preventXssAttack);
 
         // Connect controllers to the server:
-        this.server.use("/api", productController.router);
-        this.server.use("/api", userController.router);
+    this.server.use("/api", productController.router);
+    this.server.use("/api", articleController.router);
+    this.server.use("/api", userController.router);
 
         // Register route not found middleware: 
         this.server.use("*", errorMiddleware.routeNotFound);

@@ -1,22 +1,11 @@
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import "./Articles.css";
 import { Image, Tag, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '../../UI/Button/Buttons';
-
-interface Article {
-    id: string;
-    title: string;
-    excerpt: string;
-    content: string;
-    category: string;
-    readTime: number;
-    publishedDate: string;
-    imageUrl?: string;
-    featured?: boolean;
-}
+import { ArticleModel } from "../../../Models/ArticleModel";
 
 export function Articles(): JSX.Element {
     const { language } = useLanguage();
@@ -24,60 +13,37 @@ export function Articles(): JSX.Element {
     const [selectedCategory, setSelectedCategory] = useState<string>("all");
     const [email, setEmail] = useState<string>("");
 
-    const [articles] = useState<Article[]>([
-        {
-            id: "similia-similibus-curenter",
-            title: language === 'he' ? 'העיקרון ההומיאופתי של סימיליה סימיליבוס קורנטור - "דומה מרפא דומה"' : 'The Homeopathic Principle of Similia Similibus Curentur - "Like Cures Like"',
-            excerpt: language === 'he' ? 'חקירה לעיקרון המרכזי של ההומיאופתיה, מערכת רפואית שהוקמה בסוף המאה ה-18 על ידי ד"ר סמואל האנמן' : 'An exploration into the central principle of homeopathy, a medical system founded in the late 18th century by Dr. Samuel Hahnemann',
-            content: "",
-            category: "homeopathy",
-            readTime: 12,
-            publishedDate: "2024-01-20",
-            featured: true,
-            imageUrl: "images/makingMeds.png"
-        },
-        {
-            id: "1",
-            title: t("articles.mock.1.title", language),
-            excerpt: t("articles.mock.1.excerpt", language),
-            content: t("articles.mock.1.content", language),
-            category: "homeopathy",
-            readTime: 8,
-            publishedDate: "2024-01-15",
-            featured: false,
-            imageUrl: "/images/articles/homeopathy-potencies.jpg"
-        },
-        {
-            id: "2",
-            title: t("articles.mock.2.title", language),
-            excerpt: t("articles.mock.2.excerpt", language),
-            content: t("articles.mock.2.content", language),
-            category: "wellness",
-            readTime: 6,
-            publishedDate: "2024-01-12",
-            imageUrl: "/images/articles/stress-management.jpg"
-        },
-        {
-            id: "3",
-            title: t("articles.mock.3.title", language),
-            excerpt: t("articles.mock.3.excerpt", language),
-            content: t("articles.mock.3.content", language),
-            category: "herbs",
-            readTime: 10,
-            publishedDate: "2024-01-10",
-            imageUrl: "/images/articles/digestive-herbs.jpg"
-        },
-        {
-            id: "4",
-            title: t("articles.mock.4.title", language),
-            excerpt: t("articles.mock.4.excerpt", language),
-            content: t("articles.mock.4.content", language),
-            category: "research",
-            readTime: 12,
-            publishedDate: "2024-01-08",
-            imageUrl: "/images/articles/research-update.jpg"
-        }
-    ]);
+    const [articles, setArticles] = useState<ArticleModel[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        let cancelled = false;
+        const load = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                // In development, frontend runs on :3000 and backend on :4000
+                const devHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                const base = devHost ? 'http://localhost:4000' : '';
+                const res = await fetch(`${base}/api/dhnaturally/articles`);
+                if (!res.ok) throw new Error(`Failed to load articles: ${res.status}`);
+                const contentType = (res.headers.get('content-type') || '').toLowerCase();
+                if (!contentType.includes('application/json')) {
+                    const text = await res.text();
+                    throw new Error(`Expected JSON but got ${contentType || 'unknown'}: ${text.substring(0,200)}`);
+                }
+                const data = await res.json();
+                if (!cancelled) setArticles(data as ArticleModel[]);
+            } catch (err: any) {
+                if (!cancelled) setError(err.message ?? 'Unknown error');
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        };
+        load();
+        return () => { cancelled = true; };
+    }, []);
 
     const categories = [
     { value: "all", label: t("articles.category.all", language) },
@@ -95,6 +61,10 @@ export function Articles(): JSX.Element {
         ? regularArticles
         : regularArticles.filter(article => article.category === selectedCategory);
 
+    const getSlugOrId = (article: any) => article.slug ?? article.id;
+    const getTitle = (article: any) => article.title_en ?? article.title ?? article.title_he ?? '';
+    const getExcerpt = (article: any) => article.excerpt ?? article.subtitle_en ?? article.subtitle_he ?? '';
+
     const handleNewsletterSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Newsletter signup:", email);
@@ -105,18 +75,21 @@ export function Articles(): JSX.Element {
         <div className="articles">
             <header className="articles-hero">
                 <div className="container">
-                    <h1 className="hero-title">{t("articles.title", language)}</h1>
-                    <p className="hero-subtitle">{t("articles.description", language)}</p>
+                    <h1 className="articles-title">{t("articles.title", language)}</h1>
+                    <p className="articles-description">{t("articles.description", language)}</p>
                 </div>
             </header>
 
             <main className="container articles-main">
+                {loading && <div className="loading">{t('articles.loading', language) ?? 'Loading...'}</div>}
+                {error && <div className="error">{error}</div>}
+
                 {featuredArticle && (
                     <section className="featured">
                         <div className="featured-card">
                             <div className="featured-media">
                                 {featuredArticle.imageUrl ? (
-                                    <img src={featuredArticle.imageUrl} alt={featuredArticle.title} className="featured-image" loading="lazy" />
+                                    <img src={featuredArticle.imageUrl} alt={getTitle(featuredArticle)} className="featured-image" loading="lazy" />
                                 ) : (
                                     <div className="image-fallback"><Image size={48} /></div>
                                 )}
@@ -128,9 +101,9 @@ export function Articles(): JSX.Element {
                                     <span className="pill"><Tag size={14} className="meta-icon" /> {t(`articles.category.${featuredArticle.category}`, language)}</span>
                                     <span className="meta-item"><Clock size={14} className="meta-icon" /> {featuredArticle.readTime} {t("articles.readTime", language)}</span>
                                 </div>
-                                <h2 className="featured-title">{featuredArticle.title}</h2>
-                                <p className="featured-excerpt">{featuredArticle.excerpt}</p>
-                                <Button className="primary" onClick={() => navigate(`/articles/${featuredArticle.id}`)}>{t("articles.readMore", language)}</Button>
+                                <h2 className="featured-title">{getTitle(featuredArticle)}</h2>
+                                <p className="featured-excerpt">{getExcerpt(featuredArticle)}</p>
+                                <Button className="primary" onClick={() => navigate(`/articles/${getSlugOrId(featuredArticle)}`)}>{t("articles.readMore", language)}</Button>
                             </div>
                         </div>
                     </section>
@@ -153,7 +126,7 @@ export function Articles(): JSX.Element {
                         <article key={article.id} className="article-card">
                             <div className="article-media">
                                 {article.imageUrl ? (
-                                    <img src={article.imageUrl} alt={article.title} className="article-image" loading="lazy" />
+                                    <img src={article.imageUrl} alt={getTitle(article)} className="article-image" loading="lazy" />
                                 ) : (
                                     <div className="image-fallback"><Image size={36} /></div>
                                 )}
@@ -165,10 +138,10 @@ export function Articles(): JSX.Element {
                                     <span className="meta-item"><Clock size={12} className="meta-icon" /> {article.readTime} {t("articles.readTime", language)}</span>
                                 </div>
 
-                                <h3 className="article-title">{article.title}</h3>
-                                <p className="article-excerpt">{article.excerpt}</p>
+                                <h3 className="article-title">{getTitle(article)}</h3>
+                                <p className="article-excerpt">{getExcerpt(article)}</p>
                                 <div className="article-actions">
-                                    <Button className="link" onClick={() => navigate(`/articles/${article.id}`)}>{t("articles.readMore", language)} <ArrowRight size={14} /></Button>
+                                    <Button className="link" onClick={() => navigate(`/articles/${getSlugOrId(article)}`)}>{t("articles.readMore", language)} <ArrowRight size={14} /></Button>
                                 </div>
                             </div>
                         </article>

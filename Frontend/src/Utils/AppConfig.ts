@@ -10,9 +10,11 @@ class AppConfig {
 
     // General endpoints (backend registers product controller under /api and routes include /dhnaturally)
     public readonly productsUrl = `${this.baseUrl}api/dhnaturally/products`; // All products
+    public readonly articlesUrl = `${this.baseUrl}api/dhnaturally/articles`; // All articles
     public readonly productById = `${this.baseUrl}api/dhnaturally/products/`; // Single product (append id)
     public readonly searchproductsUrl = `${this.baseUrl}api/dhnaturally/products/search`; // Search products
     public readonly productsImagesUrl = `${this.baseUrl}api/products/images`; // product images (static)
+    public readonly articlesImagesUrl = `${this.baseUrl}api/articles/images`;
     public readonly contactUsUrl = `${this.baseUrl}api/contact-us`; // Contact us endpoint
 
     // Authentication endpoints

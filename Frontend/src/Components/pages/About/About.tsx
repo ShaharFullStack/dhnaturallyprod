@@ -10,7 +10,7 @@ import cert3 from '../../../Assets/Images/certifications/IMG_0005.jpg';
 import cert4 from '../../../Assets/Images/certifications/IMG_0006.jpg';
 import cert5 from '../../../Assets/Images/certifications/IMG_0007.jpg';
 import cert6 from '../../../Assets/Images/certifications/IMG_0008.jpg';
-import womanImg from '../../../Assets/Images/woman.png';
+import dafnaImg from '../../../Assets/Images/dafna.png';
 
 export function About(): JSX.Element {
     const { language } = useLanguage();
@@ -122,6 +122,7 @@ export function About(): JSX.Element {
                 <div className="hero-background"></div>
                 <div className="about-hero-inner">
 
+                    <h1 className="h1-title" data-scroll-animate>DHnaturally</h1>
                     <h1 className="about-hero-title" data-scroll-animate>{t("about.title", language)}</h1>
                     <p className="about-hero-subtitle" data-scroll-animate>{t("about.subtitle", language)}</p>
                     <div className="hero-cta" data-scroll-animate>
@@ -173,7 +174,7 @@ export function About(): JSX.Element {
                         <div className="dafna-features-grid">
                             <div className="dafna-photo-wrap" style={{ animationDelay: '0.05s' }}>
                                 <div className="dafna-photo-frame">
-                                    <img src={womanImg} alt={t("about.dafna.photoAlt", language) || 'Dafna'} className="dafna-photo" />
+                                    <img src={dafnaImg} alt={t("about.dafna.photoAlt", language) || 'Dafna'} className="dafna-photo" />
                                 </div>
                                 <div className="dafna-photo-caption">
                                     <h3 className="dafna-name">{t("about.dafna.name", language) || 'Dafna Haliwa-Marcus'}</h3>

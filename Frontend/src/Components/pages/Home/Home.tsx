@@ -147,9 +147,9 @@ export function Home(): JSX.Element {
       {/* Floating Leaves */}
       <div className="floating-leaves">
         <img src={wormwoodImage} alt="wormwood" className="floating-leaf leaf-1" />
-        <img src={celandineImage} alt="celandine" className="floating-leaf leaf-2" />
         <img src={wormwoodImage} alt="wormwood" className="floating-leaf leaf-3" />
-        <img src={celandineImage} alt="celandine" className="floating-leaf leaf-4" />
+        {/* <img src={celandineImage} alt="celandine" className="floating-leaf leaf-2" /> */}
+        <img src={celandineImage} alt="wormwood" className="floating-leaf leaf-4" />
       </div>
 
       {/* Clean Hero Section */}
@@ -194,50 +194,14 @@ export function Home(): JSX.Element {
         </div>
       </section>
 
-      {/* Expertise & Authority Section */}
-      <section className="features-section" data-testid="expertise-section" data-scroll-animate>
-        <div className="hero-container">
-          <div className="section-header">
-            <h1 className="section-title feature-headline">
-              {language === 'he' ? ' DHnaturally מובילה בטיפול טבעי' : 'Why DHnaturally is Considered the Leading Authority in Natural Treatment?'}
-            </h1>
-            <p className="section-description">
-              {language === 'he'
-                ? 'עשרות שנות מחקר, פיתוח ולמידה בתחום הנטורופתיה וההומיאופתיה הביאו אותנו למעמד של מומחים מובילים בישראל ובעולם'
-                : 'Decades of research, development and learning in naturopathy and homeopathy have brought us to the status of leading experts in Israel and worldwide'
-              }
-            </p>
-          </div>
-        
-          <div className="features-grid">
-            {expertiseFeatures.map((feature, index) => {
-              const IconComponent = feature.icon;
-              return (
-                <div
-                  key={index}
-                  className="feature-card"
-                  data-testid={`expertise-${index}`}
-                >
-                  <div className="feature-icon">
-                    <IconComponent className="icon" />
-                  </div>
-                  <h3 className="feature-title">{feature.title}</h3>
-                  <p className="feature-description">{feature.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Trust & Safety Section */}
+            {/* Trust & Safety Section */}
       <section className="trust-section" data-testid="trust-section" data-scroll-animate>
         <div className="hero-container">
           <div className="section-header">
-            <h2 className="section-title">
-              {language === 'he' ? 'המחויבות שלנו אליכם' : 'Our Commitment to You'}
+            <h2 className="section-title trust-headline">
+              {language === 'he' ? 'המחויבות שלנו' : 'Our Commitment'}
             </h2>
-            <p className="section-description">
+            <p className="section-description trust-description">
               {language === 'he'
                 ? 'אנו מבינים שבריאותכם היא הדבר הכי חשוב. לכן, כל תכשיר עובר בקרת איכות מחמירה ונבחן קלינית לבטיחות ויעילות'
                 : 'We understand your health is the most important thing. Therefore, every remedy undergoes strict quality control and is clinically tested for safety and efficacy'
@@ -282,6 +246,44 @@ export function Home(): JSX.Element {
           </div>
         </div>
       </section>
+
+      {/* Expertise & Authority Section */}
+      <section className="features-section" data-testid="expertise-section" data-scroll-animate>
+        <div className="hero-container">
+          <div className="section-header">
+            <h1 className="section-title features-headline">
+              {language === 'he' ? ' DHnaturally מובילה בטיפול טבעי' : 'Why DHnaturally is Considered the Leading Authority in Natural Treatment?'}
+            </h1>
+            <p className="section-description features-description">
+              {language === 'he'
+                ? 'עשרות שנות מחקר, פיתוח ולמידה בתחום הנטורופתיה וההומיאופתיה הביאו אותנו למעמד של מומחים מובילים בישראל ובעולם'
+                : 'Decades of research, development and learning in naturopathy and homeopathy have brought us to the status of leading experts in Israel and worldwide'
+              }
+            </p>
+          </div>
+        
+          <div className="features-grid">
+            {expertiseFeatures.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <div
+                  key={index}
+                  className="feature-card"
+                  data-testid={`expertise-${index}`}
+                >
+                  <div className="feature-icon">
+                    <IconComponent className="icon" />
+                  </div>
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-description">{feature.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+
 
       {/* Treatment Approach */}
       <section className="about-section" data-scroll-animate id="approach">

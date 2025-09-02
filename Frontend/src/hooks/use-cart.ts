@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '../Contexts/language-context';
-import { useToast } from './use-toast';
 import { t } from '../lib/i18b';
+import { useToast } from './use-toast';
 
 interface Product {
   id: string;
@@ -16,15 +16,6 @@ interface CartItem {
   productId: string;
   quantity: number;
   product: Product;
-}
-
-function getSessionId(): string {
-  let sessionId = localStorage.getItem('dh-session-id');
-  if (!sessionId) {
-    sessionId = Math.random().toString(36).substring(2) + Date.now().toString(36);
-    localStorage.setItem('dh-session-id', sessionId);
-  }
-  return sessionId;
 }
 
 export function useCart() {

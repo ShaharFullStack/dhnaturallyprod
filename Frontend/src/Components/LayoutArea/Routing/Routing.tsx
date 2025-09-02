@@ -6,6 +6,8 @@ import { ProductDetail } from "../../pages/ProductDetail/ProductDetail";
 import { Articles } from "../../pages/Articles/Articles";
 import { ArticleDetail } from "../../pages/Articles/ArticleDetail";
 import { About } from "../../pages/About/About";
+import { AdminLogin } from "../../pages/Admin/AdminLogin";
+import { Admin } from "../../pages/Admin/Admin";
 import { Contact } from "../../pages/Contact/Contact";
 
 export function Routing(): JSX.Element {
@@ -20,6 +22,8 @@ export function Routing(): JSX.Element {
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/articles/:id" element={<ArticleDetail />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route path="/contact" element={<Contact />} />
             </Routes>
         </div>

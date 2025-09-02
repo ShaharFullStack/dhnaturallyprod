@@ -25,22 +25,29 @@
 
 /* Hero */
 .articles-hero {
-    background-image: url('../../../Assets/Images/nature1.png');
+    background: linear-gradient(rgb(87, 115, 240, 0.2), rgba(0, 0, 0, 0)), url('../../../Assets/Images/nature1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
     color: #fff;
     padding: 2.5rem 0;
     text-align: center
 }
 
-.hero-title {
-    font-size: 1.5rem;
+
+.articles-title {
+    font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 0.5rem
+    margin-bottom: 1rem;
 }
 
-.hero-subtitle {
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 820px;
-    margin: 0 auto
+.articles-description {
+    color: var(--dh-pale);
+    font-size: 1.875rem;
+    text-shadow: #000 0px 0px 6px;
+    max-width: 48rem;
+    margin: 0 auto;
 }
 
 /* Featured */

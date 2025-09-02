@@ -83,7 +83,9 @@ export function ProductDetail(): JSX.Element {
             </div>
 
             <div className="product-detail-content">
+                
                 <div className="product-detail-image-section">
+                    
                     {product.imageUrl ? (
                         <img
                             src={product.imageUrl}
@@ -95,9 +97,11 @@ export function ProductDetail(): JSX.Element {
                             <span className="product-placeholder-icon">📦</span>
                         </div>
                     )}
+                    
                 </div>
 
                 <div className="product-detail-info-section">
+                    
                     <h1 className="product-detail-title">
                         {currentName}
                     </h1>
@@ -107,7 +111,13 @@ export function ProductDetail(): JSX.Element {
                             {t("common.currency", language)}{product.price}
                         </span>
                     </div>
-
+                    <div className="product-detail-meta">
+                        <div className="meta-item">
+                        </div>
+                        <div className="meta-item">
+                            {getProductCategory(product, language)}
+                        </div>
+                    </div>
                     <div className="product-detail-description">
                         <h3>{t("store.description", language) || "Description"}</h3>
                         <p>{currentDescription}</p>
@@ -122,15 +132,7 @@ export function ProductDetail(): JSX.Element {
                         </button>
                     </div>
 
-                    <div className="product-detail-meta">
-                        <div className="meta-item">
-                            <strong>{t("store.productId", language) || "Product ID"}:</strong> {product.id}
-                        </div>
-                        <div className="meta-item">
-                            <strong>{t("store.category", language) || "Category"}:</strong>
-                            {getProductCategory(product, language)}
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

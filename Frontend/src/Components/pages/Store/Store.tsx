@@ -5,6 +5,8 @@ import { t } from "../../../lib/i18b";
 import "./Store.css";
 import { ProductModel } from "../../../Models/ProductModel";
 import { productService } from "../../../Services/ProductService";
+import { appConfig } from "../../../Utils/AppConfig";
+import axios from "axios";
 
 
 export function Store(): JSX.Element {
@@ -23,8 +25,19 @@ export function Store(): JSX.Element {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const data = await productService.getAllProducts();
-                if (isMounted) setProducts(data || []);
+                // Try to use the service first (for authenticated users)
+                try {
+                    const data = await productService.getAllProducts();
+                    if (isMounted) setProducts(data || []);
+                } catch (authError: any) {
+                    // If authentication fails, fall back to public API call
+                    if (authError.message === "No token found") {
+                        const response = await axios.get<ProductModel[]>(appConfig.productsUrl);
+                        if (isMounted) setProducts(response.data || []);
+                    } else {
+                        throw authError;
+                    }
+                }
             } catch (err: any) {
                 if (isMounted) setError(err.message || 'Failed to fetch products');
             } finally {
@@ -42,8 +55,19 @@ export function Store(): JSX.Element {
             const fetchAllProducts = async () => {
                 try {
                     setLoading(true);
-                    const data = await productService.getAllProducts();
-                    setProducts(data || []);
+                    // Try to use the service first (for authenticated users)
+                    try {
+                        const data = await productService.getAllProducts();
+                        setProducts(data || []);
+                    } catch (authError: any) {
+                        // If authentication fails, fall back to public API call
+                        if (authError.message === "No token found") {
+                            const response = await axios.get<ProductModel[]>(appConfig.productsUrl);
+                            setProducts(response.data || []);
+                        } else {
+                            throw authError;
+                        }
+                    }
                 } catch (err: any) {
                     setError(err.message || 'Failed to fetch products');
                 } finally {
@@ -57,8 +81,19 @@ export function Store(): JSX.Element {
         const timeoutId = setTimeout(async () => {
             try {
                 setLoading(true);
-                const searchResults = await productService.searchProducts(searchTerm);
-                setProducts(searchResults.products || []);
+                // Try to use the service search first (for authenticated users)
+                try {
+                    const searchResults = await productService.searchProducts(searchTerm);
+                    setProducts(searchResults.products || []);
+                } catch (authError: any) {
+                    // If authentication fails, fall back to public API call with search
+                    if (authError.message === "No token found") {
+                        const response = await axios.get<ProductModel[]>(`${appConfig.productsUrl}?search=${searchTerm}`);
+                        setProducts(response.data || []);
+                    } else {
+                        throw authError;
+                    }
+                }
             } catch (err: any) {
                 setError(err.message || 'Search failed');
             } finally {

@@ -148,6 +148,7 @@ export const translations: Translations = {
   'articles.newsletter.description': { he: 'קבלו מאמרים מקצועיים, טיפים בריאותיים ומידע על מוצרים חדשים ישירות למייל שלכם', en: 'Receive professional articles, health tips and new product updates directly to your email' },
   'articles.newsletter.placeholder': { he: 'הכניסו כתובת מייל לקבלת ייעוץ מקצועי', en: 'Enter email for professional health guidance' },
   'articles.newsletter.subscribe': { he: 'הירשמו לעדכונים מקצועיים', en: 'Subscribe to Professional Updates' },
+  'articles.loading': { he: 'טוען מאמרים...', en: 'Loading articles...' },
   'articles.expert.authored': { he: 'נכתב על ידי מומחים', en: 'Expert Authored' },
   'articles.evidence.based': { he: 'מבוסס ראיות', en: 'Evidence Based' },
   'articles.category.all': { he: 'כל הקטגוריות', en: 'All Categories' },
@@ -170,7 +171,7 @@ export const translations: Translations = {
   'articles.mock.4.content': { he: 'ניתוח מאמרים מדעיים, פירושים קליניים והשלכות פרקטיות לטיפול מבוסס ראיות.', en: 'Analysis of scientific articles, clinical interpretations, and practical implications for evidence-based practice.' },
 
   // About page
-  'about.title': { he: 'DHnaturally\nתמצית בריאות מהטבע', en: 'DHnaturally\nNatural Medicine' },
+  'about.title': { he: 'תמצית בריאות מהטבע', en: 'Natural Medicine' },
   'about.subtitle': { he: 'תכשירים הומיאופתיים מתקדמים וטיפול הוליסטי מבוסס מחקר לבריאות מיטבית', en: 'Advanced homeopathic formulations and research-based holistic treatment for optimal health' },
   'about.story.title': { he: 'המומחיות והניסיון שלנו', en: 'Our Expertise & Experience' },
   'about.mission.title': { he: 'המשימה המקצועית שלנו', en: 'Our Professional Mission' },
@@ -193,7 +194,7 @@ export const translations: Translations = {
   'about.certifications.homeopathy.description': { he: 'תעודות BSY בהומיאופתיה ואירידולוגיה המעידות על הכשרה מקצועית בתחומי האבחון והטיפול הטבעיים', en: 'BSY certificates in Homeopathy and Iridology demonstrating professional training in natural diagnosis and treatment methods' },
   'about.team.title': { he: 'הצוות המקצועי', en: 'Professional Team' },
   'about.values.title': { he: 'ערכי הליבה שלנו', en: 'Our Core Values' },
-  'about.values.prevention.description': { he: 'מניעה דרך חיזוק מערכות הגוף ואורח חיים בריא', en: 'Focusing on prevention by strengthening body systems and healthy lifestyle' },
+  'about.values.prevention.description': { he: 'מניעה דרך חיזוק מערכות הגוף ואורח חיים בריא', en: 'Focusing on prevention by strengthening body systems ' },
   'about.values.restoration.description': { he: 'שיקום היכולת הטבעית של הגוף לריפוי ושיקום תפקוד', en: 'Restoring the body’s natural healing and functional capacity' },
   'about.values.balance.description': { he: 'שימור איזון בין גוף ונפש להשגת בריאות ארוכת טווח', en: 'Maintaining mind–body balance for long-term wellness' },
   'about.values.evidence.description': { he: 'שילוב ידע מסורתי עם ממצאי מחקר עדכניים', en: 'Combining traditional knowledge with up-to-date research findings' },
@@ -369,6 +370,15 @@ export const translations: Translations = {
   'auth.createAccount': { he: 'יצירת חשבון חדש', en: 'Create New Account' },
   'auth.haveAccount': { he: 'יש לכם חשבון? התחברו', en: 'Have an account? Sign in' },
   'auth.noAccount': { he: 'אין לכם חשבון? הרשמו', en: 'No account? Sign up' },
+
+  // Admin
+  'admin.login.title': { he: 'התחברות מנהל', en: 'Admin Login' },
+  'admin.login.email': { he: 'דואר אלקטרוני מנהל', en: 'Admin Email' },
+  'admin.login.password': { he: 'סיסמה', en: 'Password' },
+  'admin.login.loading': { he: 'מתחבר...', en: 'Logging in...' },
+  'admin.login.submit': { he: 'התחבר', en: 'Login' },
+  'admin.dashboard.title': { he: 'לוח בקרה מנהל', en: 'Admin Dashboard' },
+  'admin.dashboard.welcome': { he: 'ברוכים הבאים לאזור המנהל', en: 'Welcome to the admin area' },
 
   // Account Management
   'account.profile': { he: 'הפרופיל שלי', en: 'My Profile' },
