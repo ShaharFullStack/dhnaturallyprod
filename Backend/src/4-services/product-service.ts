@@ -20,7 +20,10 @@ class ProductService {
             imageName,
             created_at,
             updated_at,
-            CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName) AS imageUrl 
+            CASE 
+                WHEN imageName IS NULL OR imageName = '' THEN NULL
+                ELSE CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName)
+            END AS imageUrl 
         FROM products
         ORDER BY name;
         `;
@@ -40,13 +43,18 @@ class ProductService {
             imageName,
             created_at,
             updated_at,
-            CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName) AS imageUrl
+            CASE 
+                WHEN imageName IS NULL OR imageName = '' THEN NULL
+                ELSE CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName)
+            END AS imageUrl
         FROM products
         WHERE id = ?
         `;
-        const [rows] = await dal.execute(sql, [id]);
-        if (!rows.length) throw new NotFoundError(`Product with id ${id} not found`);
-        return new ProductModel(rows[0]);
+        const results = await dal.execute(sql, [id]);
+        if (!results || !Array.isArray(results) || results.length === 0) {
+            throw new NotFoundError(`Product with id ${id} not found`);
+        }
+        return new ProductModel(results[0]);
     }
 
     public async addProduct(product: ProductModel): Promise<ProductModel> {
@@ -158,30 +166,50 @@ class ProductService {
         return result[0]?.imageName;
     }
 
-    public async searchProducts(searchValue: string, page: number = 1, pageSize: number = 10): Promise<{ products: ProductModel[], total: number }> {
+    public async searchProducts(searchValue: string, page: number = 1, pageSize: number = 50): Promise<{ products: ProductModel[], total: number }> {
         const offset = (page - 1) * pageSize;
         const sql = `
-        SELECT 
-        id, name, description, price, imageName
+        SELECT
+            id,
+            name AS name_en,
+            name_he,
+            description AS description_en,
+            description_he,
+            price,
+            imageName,
+            created_at,
+            updated_at,
+            CASE 
+                WHEN imageName IS NULL OR imageName = '' THEN NULL
+                ELSE CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName)
+            END AS imageUrl
         FROM products
-        WHERE description LIKE CONCAT('%', ?, '%')
+        WHERE 
+            name LIKE CONCAT('%', ?, '%') OR 
+            name_he LIKE CONCAT('%', ?, '%') OR
+            description LIKE CONCAT('%', ?, '%') OR
+            description_he LIKE CONCAT('%', ?, '%')
         ORDER BY name
-        LIMIT ? OFFSET ?;
+        LIMIT ? OFFSET ?
         `;
 
         const totalSql = `
         SELECT COUNT(*) as count
         FROM products
-        WHERE description LIKE CONCAT('%', ?, '%')
+        WHERE 
+            name LIKE CONCAT('%', ?, '%') OR 
+            name_he LIKE CONCAT('%', ?, '%') OR
+            description LIKE CONCAT('%', ?, '%') OR
+            description_he LIKE CONCAT('%', ?, '%')
         `;
 
         const [products, totalResult] = await Promise.all([
-            dal.execute(sql, [searchValue, pageSize, offset]),
-            dal.execute(totalSql, [searchValue])
+            dal.execute(sql, [searchValue, searchValue, searchValue, searchValue, pageSize, offset]),
+            dal.execute(totalSql, [searchValue, searchValue, searchValue, searchValue])
         ]);
 
         const total = totalResult[0]?.count || 0;
-        return { products, total };;
+        return { products, total };
     }
 }
 

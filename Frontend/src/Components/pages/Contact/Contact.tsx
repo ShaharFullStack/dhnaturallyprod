@@ -1,4 +1,4 @@
-import { JSX, useState } from "react";
+import { JSX, useState, useEffect } from "react";
 import { useLanguage } from "../../../Contexts/language-context";
 import { t } from "../../../lib/i18b";
 import "./Contact.css";
@@ -28,6 +28,25 @@ export function Contact(): JSX.Element {
         experience: ""
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // Intersection Observer for scroll animations
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        const sections = document.querySelectorAll('[data-scroll-animate]');
+        sections.forEach((section) => observer.observe(section));
+
+        return () => observer.disconnect();
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -101,13 +120,15 @@ export function Contact(): JSX.Element {
 
     return (
         <div className="contact">
-            {/* Header Section */}
-            <header className="contact-header">
-                <div className="contact-header-inner">
-                    <h1 className="contact-title">{t("contact.title", language)}</h1>
-                    <p className="contact-subtitle">{t("contact.description", language)}</p>
+            {/* Hero Section */}
+            <div className="contact-hero">
+                <div className="hero-background"></div>
+                <div className="contact-hero-inner">
+                    <h1 className="h1-title" data-scroll-animate>DHnaturally</h1>
+                    <h1 className="contact-hero-title" data-scroll-animate>{t("contact.title", language)}</h1>
+                    <p className="contact-hero-subtitle" data-scroll-animate>{t("contact.description", language)}</p>
                 </div>
-            </header>
+            </div>
 
             <main className="contact-container">
                 <div className="contact-grid">

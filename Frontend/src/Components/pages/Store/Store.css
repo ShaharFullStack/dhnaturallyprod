@@ -6,6 +6,7 @@
   --dh-light: hsl(180, 100%, 87%);
   --dh-pale: hsl(194, 77%, 94%);
   --dh-sage: hsl(154, 25%, 50%);
+  --gradient-primary: linear-gradient(135deg, var(--dh-navy) 0%, var(--dh-ocean) 50%, var(--dh-sky) 100%);
 }
 
 /* Store Page Styles */
@@ -14,33 +15,108 @@
     background-color: var(--dh-pale);
 }
 
-/* Header Section */
-.store-header {
-    background: linear-gradient(to right, var(--dh-navy), var(--dh-ocean));
-    color: white;
+/* Scroll animations */
+[data-scroll-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.store-header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+[data-scroll-animate].animate-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.store-header-text {
+/* Enhanced Hero Section */
+.store-hero {
+    position: relative;
+    background: var(--gradient-primary);
+    color: var(--dh-light);
+    overflow: hidden;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+.h1-title {
+    font-family: 'Halimun', sans-serif;
+    font-size: 5.6rem;
+    z-index: 20;
+    text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.7);
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    background-image: url('../../../Assets/Images/herbals.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+}
+
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 120%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    transform: rotate(-15deg);
+    animation: heroFloat 20s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+    0%, 100% {
+        transform: rotate(-15deg) translateY(0px);
+    }
+    50% {
+        transform: rotate(-15deg) translateY(-20px);
+    }
+}
+
+.store-hero-inner {
+    position: relative;
+    z-index: 2;
     text-align: center;
-}
-
-.store-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.store-description {
-    color: var(--dh-pale);
-    font-size: 0.875rem;
-    max-width: 48rem;
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.store-hero-title {
+    font-size: 2.5rem;
+    color: var(--dh-light);
+    text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.7);
+    animation: fadeInUp 1s ease-out 0.4s both;
+    padding-top: 1rem;
+    line-height: 1.2;
+    white-space: pre-line;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.store-hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.7);
+    font-size: 1.45rem;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Main Content */
@@ -115,15 +191,21 @@
 }
 
 .product-image-container {
-    aspect-ratio: 1;
+    aspect-ratio: 4/3;
     background-color: var(--dh-pale);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .product-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 .product-placeholder {
@@ -250,17 +332,24 @@
   }
 }
 
+@media (min-width: 768px) {
+  .store-hero {
+    min-height: 55vh;
+  }
+
+  .store-hero-title {
+    font-size: 3.5rem;
+  }
+}
+
 @media (min-width: 1024px) {
-  .store-header-content {
-    padding: 3rem 1rem;
+  .store-hero {
+    padding: 6rem 0 5rem;
+    min-height: 60vh;
   }
 
-  .store-title {
-    font-size: 2.5rem;
-  }
-
-  .store-description {
-    font-size: 1.125rem;
+  .store-hero-title {
+    font-size: 4rem;
   }
 
   .search-input {

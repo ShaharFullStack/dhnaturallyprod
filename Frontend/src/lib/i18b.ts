@@ -557,6 +557,143 @@ export const translations: Translations = {
   'filter.onSale': { he: 'במבצע', en: 'On Sale' },
   'filter.clearAll': { he: 'נקה סינונים', en: 'Clear Filters' },
   'filter.apply': { he: 'החל סינונים', en: 'Apply Filters' },
+
+  // Admin Dashboard
+  'admin.dashboard.overview': { he: 'סקירה כללית', en: 'Overview' },
+  'admin.dashboard.products': { he: 'מוצרים', en: 'Products' },
+  'admin.dashboard.articles': { he: 'מאמרים', en: 'Articles' },
+  'admin.dashboard.totalProducts': { he: 'סך כל המוצרים', en: 'Total Products' },
+  'admin.dashboard.totalArticles': { he: 'סך כל המאמרים', en: 'Total Articles' },
+  'admin.dashboard.recentActivity': { he: 'פעילות אחרונה', en: 'Recent Activity' },
+  'admin.dashboard.stats': { he: 'נתוני סטטיסטיקה', en: 'Statistics' },
+  
+  // Authentication & Authorization
+  'auth.error.adminRequired': { he: 'נדרשת הרשאת מנהל', en: 'Admin access required' },
+  'auth.error.invalidCredentials': { he: 'שם משתמש או סיסמה שגויים', en: 'Invalid email or password' },
+  'auth.error.accessDenied': { he: 'הגישה נדחתה', en: 'Access denied' },
+  'auth.success.loginSuccessful': { he: 'התחברות בוצעה בהצלחה', en: 'Login successful' },
+  'auth.loading.authenticating': { he: 'מאמת זהות...', en: 'Authenticating...' },
+  'auth.logout.success': { he: 'התנתקת בהצלחה', en: 'Logged out successfully' },
+  
+  // Product Management
+  'admin.products.title': { he: 'ניהול מוצרים', en: 'Product Management' },
+  'admin.products.add': { he: 'הוסף מוצר חדש', en: 'Add New Product' },
+  'admin.products.edit': { he: 'ערוך מוצר', en: 'Edit Product' },
+  'admin.products.delete': { he: 'מחק מוצר', en: 'Delete Product' },
+  'admin.products.search': { he: 'חפש מוצרים...', en: 'Search products...' },
+  'admin.products.noProducts': { he: 'לא נמצאו מוצרים', en: 'No products found' },
+  'admin.products.actions': { he: 'פעולות', en: 'Actions' },
+  'admin.products.view': { he: 'צפה', en: 'View' },
+  'admin.products.name': { he: 'שם המוצר', en: 'Product Name' },
+  'admin.products.price': { he: 'מחיר', en: 'Price' },
+  'admin.products.created': { he: 'נוצר', en: 'Created' },
+  'admin.products.updated': { he: 'עודכן', en: 'Updated' },
+  
+  // Article Management
+  'admin.articles.title': { he: 'ניהול מאמרים', en: 'Article Management' },
+  'admin.articles.add': { he: 'הוסף מאמר חדש', en: 'Add New Article' },
+  'admin.articles.edit': { he: 'ערוך מאמר', en: 'Edit Article' },
+  'admin.articles.delete': { he: 'מחק מאמר', en: 'Delete Article' },
+  'admin.articles.search': { he: 'חפש מאמרים...', en: 'Search articles...' },
+  'admin.articles.noArticles': { he: 'לא נמצאו מאמרים', en: 'No articles found' },
+  'admin.articles.title.column': { he: 'כותרת', en: 'Title' },
+  'admin.articles.category': { he: 'קטגוריה', en: 'Category' },
+  'admin.articles.published': { he: 'פורסם', en: 'Published' },
+  'admin.articles.author': { he: 'מחבר', en: 'Author' },
+  
+  // Add Product Form
+  'admin.product.form.title': { he: 'הוספת מוצר חדש', en: 'Add New Product' },
+  'admin.product.form.edit.title': { he: 'עריכת מוצר', en: 'Edit Product' },
+  'admin.product.form.basicInfo': { he: 'מידע בסיסי', en: 'Basic Information' },
+  'admin.product.form.name.en': { he: 'שם המוצר (אנגלית)', en: 'Product Name (English)' },
+  'admin.product.form.name.he': { he: 'שם המוצר (עברית)', en: 'Product Name (Hebrew)' },
+  'admin.product.form.description.en': { he: 'תיאור (אנגלית)', en: 'Description (English)' },
+  'admin.product.form.description.he': { he: 'תיאור (עברית)', en: 'Description (Hebrew)' },
+  'admin.product.form.price': { he: 'מחיר (₪)', en: 'Price (₪)' },
+  'admin.product.form.image': { he: 'תמונת המוצר', en: 'Product Image' },
+  'admin.product.form.uploadImage': { he: 'העלה תמונה', en: 'Upload Image' },
+  'admin.product.form.imagePreview': { he: 'תצוגה מקדימה', en: 'Image Preview' },
+  'admin.product.form.save': { he: 'שמור מוצר', en: 'Save Product' },
+  'admin.product.form.saving': { he: 'שומר...', en: 'Saving...' },
+  'admin.product.form.cancel': { he: 'ביטול', en: 'Cancel' },
+  'admin.product.form.placeholder.name.en': { he: 'הכנס שם המוצר באנגלית...', en: 'Enter product name in English...' },
+  'admin.product.form.placeholder.name.he': { he: 'הכנס שם המוצר בעברית...', en: 'Enter product name in Hebrew...' },
+  'admin.product.form.placeholder.description.en': { he: 'הכנס תיאור המוצר באנגלית...', en: 'Enter product description in English...' },
+  'admin.product.form.placeholder.description.he': { he: 'הכנס תיאור המוצר בעברית...', en: 'Enter product description in Hebrew...' },
+  'admin.product.form.placeholder.price': { he: 'הכנס מחיר...', en: 'Enter price...' },
+  
+  // Edit Article Form
+  'admin.article.form.title': { he: 'עריכת מאמר', en: 'Edit Article' },
+  'admin.article.form.loading': { he: 'טוען מאמר...', en: 'Loading article...' },
+  'admin.article.form.basicInfo': { he: 'מידע בסיסי', en: 'Basic Information' },
+  'admin.article.form.content': { he: 'תוכן המאמר', en: 'Article Content' },
+  'admin.article.form.save': { he: 'שמור מאמר', en: 'Save Article' },
+  'admin.article.form.saving': { he: 'שומר...', en: 'Saving...' },
+  'admin.article.form.slug': { he: 'כתובת URL', en: 'URL Slug' },
+  'admin.article.form.excerpt': { he: 'תקציר', en: 'Excerpt' },
+  'admin.article.form.featured': { he: 'מאמר מומלץ', en: 'Featured Article' },
+  
+  // Confirmation Dialogs
+  'admin.confirm.delete.product': { he: 'האם אתה בטוח שברצונך למחוק את המוצר הזה?', en: 'Are you sure you want to delete this product?' },
+  'admin.confirm.delete.article': { he: 'האם אתה בטוח שברצונך למחוק את המאמר הזה?', en: 'Are you sure you want to delete this article?' },
+  
+  // Success Messages
+  'admin.success.product.created': { he: 'המוצר נוצר בהצלחה!', en: 'Product created successfully!' },
+  'admin.success.product.updated': { he: 'המוצר עודכן בהצלחה!', en: 'Product updated successfully!' },
+  'admin.success.product.deleted': { he: 'המוצר נמחק בהצלחה!', en: 'Product deleted successfully!' },
+  'admin.success.article.updated': { he: 'המאמר עודכן בהצלחה!', en: 'Article updated successfully!' },
+  'admin.success.article.deleted': { he: 'המאמר נמחק בהצלחה!', en: 'Article deleted successfully!' },
+  
+  // Error Messages
+  'admin.error.product.create': { he: 'שגיאה ביצירת המוצר', en: 'Error creating product' },
+  'admin.error.product.update': { he: 'שגיאה בעדכון המוצר', en: 'Error updating product' },
+  'admin.error.product.delete': { he: 'שגיאה במחיקת המוצר', en: 'Error deleting product' },
+  'admin.error.article.load': { he: 'שגיאה בטעינת המאמר', en: 'Error loading article' },
+  'admin.error.article.update': { he: 'שגיאה בעדכון המאמר', en: 'Error updating article' },
+  'admin.error.article.delete': { he: 'שגיאה במחיקת המאמר', en: 'Error deleting article' },
+  'admin.error.image.upload': { he: 'שגיאה בהעלאת התמונה', en: 'Error uploading image' },
+  
+  // Loading States
+  'admin.loading.products': { he: 'טוען מוצרים...', en: 'Loading products...' },
+  'admin.loading.articles': { he: 'טוען מאמרים...', en: 'Loading articles...' },
+  'admin.loading.stats': { he: 'טוען נתונים...', en: 'Loading data...' },
+  
+  // Navigation & Breadcrumbs
+  'admin.nav.dashboard': { he: 'לוח בקרה', en: 'Dashboard' },
+  'admin.nav.addProduct': { he: 'הוסף מוצר', en: 'Add Product' },
+  'admin.nav.editProduct': { he: 'ערוך מוצר', en: 'Edit Product' },
+  'admin.nav.editArticle': { he: 'ערוך מאמר', en: 'Edit Article' },
+  'admin.nav.backToDashboard': { he: 'חזרה ללוח הבקרה', en: 'Back to Dashboard' },
+  'admin.nav.backToProducts': { he: 'חזרה למוצרים', en: 'Back to Products' },
+  'admin.nav.backToArticles': { he: 'חזרה למאמרים', en: 'Back to Articles' },
+  
+  // Status Indicators
+  'admin.status.active': { he: 'פעיל', en: 'Active' },
+  'admin.status.inactive': { he: 'לא פעיל', en: 'Inactive' },
+  'admin.status.draft': { he: 'טיוטה', en: 'Draft' },
+  'admin.status.published': { he: 'פורסם', en: 'Published' },
+  'admin.status.yes': { he: 'כן', en: 'Yes' },
+  'admin.status.no': { he: 'לא', en: 'No' },
+  
+  // Common Admin Actions
+  'admin.action.edit': { he: 'ערוך', en: 'Edit' },
+  'admin.action.delete': { he: 'מחק', en: 'Delete' },
+  'admin.action.view': { he: 'צפה', en: 'View' },
+  'admin.action.save': { he: 'שמור', en: 'Save' },
+  'admin.action.cancel': { he: 'ביטול', en: 'Cancel' },
+  'admin.action.add': { he: 'הוסף', en: 'Add' },
+  'admin.action.create': { he: 'צור', en: 'Create' },
+  'admin.action.update': { he: 'עדכן', en: 'Update' },
+  'admin.action.remove': { he: 'הסר', en: 'Remove' },
+  'admin.action.upload': { he: 'העלה', en: 'Upload' },
+  
+  // Form Validation
+  'admin.validation.required': { he: 'שדה חובה', en: 'This field is required' },
+  'admin.validation.invalidPrice': { he: 'מחיר לא תקין', en: 'Invalid price' },
+  'admin.validation.invalidEmail': { he: 'כתובת אימייל לא תקינה', en: 'Invalid email address' },
+  'admin.validation.imageRequired': { he: 'תמונה נדרשת', en: 'Image is required' },
+  'admin.validation.nameRequired': { he: 'שם נדרש', en: 'Name is required' },
+  'admin.validation.descriptionRequired': { he: 'תיאור נדרש', en: 'Description is required' },
 };
 
 export function t(key: string, lang: 'he' | 'en' = 'he'): string {

@@ -6,12 +6,9 @@ import { ProductModel } from "../Models/ProductModel";
 
 class ProductService {
     private getAuthHeader(): { Authorization: string } | {} {
-        const token = sessionStorage.getItem("token");
-        if (!token) throw new Error("No token found");
-        if (token) {
-            return { Authorization: `Bearer ${token}` };
-        }
-        return {};
+        const token = localStorage.getItem("adminToken") || localStorage.getItem("token");
+        if (!token) return {};
+        return { Authorization: `Bearer ${token}` };
     }
     public async getAllProducts(): Promise<ProductModel[]> {
     const state = store.getState() as any;
@@ -101,12 +98,12 @@ class ProductService {
     }
 
     public async searchProducts(searchValue: string): Promise<{ products: ProductModel[] }> {
-        const response = await axios.get<{ products: ProductModel[] }>(
-            `${appConfig.productsUrl}?search=${searchValue}`,
+        const response = await axios.get<ProductModel[]>(
+            `${appConfig.productsUrl}?search=${encodeURIComponent(searchValue)}`,
             {
                 headers: this.getAuthHeader(),
             });
-        return response.data;
+        return { products: response.data };
     }
 
     public async getProductByIdUser(id: string): Promise<ProductModel[]> {

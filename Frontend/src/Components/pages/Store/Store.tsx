@@ -20,6 +20,25 @@ export function Store(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
+    // Intersection Observer for scroll animations
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        const sections = document.querySelectorAll('[data-scroll-animate]');
+        sections.forEach((section) => observer.observe(section));
+
+        return () => observer.disconnect();
+    }, []);
+
     useEffect(() => {
         let isMounted = true;
         const fetchProducts = async () => {
@@ -185,17 +204,13 @@ export function Store(): JSX.Element {
 
     return (
         <div className="store-container">
-            {/* Header Section */}
-            <div className="store-header">
-                <div className="store-header-content">
-                    <div className="store-header-text">
-                        <h1 className="store-title">
-                            {t("store.title", language)}
-                        </h1>
-                        <p className="store-description">
-                            {t("store.description", language)}
-                        </p>
-                    </div>
+            {/* Hero Section */}
+            <div className="store-hero">
+                <div className="hero-background"></div>
+                <div className="store-hero-inner">
+                    <h1 className="h1-title" data-scroll-animate>DHnaturally</h1>
+                    <h1 className="store-hero-title" data-scroll-animate>{t("store.title", language)}</h1>
+                    <p className="store-hero-subtitle" data-scroll-animate>{t("store.description", language)}</p>
                 </div>
             </div>
 

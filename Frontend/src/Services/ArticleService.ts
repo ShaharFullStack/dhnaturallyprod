@@ -4,7 +4,7 @@ import { ArticleModel } from "../Models/ArticleModel";
 
 class ArticleService {
     private getAuthHeader(): { Authorization: string } | {} {
-        const token = sessionStorage.getItem("token");
+        const token = localStorage.getItem("token");
         if (!token) return {};
         return { Authorization: `Bearer ${token}` };
     }

@@ -1,7 +1,8 @@
-import React, { JSX, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { JSX, useState, useEffect, useCallback } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { t } from '../../../lib/i18b';
 import { useLanguage } from '../../../Contexts/language-context';
+import { useAuth } from '../../../Contexts/auth-context';
 import { 
     Plus, 
     Edit, 
@@ -39,7 +40,9 @@ interface Article {
 
 export function Admin(): JSX.Element {
     const { language } = useLanguage();
+    const { logout, token } = useAuth();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     
     const [activeTab, setActiveTab] = useState<'overview' | 'products' | 'articles'>('overview');
     const [products, setProducts] = useState<Product[]>([]);
@@ -48,18 +51,11 @@ export function Admin(): JSX.Element {
     const [searchTerm, setSearchTerm] = useState('');
     const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'inactive'>('all');
 
-    useEffect(() => {
-        if (activeTab === 'products') {
-            loadProducts();
-        } else if (activeTab === 'articles') {
-            loadArticles();
-        }
-    }, [activeTab]);
-
-    const loadProducts = async () => {
+    const loadProducts = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/api/dhnaturally/products');
+            // Add cache-busting parameter to ensure fresh data
+            const response = await fetch(`http://localhost:4000/api/dhnaturally/products?_t=${Date.now()}`);
             if (response.ok) {
                 const data = await response.json();
                 setProducts(data);
@@ -69,9 +65,9 @@ export function Admin(): JSX.Element {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
-    const loadArticles = async () => {
+    const loadArticles = useCallback(async () => {
         setLoading(true);
         try {
             const response = await fetch('http://localhost:4000/api/dhnaturally/articles');
@@ -84,7 +80,23 @@ export function Admin(): JSX.Element {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        if (activeTab === 'products') {
+            loadProducts();
+        } else if (activeTab === 'articles') {
+            loadArticles();
+        }
+    }, [activeTab, loadProducts, loadArticles]);
+
+    // Listen for refresh parameter from URL
+    useEffect(() => {
+        const refresh = searchParams.get('refresh');
+        if (refresh && activeTab === 'products') {
+            loadProducts();
+        }
+    }, [searchParams, activeTab, loadProducts]);
 
     const deleteProduct = async (id: string) => {
         if (!window.confirm(t('admin.confirm.delete.product', language) ?? 'Are you sure you want to delete this product?')) {
@@ -93,10 +105,15 @@ export function Admin(): JSX.Element {
         
         try {
             const response = await fetch(`http://localhost:4000/api/dhnaturally/products/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             if (response.ok) {
                 loadProducts();
+            } else {
+                console.error('Failed to delete product:', response.statusText);
             }
         } catch (error) {
             console.error('Failed to delete product:', error);
@@ -110,14 +127,24 @@ export function Admin(): JSX.Element {
         
         try {
             const response = await fetch(`http://localhost:4000/api/dhnaturally/articles/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             if (response.ok) {
                 loadArticles();
+            } else {
+                console.error('Failed to delete article:', response.statusText);
             }
         } catch (error) {
             console.error('Failed to delete article:', error);
         }
+    };
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
     };
 
     const filteredProducts = products.filter(product => {
@@ -140,8 +167,15 @@ export function Admin(): JSX.Element {
         <div className="admin-dashboard">
             <div className="admin-header">
                 <div className="container">
-                    <h1>{t('admin.dashboard.title', language) ?? 'Admin Dashboard'}</h1>
-                    <p>{t('admin.dashboard.welcome', language) ?? 'Manage your products and articles'}</p>
+                    <div className="header-content">
+                        <div>
+                            <h1>{t('admin.dashboard.title', language) ?? 'Admin Dashboard'}</h1>
+                            <p>{t('admin.dashboard.welcome', language) ?? 'Manage your products and articles'}</p>
+                        </div>
+                        <button onClick={handleLogout} className="logout-btn">
+                            Logout
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -153,21 +187,21 @@ export function Admin(): JSX.Element {
                         onClick={() => setActiveTab('overview')}
                     >
                         <BarChart3 size={20} />
-                        {t('admin.nav.overview', language) ?? 'Overview'}
+                        {t('admin.dashboard.overview', language) ?? 'Overview'}
                     </button>
                     <button 
                         className={`nav-tab ${activeTab === 'products' ? 'active' : ''}`}
                         onClick={() => setActiveTab('products')}
                     >
                         <Package size={20} />
-                        {t('admin.nav.products', language) ?? 'Products'}
+                        {t('admin.dashboard.products', language) ?? 'Products'}
                     </button>
                     <button 
                         className={`nav-tab ${activeTab === 'articles' ? 'active' : ''}`}
                         onClick={() => setActiveTab('articles')}
                     >
                         <FileText size={20} />
-                        {t('admin.nav.articles', language) ?? 'Articles'}
+                        {t('admin.dashboard.articles', language) ?? 'Articles'}
                     </button>
                 </div>
 
@@ -181,7 +215,7 @@ export function Admin(): JSX.Element {
                                 </div>
                                 <div className="stat-info">
                                     <h3>{products.length}</h3>
-                                    <p>{t('admin.stats.products', language) ?? 'Total Products'}</p>
+                                    <p>{t('admin.dashboard.totalProducts', language) ?? 'Total Products'}</p>
                                 </div>
                             </div>
                             <div className="stat-card">
@@ -190,7 +224,7 @@ export function Admin(): JSX.Element {
                                 </div>
                                 <div className="stat-info">
                                     <h3>{articles.length}</h3>
-                                    <p>{t('admin.stats.articles', language) ?? 'Total Articles'}</p>
+                                    <p>{t('admin.dashboard.totalArticles', language) ?? 'Total Articles'}</p>
                                 </div>
                             </div>
                             <div className="stat-card">
@@ -199,7 +233,7 @@ export function Admin(): JSX.Element {
                                 </div>
                                 <div className="stat-info">
                                     <h3>{products.length}</h3>
-                                    <p>{t('admin.stats.activeProducts', language) ?? 'Total Products'}</p>
+                                    <p>{t('admin.products.title', language) ?? 'Products'}</p>
                                 </div>
                             </div>
                             <div className="stat-card">
@@ -208,27 +242,27 @@ export function Admin(): JSX.Element {
                                 </div>
                                 <div className="stat-info">
                                     <h3>{articles.filter(a => a.is_published).length}</h3>
-                                    <p>{t('admin.stats.publishedArticles', language) ?? 'Published Articles'}</p>
+                                    <p>{t('admin.articles.published', language) ?? 'Published Articles'}</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="quick-actions">
-                            <h3>{t('admin.quickActions', language) ?? 'Quick Actions'}</h3>
+                            <h3>{t('admin.dashboard.recentActivity', language) ?? 'Quick Actions'}</h3>
                             <div className="action-buttons">
                                 <Button 
                                     className="action-btn"
                                     onClick={() => navigate('/admin/products/new')}
                                 >
                                     <Plus size={20} />
-                                    {t('admin.addProduct', language) ?? 'Add New Product'}
+                                    {t('admin.products.add', language) ?? 'Add New Product'}
                                 </Button>
                                 <Button 
                                     className="action-btn"
                                     onClick={() => navigate('/admin/articles/new')}
                                 >
                                     <Plus size={20} />
-                                    {t('admin.addArticle', language) ?? 'Add New Article'}
+                                    {t('admin.articles.add', language) ?? 'Add New Article'}
                                 </Button>
                             </div>
                         </div>
@@ -242,7 +276,7 @@ export function Admin(): JSX.Element {
                             <h2>{t('admin.products.title', language) ?? 'Products Management'}</h2>
                             <Button onClick={() => navigate('/admin/products/new')}>
                                 <Plus size={16} />
-                                {t('admin.addProduct', language) ?? 'Add Product'}
+                                {t('admin.products.add', language) ?? 'Add Product'}
                             </Button>
                         </div>
 
@@ -251,7 +285,7 @@ export function Admin(): JSX.Element {
                                 <Search size={20} />
                                 <input
                                     type="text"
-                                    placeholder={t('admin.search.products', language) ?? 'Search products...'}
+                                    placeholder={t('admin.products.search', language) ?? 'Search products...'}
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
@@ -260,14 +294,14 @@ export function Admin(): JSX.Element {
                                 value={filterStatus} 
                                 onChange={(e) => setFilterStatus(e.target.value as any)}
                             >
-                                <option value="all">{t('admin.filter.all', language) ?? 'All'}</option>
-                                <option value="active">{t('admin.filter.active', language) ?? 'Active'}</option>
-                                <option value="inactive">{t('admin.filter.inactive', language) ?? 'Inactive'}</option>
+                                <option value="all">{t('admin.status.active', language) ?? 'All'}</option>
+                                <option value="active">{t('admin.status.active', language) ?? 'Active'}</option>
+                                <option value="inactive">{t('admin.status.inactive', language) ?? 'Inactive'}</option>
                             </select>
                         </div>
 
                         {loading ? (
-                            <div className="loading">Loading products...</div>
+                            <div className="loading">{t('admin.loading.products', language) ?? 'Loading products...'}</div>
                         ) : (
                             <div className="items-grid">
                                 {filteredProducts.map(product => (
@@ -291,7 +325,7 @@ export function Admin(): JSX.Element {
                                             <div className="item-status">
                                                 <span className="status active">
                                                     <CheckCircle size={16} />
-                                                    {t('admin.status.available', language) ?? 'Available'}
+                                                    {t('admin.status.active', language) ?? 'Available'}
                                                 </span>
                                             </div>
                                         </div>
@@ -323,7 +357,7 @@ export function Admin(): JSX.Element {
                             <h2>{t('admin.articles.title', language) ?? 'Articles Management'}</h2>
                             <Button onClick={() => navigate('/admin/articles/new')}>
                                 <Plus size={16} />
-                                {t('admin.addArticle', language) ?? 'Add Article'}
+                                {t('admin.articles.add', language) ?? 'Add Article'}
                             </Button>
                         </div>
 
@@ -332,7 +366,7 @@ export function Admin(): JSX.Element {
                                 <Search size={20} />
                                 <input
                                     type="text"
-                                    placeholder={t('admin.search.articles', language) ?? 'Search articles...'}
+                                    placeholder={t('admin.articles.search', language) ?? 'Search articles...'}
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
@@ -341,14 +375,14 @@ export function Admin(): JSX.Element {
                                 value={filterStatus} 
                                 onChange={(e) => setFilterStatus(e.target.value as any)}
                             >
-                                <option value="all">{t('admin.filter.all', language) ?? 'All'}</option>
-                                <option value="active">{t('admin.filter.published', language) ?? 'Published'}</option>
-                                <option value="inactive">{t('admin.filter.draft', language) ?? 'Draft'}</option>
+                                <option value="all">{t('admin.status.active', language) ?? 'All'}</option>
+                                <option value="active">{t('admin.articles.published', language) ?? 'Published'}</option>
+                                <option value="inactive">{t('admin.status.draft', language) ?? 'Draft'}</option>
                             </select>
                         </div>
 
                         {loading ? (
-                            <div className="loading">Loading articles...</div>
+                            <div className="loading">{t('admin.loading.articles', language) ?? 'Loading articles...'}</div>
                         ) : (
                             <div className="items-list">
                                 {filteredArticles.map(article => (

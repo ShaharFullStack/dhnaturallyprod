@@ -1,6 +1,7 @@
-import { JSX, useState, useEffect } from "react";
+import { JSX, useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
+import { useAuth } from "../../../Contexts/auth-context";
 import { t } from "../../../lib/i18b";
 import { Button } from "../../UI/Button/Buttons";
 import { ArticleModel } from "../../../Models/ArticleModel";
@@ -10,6 +11,7 @@ import "../AddArticle/AddArticle.css";
 
 export function EditArticle(): JSX.Element {
     const { language } = useLanguage();
+    const { token } = useAuth();
     const navigate = useNavigate();
     const { id } = useParams();
     
@@ -23,16 +25,20 @@ export function EditArticle(): JSX.Element {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<boolean>(false);
 
-    useEffect(() => {
-        if (id) {
-            loadArticle(id);
-        }
-    }, [id]);
-
-    const loadArticle = async (articleId: string) => {
+    const loadArticle = useCallback(async (articleId: string) => {
         setInitialLoading(true);
         try {
-            const response = await fetch(`http://localhost:4000/api/dhnaturally/articles/${articleId}`);
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            };
+            
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            const response = await fetch(`http://localhost:4000/api/dhnaturally/articles/${articleId}`, {
+                headers
+            });
             if (response.ok) {
                 const data = await response.json();
                 setArticle(new ArticleModel(data));
@@ -47,7 +53,13 @@ export function EditArticle(): JSX.Element {
         } finally {
             setInitialLoading(false);
         }
-    };
+    }, [token]);
+
+    useEffect(() => {
+        if (id) {
+            loadArticle(id);
+        }
+    }, [id, loadArticle]);
 
     const handleInputChange = (field: keyof ArticleModel, value: string | boolean | number) => {
         setArticle(prev => ({ ...prev, [field]: value }));
@@ -98,8 +110,8 @@ export function EditArticle(): JSX.Element {
         return (
             <div className="add-article">
                 <div className="success-message">
-                    <h2>{t("editArticle.success.title", language)}</h2>
-                    <p>{t("editArticle.success.message", language)}</p>
+                    <h2>{t("admin.success.article.updated", language) ?? "Article updated successfully!"}</h2>
+                    <p>{t("admin.nav.backToArticles", language) ?? "Redirecting to articles..."}</p>
                 </div>
             </div>
         );
@@ -114,9 +126,9 @@ export function EditArticle(): JSX.Element {
                         onClick={() => navigate('/admin')}
                     >
                         <ArrowLeft size={16} />
-                        {t("editArticle.back", language)}
+                        {t("admin.nav.backToDashboard", language)}
                     </Button>
-                    <h1>{t("editArticle.title", language)}</h1>
+                    <h1>{t("admin.article.form.title", language)}</h1>
                 </div>
             </header>
 
@@ -277,7 +289,7 @@ export function EditArticle(): JSX.Element {
                             ) : (
                                 <Save size={16} />
                             )}
-                            {loading ? t("editArticle.updating", language) : t("editArticle.update", language)}
+                            {loading ? t("admin.article.form.saving", language) : t("admin.article.form.save", language)}
                         </Button>
                     </div>
                 </form>

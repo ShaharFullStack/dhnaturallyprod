@@ -28,7 +28,10 @@ class ArticleService {
             subtitle_he,
             content AS content_en,
             content_he,
-            CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName) AS imageUrl,
+            CASE 
+                WHEN imageName IS NULL OR imageName = '' THEN NULL
+                ELSE CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName)
+            END AS imageUrl,
             is_published,
             created_at
         FROM articles
@@ -51,7 +54,10 @@ class ArticleService {
             subtitle_he,
             content,
             content_he,
-            CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName) AS imageUrl,
+            CASE 
+                WHEN imageName IS NULL OR imageName = '' THEN NULL
+                ELSE CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName)
+            END AS imageUrl,
             is_published,
             created_at,
             updated_at

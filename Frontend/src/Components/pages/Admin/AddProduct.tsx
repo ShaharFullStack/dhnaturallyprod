@@ -1,6 +1,7 @@
 import { JSX, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
+import { useAuth } from "../../../Contexts/auth-context";
 import { t } from "../../../lib/i18b";
 import { Button } from "../../UI/Button/Buttons";
 import { Upload, Save, ArrowLeft, Image as ImageIcon, Loader } from 'lucide-react';
@@ -17,6 +18,7 @@ interface ProductFormData {
 
 export function AddProduct(): JSX.Element {
     const { language } = useLanguage();
+    const { token } = useAuth();
     const navigate = useNavigate();
     const { id } = useParams();
     const isEdit = Boolean(id);
@@ -37,30 +39,45 @@ export function AddProduct(): JSX.Element {
     const [success, setSuccess] = useState<boolean>(false);
 
     useEffect(() => {
+        const loadProduct = async (productId: string) => {
+            setInitialLoading(true);
+            try {
+                const response = await fetch(`http://localhost:4000/api/dhnaturally/products/${productId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Loaded product data:', data); // Debug log
+                    
+                    // Map the API data to the form structure
+                    setProduct({
+                        name_en: data.name_en || '',
+                        name_he: data.name_he || '',
+                        description_en: data.description_en || '',
+                        description_he: data.description_he || '',
+                        price: data.price || 0
+                    });
+                    
+                    // Set image preview if exists
+                    if (data.imageUrl) {
+                        setImagePreview(data.imageUrl);
+                    }
+                } else {
+                    setError('Failed to load product');
+                }
+            } catch (err: any) {
+                setError(err.message || 'Failed to load product');
+            } finally {
+                setInitialLoading(false);
+            }
+        };
+
         if (isEdit && id) {
             loadProduct(id);
         }
-    }, [isEdit, id]);
-
-    const loadProduct = async (productId: string) => {
-        setInitialLoading(true);
-        try {
-            const response = await fetch(`http://localhost:4000/api/dhnaturally/products/${productId}`);
-            if (response.ok) {
-                const data = await response.json();
-                setProduct(data);
-                if (data.imageUrl) {
-                    setImagePreview(data.imageUrl);
-                }
-            } else {
-                setError('Failed to load product');
-            }
-        } catch (err: any) {
-            setError(err.message || 'Failed to load product');
-        } finally {
-            setInitialLoading(false);
-        }
-    };
+    }, [isEdit, id, token]);
 
     const handleInputChange = (field: keyof ProductFormData, value: string | number | boolean) => {
         setProduct(prev => ({ ...prev, [field]: value }));
@@ -96,6 +113,12 @@ export function AddProduct(): JSX.Element {
             // Add image if selected
             if (imageFile) {
                 formData.append('image', imageFile);
+                console.log('Image file added to FormData:', imageFile.name, imageFile.size);
+            }
+
+            console.log('FormData contents:');
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
             }
 
             const url = isEdit 
@@ -106,13 +129,18 @@ export function AddProduct(): JSX.Element {
 
             const response = await fetch(url, {
                 method,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                    // Note: Don't set Content-Type for FormData - browser sets it automatically with boundary
+                },
                 body: formData
             });
 
             if (response.ok) {
                 setSuccess(true);
                 setTimeout(() => {
-                    navigate('/admin');
+                    // Force refresh of admin dashboard by adding timestamp
+                    navigate('/admin?refresh=' + Date.now());
                 }, 2000);
             } else {
                 const errorData = await response.text();
@@ -156,9 +184,12 @@ export function AddProduct(): JSX.Element {
                         onClick={() => navigate('/admin')}
                     >
                         <ArrowLeft size={16} />
-                        {t("addProduct.back", language)}
+                        {t("admin.nav.backToDashboard", language)}
                     </Button>
-                    <h1>{t(`addProduct.${isEdit ? 'edit' : 'add'}.title`, language)}</h1>
+                    <h1>{isEdit 
+                        ? t('admin.product.form.edit.title', language) 
+                        : t('admin.product.form.title', language)
+                    }</h1>
                 </div>
             </header>
 
@@ -172,7 +203,7 @@ export function AddProduct(): JSX.Element {
 
                     {/* Image Upload */}
                     <div className="form-section">
-                        <h3>{t("addProduct.image.title", language)}</h3>
+                        <h3>{t("admin.product.form.image", language)}</h3>
                         <div className="image-upload">
                             <input
                                 type="file"
@@ -187,7 +218,7 @@ export function AddProduct(): JSX.Element {
                                 ) : (
                                     <div className="upload-placeholder">
                                         <ImageIcon size={48} />
-                                        <span>{t("addProduct.image.upload", language)}</span>
+                                        <span>{t("admin.product.form.uploadImage", language)}</span>
                                     </div>
                                 )}
                             </label>
@@ -196,11 +227,11 @@ export function AddProduct(): JSX.Element {
 
                     {/* Basic Information */}
                     <div className="form-section">
-                        <h3>{t("addProduct.basic.title", language)}</h3>
+                        <h3>{t("admin.product.form.basicInfo", language)}</h3>
                         
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="nameEn">{t("addProduct.name.en", language)} *</label>
+                                <label htmlFor="nameEn">{t("admin.product.form.name.en", language)} *</label>
                                 <input
                                     type="text"
                                     id="nameEn"
@@ -208,12 +239,12 @@ export function AddProduct(): JSX.Element {
                                     onChange={(e) => handleInputChange('name_en', e.target.value)}
                                     required
                                     className="form-input"
-                                    placeholder={t("addProduct.name.en.placeholder", language)}
+                                    placeholder={t("admin.product.form.placeholder.name.en", language)}
                                 />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="nameHe">{t("addProduct.name.he", language)} *</label>
+                                <label htmlFor="nameHe">{t("admin.product.form.name.he", language)} *</label>
                                 <input
                                     type="text"
                                     id="nameHe"
@@ -222,7 +253,7 @@ export function AddProduct(): JSX.Element {
                                     required
                                     className="form-input hebrew-input"
                                     dir="rtl"
-                                    placeholder={t("addProduct.name.he.placeholder", language)}
+                                    placeholder={t("admin.product.form.placeholder.name.he", language)}
                                 />
                             </div>
                         </div>
@@ -230,10 +261,10 @@ export function AddProduct(): JSX.Element {
 
                     {/* Descriptions */}
                     <div className="form-section">
-                        <h3>{t("addProduct.descriptions.title", language)}</h3>
+                        <h3>{t("admin.product.form.content", language)}</h3>
                         
                         <div className="form-group">
-                            <label htmlFor="descEn">{t("addProduct.description.en", language)} *</label>
+                            <label htmlFor="descEn">{t("admin.product.form.description.en", language)} *</label>
                             <textarea
                                 id="descEn"
                                 value={product.description_en}
@@ -241,12 +272,12 @@ export function AddProduct(): JSX.Element {
                                 required
                                 rows={8}
                                 className="form-textarea"
-                                placeholder={t("addProduct.description.en.placeholder", language)}
+                                placeholder={t("admin.product.form.placeholder.description.en", language)}
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="descHe">{t("addProduct.description.he", language)} *</label>
+                            <label htmlFor="descHe">{t("admin.product.form.description.he", language)} *</label>
                             <textarea
                                 id="descHe"
                                 value={product.description_he}
@@ -255,17 +286,17 @@ export function AddProduct(): JSX.Element {
                                 rows={8}
                                 className="form-textarea hebrew-input"
                                 dir="rtl"
-                                placeholder={t("addProduct.description.he.placeholder", language)}
+                                placeholder={t("admin.product.form.placeholder.description.he", language)}
                             />
                         </div>
                     </div>
 
                     {/* Pricing */}
                     <div className="form-section">
-                        <h3>{t("addProduct.pricing.title", language)}</h3>
+                        <h3>{t("admin.product.form.price", language)}</h3>
                         
                         <div className="form-group">
-                            <label htmlFor="price">{t("addProduct.price", language)} *</label>
+                            <label htmlFor="price">{t("admin.product.form.price", language)} *</label>
                             <input
                                 type="number"
                                 id="price"
@@ -275,7 +306,7 @@ export function AddProduct(): JSX.Element {
                                 min="0"
                                 step="0.01"
                                 className="form-input"
-                                placeholder={t("addProduct.price.placeholder", language)}
+                                placeholder={t("admin.product.form.placeholder.price", language)}
                             />
                         </div>
                     </div>
@@ -287,7 +318,7 @@ export function AddProduct(): JSX.Element {
                             className="outline"
                             onClick={() => navigate('/admin')}
                         >
-                            {t("addProduct.cancel", language)}
+                            {t("admin.product.form.cancel", language)}
                         </Button>
                         <Button 
                             type="submit" 
@@ -299,7 +330,10 @@ export function AddProduct(): JSX.Element {
                             ) : (
                                 <Save size={16} />
                             )}
-                            {loading ? t("addProduct.saving", language) : t(`addProduct.${isEdit ? 'update' : 'save'}`, language)}
+                            {loading 
+                                ? t("admin.product.form.saving", language) 
+                                : t("admin.product.form.save", language)
+                            }
                         </Button>
                     </div>
                 </form>

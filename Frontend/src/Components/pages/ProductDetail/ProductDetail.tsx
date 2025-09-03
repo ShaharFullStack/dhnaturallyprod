@@ -111,13 +111,6 @@ export function ProductDetail(): JSX.Element {
                             {t("common.currency", language)}{product.price}
                         </span>
                     </div>
-                    <div className="product-detail-meta">
-                        <div className="meta-item">
-                        </div>
-                        <div className="meta-item">
-                            {getProductCategory(product, language)}
-                        </div>
-                    </div>
                     <div className="product-detail-description">
                         <h3>{t("store.description", language) || "Description"}</h3>
                         <p>{currentDescription}</p>
@@ -138,26 +131,3 @@ export function ProductDetail(): JSX.Element {
         </div>
     );
 }
-
-// Helper function to get localized category name
-const getProductCategory = (product: Product, language: string): string => {
-    const content = `${product.name_en || ''} ${product.description_en || ''}`.toLowerCase();
-
-    let category = 'homeopathic'; // default
-
-    if (content.includes('homeopathy') || content.includes('homeopathic')) {
-        category = 'homeopathic';
-    } else if (content.includes('herbal') || content.includes('plant') || content.includes('extract')) {
-        category = 'herbal';
-    } else if (content.includes('diabetes') || content.includes('blood sugar') || content.includes('insulin')) {
-        category = 'immunity';
-    } else if (content.includes('digest') || content.includes('stomach') || content.includes('gut')) {
-        category = 'digestion';
-    } else if (content.includes('stress') || content.includes('anxiety') || content.includes('relax')) {
-        category = 'stress';
-    }
-
-    // Return localized category name
-    const categoryKey = `store.filter.${category}`;
-    return t(categoryKey, language as 'en' | 'he') || category;
-};

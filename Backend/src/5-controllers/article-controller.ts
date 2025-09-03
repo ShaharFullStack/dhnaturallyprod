@@ -2,16 +2,20 @@ import express, { NextFunction, Request, Response } from "express";
 import { ArticleModel } from "../3-models/article-model";
 import { articleService } from "../4-services/article-service";
 import { StatusCode } from "../3-models/enums";
+import { authMiddleware } from "../6-middleware/auth-middleware";
 
 class ArticleController {
     public readonly router = express.Router();
 
     public constructor() {
+        // Public routes (no authentication required)
         this.router.get("/dhnaturally/articles", this.getAllArticles);
         this.router.get("/dhnaturally/articles/:id", this.getArticleById);
-        this.router.post("/dhnaturally/articles", this.addArticle);
-        this.router.put("/dhnaturally/articles/:id", this.updateArticle);
-        this.router.delete("/dhnaturally/articles/:id", this.deleteArticle);
+        
+        // Admin-only routes (authentication + admin role required)
+        this.router.post("/dhnaturally/articles", authMiddleware.verifyToken, authMiddleware.verifyAdmin, this.addArticle);
+        this.router.put("/dhnaturally/articles/:id", authMiddleware.verifyToken, authMiddleware.verifyAdmin, this.updateArticle);
+        this.router.delete("/dhnaturally/articles/:id", authMiddleware.verifyToken, authMiddleware.verifyAdmin, this.deleteArticle);
     }
 
     private getAllArticles = async (req: Request, res: Response, next: NextFunction) => {

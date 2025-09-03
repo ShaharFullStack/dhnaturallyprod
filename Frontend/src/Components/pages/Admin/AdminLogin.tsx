@@ -2,10 +2,12 @@ import React, { JSX, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { t } from '../../../lib/i18b';
 import { useLanguage } from '../../../Contexts/language-context';
+import { useAuth } from '../../../Contexts/auth-context';
 import './Admin.css';
 
 export function AdminLogin(): JSX.Element {
     const { language } = useLanguage();
+    const { login } = useAuth();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,30 +18,13 @@ export function AdminLogin(): JSX.Element {
         e.preventDefault();
         setLoading(true);
         setError(null);
+        
         try {
-            const res = await fetch('http://localhost:4000/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-            const contentType = res.headers.get('content-type') || '';
-            if (!res.ok) {
-                const text = await res.text();
-                throw new Error(text || `Login failed: ${res.status}`);
-            }
-            if (!contentType.includes('application/json')) {
-                const text = await res.text();
-                throw new Error(`Unexpected response: ${text}`);
-            }
-            const data = await res.json();
-            // Expect { token, user }
-            if (data.token) {
-                localStorage.setItem('dhn_token', data.token);
-                // Optionally save user info
-                localStorage.setItem('dhn_user', JSON.stringify(data.user || {}));
+            const success = await login(email, password);
+            if (success) {
                 navigate('/admin');
             } else {
-                throw new Error('No token in response');
+                setError('Invalid credentials or insufficient permissions. Admin access required.');
             }
         } catch (err: any) {
             setError(err.message ?? 'Login failed');
