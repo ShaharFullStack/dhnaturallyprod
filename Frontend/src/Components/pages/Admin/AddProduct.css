@@ -1,0 +1,416 @@
+/* DHnaturally Add/Edit Product Styles */
+:root {
+    --dh-navy: hsl(245, 94%, 18%);
+    --dh-ocean: hsl(199, 100%, 36%);
+    --dh-sky: hsl(194, 100%, 42%);
+    --dh-light: hsl(180, 100%, 87%);
+    --dh-pale: hsl(194, 77%, 94%);
+    --dh-sage: hsl(154, 25%, 50%);
+    --muted: var(--dh-sage);
+    --card-bg: white;
+    --shadow-sm: 0 2px 8px rgba(11, 59, 74, 0.06);
+    --shadow-md: 0 8px 24px rgba(11, 59, 74, 0.1);
+    --shadow-lg: 0 20px 40px rgba(11, 59, 74, 0.12);
+    --border-color: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+}
+
+.add-product {
+    min-height: 100vh;
+    background: var(--dh-pale);
+    color: var(--dh-navy);
+}
+
+/* Container utility */
+.add-product .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header */
+.add-product-header {
+    background: white;
+    border-bottom: 1px solid rgba(11, 59, 74, 0.1);
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+}
+
+.add-product-header .container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.add-product-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dh-navy);
+    margin: 0;
+}
+
+/* Main Form */
+.product-form {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Form Sections */
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--dh-pale);
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.form-section h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dh-navy);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--dh-ocean);
+    display: inline-block;
+}
+
+/* Form Layout */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--dh-navy);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Form Inputs */
+.form-input,
+.form-textarea,
+.form-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--dh-pale);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: var(--dh-navy);
+    background: white;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--dh-ocean);
+    box-shadow: 0 0 0 3px rgba(14, 165, 164, 0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.5;
+}
+
+.hebrew-input {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Image Upload */
+.image-upload {
+    border: 2px dashed var(--dh-pale);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    transition: all 0.2s ease;
+    background: rgba(14, 165, 164, 0.02);
+}
+
+.image-upload:hover {
+    border-color: var(--dh-ocean);
+    background: rgba(14, 165, 164, 0.05);
+}
+
+.image-input {
+    display: none;
+}
+
+.image-upload-label {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    color: var(--muted);
+    transition: color 0.2s ease;
+}
+
+.image-upload:hover .upload-placeholder {
+    color: var(--dh-ocean);
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Checkbox Groups */
+.checkbox-group {
+    margin-top: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.checkbox-label:hover {
+    background: var(--dh-pale);
+}
+
+.form-checkbox {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--dh-ocean);
+    cursor: pointer;
+}
+
+.checkbox-text {
+    font-size: 1rem;
+    color: var(--dh-navy);
+    font-weight: 500;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--dh-pale);
+    margin-top: 2rem;
+}
+
+/* Messages */
+.error-message {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+}
+
+.success-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    padding: 3rem;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.success-message h2 {
+    color: var(--success-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.success-message p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    gap: 1rem;
+}
+
+.loading-container p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+}
+
+/* Buttons */
+.add-product .outline {
+    background: transparent;
+    border: 2px solid var(--dh-ocean);
+    color: var(--dh-ocean);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.add-product .outline:hover {
+    background: var(--dh-ocean);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.add-product .primary {
+    background: var(--dh-ocean);
+    border: 2px solid var(--dh-ocean);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-product .primary:hover:not(:disabled) {
+    background: var(--dh-navy);
+    border-color: var(--dh-navy);
+    transform: translateY(-1px);
+}
+
+.add-product .primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Animations */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .add-product-header {
+        padding: 1rem 0;
+    }
+
+    .add-product-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .product-form {
+        padding: 1.5rem;
+        margin: 0 -0.5rem 2rem;
+        border-radius: 0;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .form-section {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .form-section h3 {
+        font-size: 1.25rem;
+        margin: 0 0 1rem 0;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .upload-placeholder {
+        padding: 1.5rem;
+    }
+
+    .success-message {
+        margin: 1rem;
+        padding: 2rem;
+    }
+
+    .success-message h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .add-product .container {
+        padding: 0 0.5rem;
+    }
+
+    .product-form {
+        padding: 1rem;
+        margin: 0 0 2rem;
+        border-radius: 0;
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+    }
+
+    .form-section h3 {
+        font-size: 1.125rem;
+    }
+
+    .form-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+}

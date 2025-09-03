@@ -17,6 +17,9 @@ class ProductService {
             description AS description_en,
             description_he,
             price,
+            imageName,
+            created_at,
+            updated_at,
             CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName) AS imageUrl 
         FROM products
         ORDER BY name;
@@ -29,9 +32,14 @@ class ProductService {
         const sql = `
         SELECT
             id,
-            name,
-            description,
+            name AS name_en,
+            name_he,
+            description AS description_en,
+            description_he,
             price,
+            imageName,
+            created_at,
+            updated_at,
             CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName) AS imageUrl
         FROM products
         WHERE id = ?
@@ -56,15 +64,17 @@ class ProductService {
 
         // Create SQL
         const sql = `
-        INSERT INTO products (id, name, description, price, imageName)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO products (id, name, name_he, description, description_he, price, imageName)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         `;
 
         // Create values array
         const values = [
             productId,
-            product.name_en || product.name_he,
-            product.description_en || product.description_he,
+            product.name_en,
+            product.name_he,
+            product.description_en,
+            product.description_he,
             product.price,
             imageName
         ];
@@ -89,7 +99,9 @@ class ProductService {
         UPDATE products
         SET
             name = ?,
+            name_he = ?,
             description = ?,
+            description_he = ?,
             price = ?,
             imageName = ?
         WHERE id = ?
@@ -97,8 +109,10 @@ class ProductService {
 
         // Create values array
         const values = [
-            product.name_en || product.name_he,
-            product.description_en || product.description_he,
+            product.name_en,
+            product.name_he,
+            product.description_en,
+            product.description_he,
             product.price,
             imageName,
             product.id

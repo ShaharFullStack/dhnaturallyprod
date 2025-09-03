@@ -1467,3 +1467,38 @@ Stack: Error: Table 'dhnaturally_db.user_sessions' doesn't exist
 
 -----------------------------------------------------
 
+Time: 3.9.2025, 12:24:26
+Error: Route /api/products/images/consultation.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 12:24:30
+Error: Product with id 6204b98a-889a-11f0-a28e-d0c1b53d67ff not found
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 12:24:30
+Error: Product with id 6204b98a-889a-11f0-a28e-d0c1b53d67ff not found
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 12:25:22
+Error: Route /api/products/images/consultation.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 12:25:25
+Error: Product with id 6204b98a-889a-11f0-a28e-d0c1b53d67ff not found
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 12:25:25
+Error: Product with id 6204b98a-889a-11f0-a28e-d0c1b53d67ff not found
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 12:25:33
+Error: Route /api/products/images/consultation.png not found.
+
+-----------------------------------------------------
+
