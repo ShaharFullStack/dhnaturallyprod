@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
+import { UploadedFile } from "express-fileupload";
 import { ArticleModel } from "../3-models/article-model";
 import { articleService } from "../4-services/article-service";
 import { StatusCode } from "../3-models/enums";
@@ -38,7 +39,18 @@ class ArticleController {
 
     private addArticle = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            // Convert string boolean to actual boolean for FormData
+            if (req.body.is_published) {
+                req.body.is_published = req.body.is_published === 'true' || req.body.is_published === '1';
+            }
+            
             const article = new ArticleModel(req.body);
+            
+            // Extract image file if present
+            if (req.files && req.files.image) {
+                (article as any).image = req.files.image as UploadedFile;
+            }
+            
             const added = await articleService.addArticle(article);
             res.status(StatusCode.Created).json(added);
         } catch (error) {
@@ -48,8 +60,19 @@ class ArticleController {
 
     private updateArticle = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            // Convert string boolean to actual boolean for FormData
+            if (req.body.is_published) {
+                req.body.is_published = req.body.is_published === 'true' || req.body.is_published === '1';
+            }
+            
             const article = new ArticleModel(req.body);
             article.id = req.params.id;
+            
+            // Extract image file if present
+            if (req.files && req.files.image) {
+                (article as any).image = req.files.image as UploadedFile;
+            }
+            
             const updated = await articleService.updateArticle(article);
             res.json(updated);
         } catch (error) {

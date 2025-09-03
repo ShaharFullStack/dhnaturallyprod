@@ -97,6 +97,8 @@ export function Navigation() {
                 onClick={toggleMobileMenu}
                 className="mobile-menu-button"
                 data-testid="mobile-menu-button"
+                aria-expanded={isMobileMenuOpen}
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               >
                 {isMobileMenuOpen ? (
                   <X className="menu-icon" />
@@ -108,8 +110,7 @@ export function Navigation() {
           </div>
 
           {/* Mobile Navigation Menu */}
-          {isMobileMenuOpen && (
-            <div className="mobile-menu" data-testid="mobile-menu">
+          <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`} data-testid="mobile-menu">
               <div className="mobile-nav-links">
                 {navItems.map((item) => (
                   <Link
@@ -131,8 +132,7 @@ export function Navigation() {
                   <LanguageToggle />
                 </div>
               </div>
-            </div>
-          )}
+          </div>
         </div>
       </nav>
 

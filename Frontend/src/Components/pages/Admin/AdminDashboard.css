@@ -5,7 +5,7 @@
     --dh-sky: hsl(194, 100%, 42%);
     --dh-light: hsl(180, 100%, 87%);
     --dh-pale: hsl(194, 77%, 94%);
-    --dh-sage: hsl(154, 25%, 50%);
+    --dh-sage: hsl(153, 24%, 22%);
     --admin-bg: #f8fafc;
     --card-bg: white;
     --border-color: #e2e8f0;
@@ -506,7 +506,7 @@
     .admin-header {
         padding: 1rem 0;
     }
-    
+
     .admin-header h1 {
         font-size: 2rem;
     }

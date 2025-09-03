@@ -60,8 +60,8 @@ export function Footer(): JSX.Element {
                             </div>
                             <div className="contact-item">
                                 <Phone className="contact-icon" />
-                                <a href="tel:+972501234567" className="contact-link">
-                                    +972-50-123-4567
+                                <a href="tel:++972 53-335-3481" className="contact-link">
+                                    +972-53-335-3481
                                 </a>
                             </div>
                             <div className="contact-item">

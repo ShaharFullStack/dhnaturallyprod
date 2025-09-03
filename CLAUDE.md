@@ -6,10 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a full-stack TypeScript naturopathy e-commerce application with separate Frontend (React) and Backend (Express) services:
 
-- **Frontend**: React 19 with TypeScript, Redux Toolkit, React Router, Auth Context, i18n support
+- **Frontend**: React 19 with TypeScript, Redux Toolkit, React Router, Auth Context, i18n support (Hebrew/English RTL)
 - **Backend**: Express.js with TypeScript, MySQL2, JWT auth, file uploads, role-based authentication
 - **Database**: MySQL with structured tables for products, articles, users, roles, sessions
 - **Architecture**: Layered backend (models, services, controllers, middleware) with authentication system
+- **UI Components**: Responsive design with mobile-first approach, custom components, and WhatsApp integration
 
 ## Development Commands
 
@@ -66,11 +67,13 @@ React application with:
 ### Key Frontend Features
 
 - **Authentication System**: Role-based admin authentication with protected routes
-- **Multi-language Support**: Hebrew and English with RTL support
+- **Multi-language Support**: Hebrew and English with RTL support using custom language context
 - **Admin Dashboard**: Protected admin routes for product/article management
-- **E-commerce Pages**: Store, product details, articles, contact
+- **E-commerce Pages**: Store, product details, articles, contact with hero sections
 - **Redux Integration**: Product and user state management with middleware
-- **Responsive Design**: Mobile-first CSS with utility classes
+- **Responsive Design**: Mobile-first CSS with utility classes, viewport-based hero sections
+- **Interactive Elements**: WhatsApp bubble integration (+972 53-335-3481), animated mobile menu
+- **Layout System**: Centralized Layout component with Header, Footer, and routing
 
 ## Environment Configuration
 
@@ -116,11 +119,14 @@ The application uses a MySQL database with tables for:
 ### Frontend Patterns  
 - Redux slices for state management with async thunks and middleware
 - Auth Context provider with JWT token management and persistence
+- Language Context provider for Hebrew/English RTL support with localStorage persistence
 - Protected route components for admin-only access
-- Custom hooks for reusable logic (useTitle, useAuth)
+- Custom hooks for reusable logic (useTitle, useAuth, useCart, useHapticFeedback)
 - Component composition with Layout wrapper and context providers
 - Service layer for API calls with Axios
-- CSS modules for component-specific styling
+- CSS modules for component-specific styling with responsive breakpoints
+- Hero sections with consistent viewport sizing (100vh on mobile)
+- Animated UI components with cubic-bezier transitions
 
 ## File Upload System
 
@@ -208,3 +214,29 @@ The application uses a MySQL database with tables for:
 - Frontend uses React Testing Library with Jest
 - Test files located in respective test directories
 - Note: User handles all testing - no automatic test execution
+
+## Important Development Notes
+
+### Responsive Design Standards
+- All hero sections use `min-height: 100vh` for full viewport coverage on mobile
+- CSS follows mobile-first approach with specific breakpoints: 320px, 768px, 1024px
+- Typography scales with `clamp()` and responsive font sizes
+- RTL support implemented through direction attributes and text alignment
+
+### Component Architecture
+- WhatsAppBubble component fixed positioned with phone number +972 53-335-3481
+- Layout component includes ScrollToTop utility for route navigation
+- Language context manages Hebrew/English state with document attribute updates
+- Mobile menu uses smooth animations with staggered transitions
+
+### Database Connection Pattern
+- DAL (Data Access Layer) uses MySQL2 connection pooling
+- Services layer calls DAL methods for database operations
+- Environment variables configured through app-config.ts centralization
+- File uploads handled through express-fileupload with path organization
+
+### Authentication Flow
+- JWT tokens managed through both localStorage and context state
+- Role-based access: roleId 1=Admin, 2=Customer
+- Session validation on frontend with automatic cleanup
+- Protected routes wrap components requiring authentication

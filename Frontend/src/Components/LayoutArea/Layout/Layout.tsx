@@ -3,6 +3,7 @@ import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { Routing } from "../Routing/Routing";
 import { useLocation } from 'react-router-dom';
+import { WhatsAppBubble } from "../../UI/WhatsAppBubble/WhatsAppBubble";
 import "./Layout.css";
 
 const ScrollToTop: React.FC = () => {
@@ -30,6 +31,9 @@ export function Layout(): JSX.Element {
             <footer className="layout-footer">
                 <Footer />
             </footer>
+            
+            {/* WhatsApp Bubble - Fixed position, always visible */}
+            <WhatsAppBubble phoneNumber="+972533353481" />
         </div>
     );
 }

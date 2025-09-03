@@ -5,7 +5,7 @@
   --dh-sky: hsl(194, 100%, 42%);
   --dh-light: hsl(180, 100%, 87%);
   --dh-pale: hsl(194, 77%, 94%);
-  --dh-sage: hsl(154, 25%, 50%);
+  --dh-sage: hsl(153, 24%, 22%);
   --gradient-primary: linear-gradient(135deg, var(--dh-navy) 0%, var(--dh-ocean) 50%, var(--dh-sky) 100%);
 }
 
@@ -33,14 +33,15 @@
     background: var(--gradient-primary);
     color: var(--dh-light);
     overflow: hidden;
-    min-height: 50vh;
+    min-height: 100vh;
+    padding: 2.5rem 0;
     display: flex;
     align-items: center;
 }
 
 .h1-title {
     font-family: 'Halimun', sans-serif;
-    font-size: 5.6rem;
+    font-size: 2.8rem;
     z-index: 20;
     text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.7);
 }
@@ -86,7 +87,7 @@
 }
 
 .store-hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--dh-light);
     text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.7);
     animation: fadeInUp 1s ease-out 0.4s both;
@@ -94,14 +95,14 @@
     line-height: 1.2;
     white-space: pre-line;
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .store-hero-subtitle {
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.7);
-    font-size: 1.45rem;
-    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
@@ -321,7 +322,7 @@
     overflow: hidden;
 }
 
-/* Responsive Design */
+/* Responsive Design - Mobile First Approach */
 @media (min-width: 640px) {
   .filter-row {
     flex-direction: row;
@@ -332,24 +333,44 @@
   }
 }
 
+/* Store Hero Responsive */
 @media (min-width: 768px) {
   .store-hero {
-    min-height: 55vh;
+    min-height: 50vh;
+    padding: 4rem 0;
   }
 
   .store-hero-title {
-    font-size: 3.5rem;
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .store-hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .h1-title {
+    font-size: 4rem;
   }
 }
 
 @media (min-width: 1024px) {
   .store-hero {
-    padding: 6rem 0 5rem;
-    min-height: 60vh;
+    min-height: 55vh;
+    padding: 5rem 0;
   }
 
   .store-hero-title {
-    font-size: 4rem;
+    font-size: 3.2rem;
+  }
+
+  .store-hero-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .h1-title {
+    font-size: 4.8rem;
   }
 
   .search-input {
@@ -381,5 +402,30 @@
 @media (min-width: 1280px) {
   .products-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 480px) {
+  .store-hero {
+    min-height: 40vh;
+    padding: 2rem 0;
+  }
+
+  .store-hero-inner {
+    padding: 0 0.75rem;
+  }
+
+  .h1-title {
+    font-size: 2.4rem;
+  }
+
+  .store-hero-title {
+    font-size: 1.8rem;
+  }
+
+  .store-hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 }

@@ -89,7 +89,7 @@ export function Contact(): JSX.Element {
         {
             icon: <Phone size={20} aria-hidden={false} aria-label="Phone / WhatsApp" />,
             title: t("contact.info.whatsapp", language),
-            details: "+972-50-123-4567",
+            details: "+972 53-335-3481",
             description: t("contact.info.whatsapp.note", language)
         },
         {

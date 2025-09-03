@@ -1,7 +1,6 @@
 import { JSX, useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
-import { useAuth } from "../../../Contexts/auth-context";
 import { t } from "../../../lib/i18b";
 import { Button } from "../../UI/Button/Buttons";
 import { ArticleModel } from "../../../Models/ArticleModel";
@@ -11,7 +10,6 @@ import "../AddArticle/AddArticle.css";
 
 export function EditArticle(): JSX.Element {
     const { language } = useLanguage();
-    const { token } = useAuth();
     const navigate = useNavigate();
     const { id } = useParams();
     
@@ -28,6 +26,7 @@ export function EditArticle(): JSX.Element {
     const loadArticle = useCallback(async (articleId: string) => {
         setInitialLoading(true);
         try {
+            const token = localStorage.getItem("adminToken") || localStorage.getItem("token");
             const headers: Record<string, string> = {
                 'Content-Type': 'application/json'
             };
@@ -53,7 +52,7 @@ export function EditArticle(): JSX.Element {
         } finally {
             setInitialLoading(false);
         }
-    }, [token]);
+    }, []);
 
     useEffect(() => {
         if (id) {

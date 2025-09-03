@@ -81,8 +81,18 @@ export function Articles(): JSX.Element {
         : regularArticles.filter(article => article.category === selectedCategory);
 
     const getSlugOrId = (article: any) => article.slug ?? article.id;
-    const getTitle = (article: any) => article.title_en ?? article.title ?? article.title_he ?? '';
-    const getExcerpt = (article: any) => article.excerpt ?? article.subtitle_en ?? article.subtitle_he ?? '';
+    const getTitle = (article: any) => {
+        if (language === 'he') {
+            return article.title_he || article.title_en || article.title || '';
+        }
+        return article.title_en || article.title || article.title_he || '';
+    };
+    const getExcerpt = (article: any) => {
+        if (language === 'he') {
+            return article.excerpt_he || article.subtitle_he || article.excerpt || article.subtitle_en || '';
+        }
+        return article.excerpt || article.subtitle_en || article.excerpt_he || article.subtitle_he || '';
+    };
 
     const handleNewsletterSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -99,7 +109,12 @@ export function Articles(): JSX.Element {
                     <h1 className="h1-title" data-scroll-animate>DHnaturally</h1>
                     <h1 className="articles-hero-title" data-scroll-animate>{t("articles.title", language)}</h1>
                     <p className="articles-hero-subtitle" data-scroll-animate>{t("articles.description", language)}</p>
-  
+                    <div className="hero-cta" data-scroll-animate>
+                        <Button className="primary lg">
+                            {t("cta.getConsultation", language)}
+                            <ArrowRight size={18} />
+                        </Button>
+                    </div>
                 </div>
             </div>
 
@@ -121,8 +136,8 @@ export function Articles(): JSX.Element {
 
                             <div className="featured-body">
                                 <div className="meta">
-                                    <span className="pill"><Tag size={14} className="meta-icon" /> {t(`articles.category.${featuredArticle.category}`, language)}</span>
-                                    <span className="meta-item"><Clock size={14} className="meta-icon" /> {featuredArticle.readTime} {t("articles.readTime", language)}</span>
+                                    {featuredArticle.category && <span className="pill"><Tag size={14} className="meta-icon" /> {t(`articles.category.${featuredArticle.category}`, language)}</span>}
+                                    {featuredArticle.readTime && <span className="meta-item"><Clock size={14} className="meta-icon" /> {featuredArticle.readTime} {t("articles.readTime", language)}</span>}
                                 </div>
                                 <h2 className="featured-title">{getTitle(featuredArticle)}</h2>
                                 <p className="featured-excerpt">{getExcerpt(featuredArticle)}</p>
@@ -132,17 +147,20 @@ export function Articles(): JSX.Element {
                     </section>
                 )}
 
-                <div className="category-filter">
-                    {categories.map(category => (
-                        <Button
-                            key={category.value}
-                            onClick={() => setSelectedCategory(category.value)}
-                            className={`filter-pill ${selectedCategory === category.value ? 'active' : ''}`}
-                        >
-                            {category.label}
-                        </Button>
-                    ))}
-                </div>
+                {/* Only show category filter if articles have categories */}
+                {articles.some(article => article.category) && (
+                    <div className="category-filter">
+                        {categories.map(category => (
+                            <Button
+                                key={category.value}
+                                onClick={() => setSelectedCategory(category.value)}
+                                className={`filter-pill ${selectedCategory === category.value ? 'active' : ''}`}
+                            >
+                                {category.label}
+                            </Button>
+                        ))}
+                    </div>
+                )}
 
                 <section className="articles-grid">
                     {filteredArticles.map(article => (
@@ -157,8 +175,8 @@ export function Articles(): JSX.Element {
 
                             <div className="article-body">
                                 <div className="meta">
-                                    <span className="pill small"><Tag size={12} className="meta-icon" /> {t(`articles.category.${article.category}`, language)}</span>
-                                    <span className="meta-item"><Clock size={12} className="meta-icon" /> {article.readTime} {t("articles.readTime", language)}</span>
+                                    {article.category && <span className="pill small"><Tag size={12} className="meta-icon" /> {t(`articles.category.${article.category}`, language)}</span>}
+                                    {article.readTime && <span className="meta-item"><Clock size={12} className="meta-icon" /> {article.readTime} {t("articles.readTime", language)}</span>}
                                 </div>
 
                                 <h3 className="article-title">{getTitle(article)}</h3>

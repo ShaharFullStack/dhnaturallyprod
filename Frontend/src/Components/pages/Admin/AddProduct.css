@@ -5,7 +5,7 @@
     --dh-sky: hsl(194, 100%, 42%);
     --dh-light: hsl(180, 100%, 87%);
     --dh-pale: hsl(194, 77%, 94%);
-    --dh-sage: hsl(154, 25%, 50%);
+    --dh-sage: hsl(153, 24%, 22%);
     --muted: var(--dh-sage);
     --card-bg: white;
     --shadow-sm: 0 2px 8px rgba(11, 59, 74, 0.06);
@@ -338,6 +338,7 @@
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }

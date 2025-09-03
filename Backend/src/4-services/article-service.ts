@@ -1,10 +1,41 @@
 import { OkPacketParams } from "mysql2";
 import { v4 as uuid } from "uuid";
 import { fileSaver } from "uploaded-file-saver";
+import path from "path";
 import { dal } from "../2-utils/dal";
 import { NotFoundError } from "../3-models/error-models";
 import { ArticleModel } from "../3-models/article-model";
 import { appConfig } from "../2-utils/app-config";
+
+const articlesPath = path.join(__dirname, "..", "1-assets", "images", "articles");
+const productsPath = path.join(__dirname, "..", "1-assets", "images", "products");
+
+// Helper functions to temporarily configure fileSaver for articles
+async function addArticleImage(image: any): Promise<string> {
+    // Temporarily configure for articles
+    fileSaver.config(articlesPath);
+    const result = await fileSaver.add(image);
+    // Restore to products configuration
+    fileSaver.config(productsPath);
+    return result;
+}
+
+async function updateArticleImage(existingImage: string, newImage: any): Promise<string> {
+    // Temporarily configure for articles
+    fileSaver.config(articlesPath);
+    const result = await fileSaver.update(existingImage, newImage);
+    // Restore to products configuration
+    fileSaver.config(productsPath);
+    return result;
+}
+
+async function deleteArticleImage(imageName: string): Promise<void> {
+    // Temporarily configure for articles
+    fileSaver.config(articlesPath);
+    await fileSaver.delete(imageName);
+    // Restore to products configuration
+    fileSaver.config(productsPath);
+}
 
 function slugify(input: string): string {
     if (!input) return '';
@@ -30,7 +61,7 @@ class ArticleService {
             content_he,
             CASE 
                 WHEN imageName IS NULL OR imageName = '' THEN NULL
-                ELSE CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName)
+                ELSE CONCAT('http://localhost:4000/api/articles/images/', imageName)
             END AS imageUrl,
             is_published,
             created_at
@@ -48,15 +79,16 @@ class ArticleService {
         const sql = `
         SELECT
             id,
-            title,
-            subtitle,
+            title AS title_en,
+            subtitle AS subtitle_en,
             title_he,
             subtitle_he,
-            content,
+            content AS content_en,
             content_he,
+            imageName,
             CASE 
                 WHEN imageName IS NULL OR imageName = '' THEN NULL
-                ELSE CONCAT('${appConfig.dhnaturallyImagesWebPath}', imageName)
+                ELSE CONCAT('http://localhost:4000/api/articles/images/', imageName)
             END AS imageUrl,
             is_published,
             created_at,
@@ -80,7 +112,7 @@ class ArticleService {
         // @ts-ignore file property may be present
         if ((article as any).image) {
             // @ts-ignore
-            imageName = await fileSaver.add((article as any).image);
+            imageName = await addArticleImage((article as any).image);
         }
 
         const slug = slugify(article.title_en || article.title_he || '');
@@ -114,7 +146,7 @@ class ArticleService {
     const slug = slugify(article.title_en || article.title_he || '');
         if ((article as any).image) {
             // @ts-ignore
-            imageName = await fileSaver.update(imageName, (article as any).image);
+            imageName = await updateArticleImage(imageName, (article as any).image);
         }
 
         const sql = `
@@ -151,7 +183,7 @@ class ArticleService {
         const result: OkPacketParams = await dal.execute(sql, [id]);
         if (result.affectedRows === 0) throw new NotFoundError(`Article with id ${id} not found`);
 
-        if (imageName) await fileSaver.delete(imageName);
+        if (imageName) await deleteArticleImage(imageName);
     }
 
     private async getImageName(articleId: string): Promise<string> {
