@@ -17,6 +17,25 @@ export function Articles(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+    // Intersection Observer for scroll animations
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        const sections = document.querySelectorAll('[data-scroll-animate]');
+        sections.forEach((section) => observer.observe(section));
+
+        return () => observer.disconnect();
+    }, []);
+
     useEffect(() => {
         let cancelled = false;
         const load = async () => {
@@ -73,12 +92,16 @@ export function Articles(): JSX.Element {
 
     return (
         <div className="articles">
-            <header className="articles-hero">
-                <div className="container">
-                    <h1 className="articles-title">{t("articles.title", language)}</h1>
-                    <p className="articles-description">{t("articles.description", language)}</p>
+            {/* Hero Section */}
+            <div className="articles-hero">
+                <div className="hero-background"></div>
+                <div className="articles-hero-inner">
+                    <h1 className="h1-title" data-scroll-animate>DHnaturally</h1>
+                    <h1 className="articles-hero-title" data-scroll-animate>{t("articles.title", language)}</h1>
+                    <p className="articles-hero-subtitle" data-scroll-animate>{t("articles.description", language)}</p>
+  
                 </div>
-            </header>
+            </div>
 
             <main className="container articles-main">
                 {loading && <div className="loading">{t('articles.loading', language) ?? 'Loading...'}</div>}

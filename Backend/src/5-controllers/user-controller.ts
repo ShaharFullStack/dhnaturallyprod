@@ -32,7 +32,16 @@ class UserController {
 
     public async register(request: Request, response: Response, next: NextFunction) {
         try {
-            const user = new UserModel(request.body);
+            // Sanitize incoming registration payload to allowed fields only
+            const payload = {
+                firstName: request.body.firstName,
+                lastName: request.body.lastName,
+                email: request.body.email,
+                password: request.body.password,
+                roleId: request.body.roleId
+            } as Partial<UserModel>;
+
+            const user = new UserModel(payload as any);
             const result = await userService.register(user);
             response.status(StatusCode.Created).json({
                 message: "User registered successfully",
@@ -47,7 +56,10 @@ class UserController {
     
     public async login(request: Request, response: Response, next: NextFunction) {
         try {
+            console.log("Request body received:", JSON.stringify(request.body, null, 2));
+            console.log("Request body keys:", Object.keys(request.body));
             const credentials = new CredentialsModel(request.body);
+            console.log("Credentials object:", JSON.stringify(credentials, null, 2));
             const result = await userService.login(credentials);
             
             response.json({

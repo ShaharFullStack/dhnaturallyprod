@@ -11,7 +11,7 @@ export class SessionModel {
     public ip_address?: string;
     public user_agent?: string;
 
-    public constructor(session: SessionModel) {
+    public constructor(session: any) {
         this.id = session.id;
         this.user_id = session.user_id;
         this.token_hash = session.token_hash;
@@ -27,6 +27,8 @@ export class SessionModel {
         user_id: Joi.string().uuid().required(),
         token_hash: Joi.string().required().max(255),
         expires_at: Joi.date().required().min('now'),
+        created_at: Joi.date().optional(),
+        last_used: Joi.date().optional(),
         ip_address: Joi.string().ip().optional(),
         user_agent: Joi.string().max(1000).optional()
     });

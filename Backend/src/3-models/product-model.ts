@@ -91,7 +91,7 @@ export class ProductModel {
         is_featured: Joi.boolean().optional(),
         sort_order: Joi.number().integer().optional(),
         image: Joi.object().optional()
-    });
+    }).unknown(true);
 
     private static updateValidationSchema = Joi.object({
         id: Joi.string().uuid().required(),
@@ -118,7 +118,7 @@ export class ProductModel {
         sort_order: Joi.number().integer().optional(),
         image: Joi.object().optional(),
         imageUrl: Joi.string().optional().max(500)
-    });
+    }).unknown(true);
 
     public validateInsert(): void {
         const result = ProductModel.insertValidationSchema.validate(this);

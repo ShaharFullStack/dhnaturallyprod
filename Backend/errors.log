@@ -914,3 +914,556 @@ Error: Route /api/products/images/article.png not found.
 
 -----------------------------------------------------
 
+Time: 3.9.2025, 2:38:03
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:17:23
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:17:28
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:18:39
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:18:57
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:20:08
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:20:21
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:21:10
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:32:34
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:32:40
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 3:32:44
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 8:56:34
+Error: Route /api/products/images/article.png not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:13:51
+Error: Unknown column 'isActive' in 'where clause'
+Stack: Error: Unknown column 'isActive' in 'where clause'
+    at Packet.asError (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packets\packet.js:740:17)
+    at Query.execute (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\commands\command.js:29:26)
+    at PoolConnection.handlePacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:475:34)
+    at PacketParser.onPacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:93:12)
+    at PacketParser.executeStart (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:100:25)
+    at Socket.emit (node:events:524:28)
+    at Socket.emit (node:domain:489:12)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:15:02
+Error: Unknown column 'isActive' in 'where clause'
+Stack: Error: Unknown column 'isActive' in 'where clause'
+    at Packet.asError (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packets\packet.js:740:17)
+    at Query.execute (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\commands\command.js:29:26)
+    at PoolConnection.handlePacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:475:34)
+    at PacketParser.onPacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:93:12)
+    at PacketParser.executeStart (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:100:25)
+    at Socket.emit (node:events:524:28)
+    at Socket.emit (node:domain:489:12)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:17:24
+Error: Unknown column 'isActive' in 'where clause'
+Stack: Error: Unknown column 'isActive' in 'where clause'
+    at Packet.asError (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packets\packet.js:740:17)
+    at Query.execute (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\commands\command.js:29:26)
+    at PoolConnection.handlePacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:475:34)
+    at PacketParser.onPacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:93:12)
+    at PacketParser.executeStart (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:100:25)
+    at Socket.emit (node:events:524:28)
+    at Socket.emit (node:domain:489:12)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:21:32
+Error: Access denied. Invalid token format.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:21:38
+Error: "password" length must be less than or equal to 100 characters long
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:22:35
+Error: "lastLogin" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:23:07
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:24:48
+Error: "id" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:25:00
+Error: Expected double-quoted property name in JSON at position 113 (line 6 column 1)
+Stack: SyntaxError: Expected double-quoted property name in JSON at position 113 (line 6 column 1)
+    at JSON.parse (<anonymous>)
+    at parse (C:\Codes\dhnaturally\Backend\node_modules\body-parser\lib\types\json.js:92:19)
+    at C:\Codes\dhnaturally\Backend\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Codes\dhnaturally\Backend\node_modules\raw-body\index.js:238:16)
+    at done (C:\Codes\dhnaturally\Backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (C:\Codes\dhnaturally\Backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:524:28)
+    at IncomingMessage.emit (node:domain:489:12)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:25:06
+Error: "id" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:25:13
+Error: "id" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:25:26
+Error: "id" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:27:02
+Error: "id" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:30:38
+Error: "id" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:35:07
+Error: "id" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:35:13
+Error: "id" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:35:59
+Error: Incorrect email or password.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:36:07
+Error: Incorrect email or password.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:37:43
+Error: "lastLogin" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:38:13
+Error: Route /api/admin/register not found.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:38:23
+Error: "lastLogin" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:41:10
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:41:22
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:42:37
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:42:54
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:44:22
+Error: Expected double-quoted property name in JSON at position 85 (line 6 column 3)
+Stack: SyntaxError: Expected double-quoted property name in JSON at position 85 (line 6 column 3)
+    at JSON.parse (<anonymous>)
+    at parse (C:\Codes\dhnaturally\Backend\node_modules\body-parser\lib\types\json.js:92:19)
+    at C:\Codes\dhnaturally\Backend\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Codes\dhnaturally\Backend\node_modules\raw-body\index.js:238:16)
+    at done (C:\Codes\dhnaturally\Backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (C:\Codes\dhnaturally\Backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:524:28)
+    at IncomingMessage.emit (node:domain:489:12)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:44:46
+Error: Incorrect email or password.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:44:58
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:45:13
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:46:06
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:46:16
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:46:36
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:47:03
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:48:15
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:49:03
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:49:47
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:51:33
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:52:06
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:52:33
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:52:42
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:52:49
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:54:24
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:57:20
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:57:53
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 9:58:28
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:01:54
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:02:14
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:06:52
+Error: Email already exists.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:07:22
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:16:39
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:17:47
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:24:08
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:27:31
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:29:23
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:30:40
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:50:36
+Error: Unknown column 'phone' in 'field list'
+Stack: Error: Unknown column 'phone' in 'field list'
+    at Packet.asError (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packets\packet.js:740:17)
+    at Query.execute (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\commands\command.js:29:26)
+    at PoolConnection.handlePacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:475:34)
+    at PacketParser.onPacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:93:12)
+    at PacketParser.executeStart (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:100:25)
+    at Socket.emit (node:events:524:28)
+    at Socket.emit (node:domain:489:12)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:57:04
+Error: Incorrect email or password.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:57:14
+Error: Incorrect email or password.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:57:22
+Error: Incorrect email or password.
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:57:31
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 10:57:54
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:02:49
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:10:59
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:11:14
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:11:52
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:17:48
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:22:51
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:23:35
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:23:51
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:26:16
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:26:22
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:27:08
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:27:31
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:28:29
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:29:47
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:30:39
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:31:02
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:31:08
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:32:01
+Error: "created_at" is not allowed
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:33:16
+Error: Table 'dhnaturally_db.user_sessions' doesn't exist
+Stack: Error: Table 'dhnaturally_db.user_sessions' doesn't exist
+    at Packet.asError (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packets\packet.js:740:17)
+    at Query.execute (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\commands\command.js:29:26)
+    at PoolConnection.handlePacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:475:34)
+    at PacketParser.onPacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:93:12)
+    at PacketParser.executeStart (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:100:25)
+    at Socket.emit (node:events:524:28)
+    at Socket.emit (node:domain:489:12)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+
+-----------------------------------------------------
+
+Time: 3.9.2025, 11:47:35
+Error: Table 'dhnaturally_db.user_sessions' doesn't exist
+Stack: Error: Table 'dhnaturally_db.user_sessions' doesn't exist
+    at Packet.asError (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packets\packet.js:740:17)
+    at Query.execute (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\commands\command.js:29:26)
+    at PoolConnection.handlePacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:475:34)
+    at PacketParser.onPacket (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:93:12)
+    at PacketParser.executeStart (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Codes\dhnaturally\Backend\node_modules\mysql2\lib\base\connection.js:100:25)
+    at Socket.emit (node:events:524:28)
+    at Socket.emit (node:domain:489:12)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+
+-----------------------------------------------------
+

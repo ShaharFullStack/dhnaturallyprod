@@ -4,137 +4,132 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Structure
 
-This is a full-stack natural medicine e-commerce application with separate Backend and Frontend directories:
+This is a full-stack TypeScript naturopathy e-commerce application with separate Frontend (React) and Backend (Express) services:
 
-- **Backend/**: Node.js/Express API with TypeScript, MySQL database
-- **Frontend/**: React TypeScript application with Redux, TailwindCSS and i18n support
-- **Database/**: SQL files and product documentation
-- **scripts/**: Admin user creation scripts and database utilities
+- **Frontend**: React 19 with TypeScript, Redux Toolkit, React Router, i18n support
+- **Backend**: Express.js with TypeScript, MySQL2, JWT auth, file uploads
+- **Database**: MySQL with structured tables for products, articles, users, roles
+- **Architecture**: Layered backend (models, services, controllers, middleware)
 
 ## Development Commands
 
-### Backend
-- `npm start`: Run development server with nodemon and ts-node on src/app.ts (port 4000)
-- `npm test`: Run Mocha tests with ts-node register (tests/**/*.test.ts)
-- `npm run clean`: Clean dist directory with rimraf
+### Backend Development
+```bash
+cd Backend
+npm start           # Start development server with nodemon and ts-node
+npm run test        # Run Mocha tests
+npm run clean       # Clean dist directory
+```
 
-### Frontend  
-- `npm start`: Run React development server (port 3000)
-- `npm run build`: Build for production
-- `npm test`: Run React testing suite with Jest
+### Frontend Development  
+```bash
+cd Frontend
+npm start           # Start React development server
+npm run build       # Build for production
+npm run test        # Run Jest tests
+```
 
-### Admin Setup (Backend must be running)
-- `node scripts/create_admin_api.js`: Create admin user via API call to running backend
-- `node scripts/create_admin_sql.js`: Generate SQL for admin user creation (reads Backend/.env for HASHING_SALT)
-- `node scripts/check_slugs.js`: Verify article slugs and test API endpoints
+## Backend Architecture
 
-## Architecture
+The backend follows a layered architecture pattern:
 
-### Backend Architecture
-The backend follows a strict layered architecture with numbered folders indicating dependency order:
+- `src/1-assets/` - Static files (images, certificates)
+- `src/2-utils/` - Utilities (app-config, cyber, dal, logger)
+- `src/3-models/` - TypeScript models and enums
+- `src/4-services/` - Business logic layer
+- `src/5-controllers/` - HTTP request handlers with Express routers
+- `src/6-middleware/` - Custom middleware (auth, logging, security, error handling)
 
-1. **1-assets/**: Static files (SSL certificates, images)
-2. **2-utils/**: Core utilities (app-config, DAL, cyber, logger)
-3. **3-models/**: Data models, enums, error models
-4. **4-services/**: Business logic layer interfacing with DAL
-5. **5-controllers/**: HTTP request handlers, route definitions
-6. **6-middleware/**: Express middleware (auth, security, logging, error handling)
+### Key Backend Components
 
-Key architectural patterns:
-- Services use DAL (Database Access Layer) for all database operations
-- Controllers handle HTTP concerns, delegate business logic to services
-- Dependency injection pattern with async/await throughout
-- All API routes prefixed with `/api/`
-- UUID primary keys for all entities
-- Environment-based configuration (development/production modes)
-- Comprehensive error handling with custom error models
-- File uploads via uploaded-file-saver package
-- Static image serving at `/api/products/images/` endpoint
+- **Database Access**: `dal.ts` handles MySQL connections and queries
+- **Authentication**: JWT-based auth with role-based permissions
+- **File Handling**: Product and article images with express-fileupload
+- **Security**: Helmet, CORS, rate limiting, XSS prevention
+- **Configuration**: Environment-based config in `app-config.ts`
 
-### Frontend Architecture
-React application with Redux state management:
+## Frontend Architecture
 
-- **Components/**: Organized by LayoutArea, UI components, and page-specific components
-- **Redux/**: Store configuration, slices (UserSlice, ProductSlice), custom middleware
-- **Contexts/**: React Context for language management
-- **lib/**: i18n translation system (440+ keys), utilities
-- **Models/**: TypeScript interfaces matching backend models
-- **Services/**: API service layers (ProductService, ArticleService, UserService)
+React application with:
 
-State Management:
-- Redux Toolkit with configureStore
-- User slice for authentication state
-- Product slice for catalog management
-- Custom logger middleware for debugging
+- **State Management**: Redux Toolkit with separate slices
+- **Routing**: React Router with nested routes
+- **Internationalization**: Custom language context supporting English/Hebrew
+- **Styling**: CSS modules and utility classes
+- **Components**: Organized by feature areas (pages, UI, layout, specials)
 
-Key features:
-- Comprehensive bilingual system (Hebrew RTL/English LTR)
-- Custom TailwindCSS theme with dh-* color palette
-- React Router v7 for navigation
-- Professional medical terminology in translations
-- shadcn/ui-influenced component architecture
+### Key Frontend Features
 
-### Translation System
-Located in `Frontend/src/lib/i18b.ts`:
-- 440+ translation keys covering natural medicine e-commerce
-- Professional medical terminology (homeopathy, naturopathy, phytotherapy)
-- Hebrew (RTL) as primary language, English (LTR) as secondary
-- Function: `t(key, lang)` with Hebrew fallback
-- Categories: navigation, products, health benefits, professional certifications
+- **Multi-language Support**: Hebrew and English with RTL support
+- **E-commerce Pages**: Store, product details, articles, admin dashboard
+- **Redux Integration**: Product and user state management
+- **Responsive Design**: Mobile-first CSS with utility classes
 
-## Database & Configuration
+## Environment Configuration
 
-### Database
-- MySQL2 with connection pooling
-- Environment-based configuration
-- Schema includes: users, products, articles, categories, roles
-- UUID primary keys
-- Slug-based routing for articles
+### Backend (.env required)
+```
+ENVIRONMENT=development
+PORT=4000
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=your_password
+MYSQL_DATABASE=dhnaturally_db
+JWT_SECRET=your_jwt_secret
+HASHING_SALT=your_salt
+DHNATURALLY_IMAGES_WEB_PATH=path_to_images
+```
 
-### Environment Variables
-Required in Backend/.env:
-- ENVIRONMENT (development/production)
-- PORT (default 4000)
-- MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
-- JWT_SECRET, HASHING_SALT
-- DHNATURALLY_IMAGES_WEB_PATH
+### Frontend (.env optional)
+```
+REACT_APP_BASE_URL=http://localhost:4000/
+REACT_APP_ENV=development
+REACT_APP_ENABLE_DEBUG=true
+```
 
-## Security & Middleware Stack
+## Database Schema
 
-- **Rate limiting**: express-rate-limit (1000 requests per 5 minutes)
-- **Security headers**: Helmet.js
-- **CORS**: Configured for localhost development (ports 3000, 4000)
-- **Authentication**: JWT-based with custom auth middleware
-- **XSS Protection**: Custom security middleware with striptags
-- **Request logging**: Custom logger middleware
-- **Error handling**: Centralized error middleware with structured responses
+The application uses a MySQL database with tables for:
+- **users**: Customer accounts and admin users
+- **roles**: User permission levels
+- **products**: Naturopathy products with images and descriptions
+- **articles**: Educational content about naturopathy
+- **categories**: Product categorization
 
-## TypeScript Configuration
+## Key Development Patterns
 
-### Backend (tsconfig.json)
-- Target: ESNext, Module: CommonJS
-- Strict mode disabled for legacy compatibility
-- Types: node, jest
-- ts-node integration for development
+### Backend Patterns
+- Controllers use Express Router instances exported as objects
+- Services contain business logic and call DAL functions
+- Middleware functions follow Express patterns (req, res, next)
+- Models define TypeScript interfaces for data structures
+- Error handling through centralized error middleware
 
-### Frontend (tsconfig.json)
-- Target: ES2020, Module: ESNext
-- Strict mode enabled
-- JSX: react-jsx
-- Includes only src/ directory
+### Frontend Patterns  
+- Redux slices for state management with async thunks
+- Custom hooks for reusable logic (useTitle)
+- Component composition with Layout wrapper
+- Service layer for API calls with Axios
+- CSS modules for component-specific styling
 
-## Key Business Logic
+## File Upload System
 
-This application specializes in:
-- Natural medicine/homeopathy e-commerce
-- Professional-grade homeopathic remedies
-- Naturopathic consultations and treatments
-- Bilingual Hebrew/English medical terminology
-- Integration of traditional healing with modern research
+- Product images saved to `Backend/src/1-assets/images/products/`
+- Article images saved to `Backend/src/1-assets/images/articles/`
+- Static file serving configured for both image types
+- Rate limiting bypassed for image requests
 
-## Testing & Development Notes
+## Security Features
 
-- Backend uses Mocha with Chai assertions
+- JWT authentication with role-based authorization
+- CORS configured for specific origins
+- Helmet for security headers
+- Rate limiting (1000 requests per 5 seconds)
+- XSS prevention middleware
+- Input validation and sanitization
+
+## Testing
+
+- Backend uses Mocha with Chai for testing
 - Frontend uses React Testing Library with Jest
-- No lint or typecheck scripts configured - use IDE/editor checking
-- Manual testing preferred (per project instructions)
+- Test files located in respective test directories

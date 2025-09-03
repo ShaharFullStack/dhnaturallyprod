@@ -77,12 +77,8 @@ INSERT INTO products (id, name, name_he, description, description_he, price, ima
 
 -- Cholesterol Management
 (UUID(), 'DH9 - Cholesterol Control', 'DH9 - בקרת כולסטרול', 'Cholesterinum, Berberis Vulgaris, Natrum Muriaticum. Directly targets cholesterol deposits, reduces LDL and balances HDL levels. Controls and reduces triglycerides while balancing metabolism and supporting healthy digestion.', 'כולסטרינום, ברבריס וולגריס, נתרום מוריאטיקום. מכוון ישירות למרבצי כולסטרול, מפחית LDL ומאזן רמות HDL. שולט ומפחית טריגליצרידים תוך איזון מטבוליזם ותמיכה בעיכול בריא.', 169.90, 'product.png'),
-
--- Neurological & Cognitive Support
-(UUID(), 'DH18 - Memory Enhancement', 'DH18 - שיפור זיכרון', 'Lycopodium, Baryta Carbonica. Addresses Alzheimer\''s disease and memory loss concerns. Supports cognitive function, mental clarity, and memory retention. Helps with age-related cognitive decline and promotes neuroplasticity.', 'ליקופודיום, בריטה קרבוניקה. מתמודד עם מחלת אלצהיימר ובעיות אובדן זיכרון. תומך בתפקוד קוגניטיבי, בהירות מנטלית ושמירת זיכרון. עוזר עם ירידה קוגניטיבית הקשורה לגיל ומקדם נוירופלסטיות.', 169.90, 'product.png'),
-
-(UUID(), 'DH22 - Nrf2 Neuro Antioxidant', 'DH22 - נוגד חמצון נוירו Nrf2', 'Green Tea, Silybum Marianum, Punica Granatum, Coffea Cruda, Ginkgo Biloba, Olive Leaf Extract. Advanced neuroprotective formula for Friedreich\''s Ataxia and Alport Syndrome. Activates Nrf2 pathways for cellular protection and neurological support.', 'תה ירוק, סיליבום מריאנום, פוניקה גרנטום, קפאה קרודה, גינקו בילובה, תמצית עלי זית. נוסחת הגנה נוירולוגית מתקדמת עבור אטקסיה של פרידרייך ותסמונת אלפורט. מפעיל נתיבי Nrf2 להגנת תא ותמיכה נוירולוגית.', 169.90, 'product.png'),
-(UUID(), 'DH23 - Vagus Nerve Reset', 'DH23 - איפוס עצב הוואגוס', 'Hypericum, Ignatia, Nux Vomica, Aurum Metallicum. Specialized formula for vagus nerve reset and psychiatric support. Addresses nervous system regulation, emotional balance, and stress-related disorders through targeted nerve pathway support.', 'היפריקום, איגנטיה, נוקס וומיקה, אורום מטליקום. נוסחה מיוחדת לאיפוס עצב הוואגוס ותמיכה פסיכיאטרית. מתמודד עם ויסות מערכת עצבים, איזון רגשי והפרעות הקשורות ללחץ דרך תמיכה מכוונת בנתיבי עצבים.', 169.90, 'product.png'),
+(UUID(), 'DH18 - Memory Enhancement', 'DH18 - שיפור זיכרון', 'Lycopodium, Baryta Carbonica. Addresses Alzheimer''s disease and memory loss concerns. Supports cognitive function, mental clarity, and memory retention. Helps with age-related cognitive decline and promotes neuroplasticity.', 'ליקופודיום, בריטה קרבוניקה. מתמודד עם מחלת אלצהיימר ובעיות אובדן זיכרון. תומך בתפקוד קוגניטיבי, בהירות מנטלית ושמירת זיכרון. עוזר עם ירידה קוגניטיבית הקשורה לגיל ומקדם נוירופלסטיות.', 169.90, 'product.png'),
+(UUID(), 'DH22 - Nrf2 Neuro Antioxidant', 'DH22 - נוגד חמצון נוירו Nrf2', 'Green Tea, Silybum Marianum, Punica Granatum, Coffea Cruda, Ginkgo Biloba, Olive Leaf Extract. Advanced neuroprotective formula for Friedreich''s Ataxia and Alport Syndrome. Activates Nrf2 pathways for cellular protection and neurological support.', 'תה ירוק, סיליבום מריאניום, פוניקה גרנטום, קפאה קרודה, גינקו בילובה, תמצית עלי זית. נוסחת הגנה נוירולוגית מתקדמת עבור אטקסיה של פרידרייך ותסמונת אלפורט. מפעיל נתיבי Nrf2 להגנת תא ותמיכה נוירולוגית.', 169.90, 'product.png'),
 
 -- ADHD Support
 (UUID(), 'DH27 - ADHD Comprehensive Support', 'DH27 - תמיכה מקיפה ב-ADHD', 'Personalized blend including Argentum Nitricum, Arsenicum Album, Baryta Carbonica, Lycopodium, Chamomilla, Coffea Cruda, and others. Addresses nervous, impulsive behavior, anxiety, restlessness, concentration difficulties, anger outbursts, and hyperactivity in children and adults.', 'תערובת מותאמת אישית הכוללת ארגנטום ניטריקום, ארסניקום אלבום, בריטה קרבוניקה, ליקופודיום, קמומילה, קפאה קרודה ואחרים. מתמודד עם התנהגות עצבנית ואימפולסיבית, חרדה, חוסר מנוחה, קשיי ריכוז, התפרצויות כעס והיפראקטיביות אצל ילדים ומבוגרים.', 169.90, 'product.png'),
@@ -224,6 +220,11 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `roleId` tinyint DEFAULT NULL,
+  `isActive` TINYINT(1) DEFAULT 1,
+  `emailVerified` TINYINT(1) DEFAULT 0,
+  `lastLogin` DATETIME DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `roleId_idx` (`roleId`),
@@ -237,6 +238,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('1f92104f-aa05-42fb-8106-6e4c4810d29a','Shahar','Maoz','shahar@maoz.com','de263117e819b59ca59abc8a50afd05598035acdd49f5041c5c99a03f93d8656757c35829567c3c2c1bf01c5ee888a203c282b49415ae88508baa5f1f71586f8',1),('2b8f2bfd-c50f-42ab-9c0e-ff6801f6348c','Admin','Admin','admin@gmail.com','82bac9225d3b22994c5b7eec04e388e105f5d7e417d430ee77f70b1abe8ad0cf01b0a3882e1247957cc49cce5732db6c4fbc4ae6a29aa59f068fb8784eb60395',1),('52b2f459-0fd6-4565-9978-7429041d30fa','User','User','user@user.com','263fc6c89e4271750906e04e0f79fc5897eb901e5feeb7f1c2bed3b2830e48063dce21331d8835292a6abf11d823055db2be667211475ce724d23d1041523594',2),('e6053beb-e60c-480b-8f92-9d1f1229f3da','Test','Test','test@gmail.com','6c4a25ba5258bfe95b0e0d14cf5619edf641e644d44a338e385aa33d1650b453d66788bab5f0c0ef3f79ca7ed39835ed56c22396465e38cd6ac8ce05d4dadd87',2);
+INSERT INTO `users` (id, firstName, lastName, email, password, roleId) VALUES ('1f92104f-aa05-42fb-8106-6e4c4810d29a','Admin','Admin','admin@admin.com','de263117e819b59ca59abc8a50afd05598035acdd49f5041c5c99a03f93d8656757c35829567c3c2c1bf01c5ee888a203c282b49415ae88508baa5f1f71586f8',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

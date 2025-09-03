@@ -38,7 +38,7 @@ export class CategoryModel {
         parent_id: Joi.string().uuid().optional().allow(null),
         sort_order: Joi.number().integer().optional(),
         is_active: Joi.boolean().optional()
-    });
+    }).unknown(true);
 
     private static updateValidationSchema = Joi.object({
         id: Joi.string().uuid().required(),
@@ -50,7 +50,7 @@ export class CategoryModel {
         parent_id: Joi.string().uuid().optional().allow(null),
         sort_order: Joi.number().integer().optional(),
         is_active: Joi.boolean().optional()
-    });
+    }).unknown(true);
 
     public validateInsert(): void {
         const result = CategoryModel.insertValidationSchema.validate(this);

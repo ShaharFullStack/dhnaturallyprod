@@ -1,0 +1,76 @@
+{
+  "info": {
+    "name": "DHnaturally Minimal API Collection",
+    "description": "Minimal Postman collection that works with current database schema",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Manual User Registration (Direct DB)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "-- Execute this SQL directly in your database to create an admin user:\n\nINSERT INTO users (id, firstName, lastName, email, password, roleId) \nVALUES (\n  UUID(), \n  'Admin', \n  'User', \n  'admin@dhnaturally.com', \n  'de263117e819b59ca59abc8a50afd05598035acdd49f5041c5c99a03f93d8656757c35829567c3c2c1bf01c5ee888a203c282b49415ae88508baa5f1f71586f8', -- 'admin123456' hashed\n  1\n);"
+        },
+        "url": {
+          "raw": "This is not a real endpoint - execute the SQL above in your database",
+          "host": ["localhost"]
+        },
+        "description": "Since the API registration doesn't work with current database, use this SQL to create admin user directly"
+      }
+    },
+    {
+      "name": "Products - Get All",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/dhnaturally/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dhnaturally", "products"]
+        }
+      }
+    },
+    {
+      "name": "Articles - Get All", 
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/dhnaturally/articles",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dhnaturally", "articles"]
+        }
+      }
+    },
+    {
+      "name": "Contact Form",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"message\": \"Test message\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contact-us",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "contact-us"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000"
+    }
+  ]
+}

@@ -8,55 +8,54 @@ export class UserModel {
     public lastName: string;
     public email: string;
     public password: string;
-    public phone?: string;
     public roleId: RoleModel;
     public isActive: boolean;
     public emailVerified: boolean;
-    public lastLogin?: Date;
-    public createdAt?: Date;
-    public updatedAt?: Date;
+    public lastLogin?: string;
+    public created_at?: string;
+    public updated_at?: string;
 
-    public constructor(user: UserModel) {
-        this.id = user.id;
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
-        this.email = user.email;
-        this.password = user.password;
-        this.phone = user.phone;
-        this.roleId = user.roleId;
-        this.isActive = user.isActive ?? true;
-        this.emailVerified = user.emailVerified ?? false;
-        this.lastLogin = user.lastLogin;
-        this.createdAt = user.createdAt;
-        this.updatedAt = user.updatedAt;
+    public constructor(user: Partial<UserModel> = {}) {
+        // Accept both camelCase and snake_case properties coming from DB or client
+        const anyUser: any = user as any;
+
+        this.id = anyUser.id ?? "";
+        this.firstName = anyUser.firstName ?? anyUser.first_name ?? "";
+        this.lastName = anyUser.lastName ?? anyUser.last_name ?? "";
+        this.email = anyUser.email ?? "";
+        this.password = anyUser.password ?? "";
+        this.roleId = anyUser.roleId ?? anyUser.role_id ?? RoleModel.User;
+        this.isActive = anyUser.isActive ?? anyUser.is_active ?? true;
+        this.emailVerified = anyUser.emailVerified ?? anyUser.email_verified ?? false;
+        // Map timestamps from snake_case (DB) to camelCase
+        this.lastLogin = anyUser.lastLogin ?? anyUser.last_login;
+        this.updated_at = anyUser.updated_at;
+        this.created_at = anyUser.created_at;
     }
 
     private static insertValidationSchema = Joi.object({
-        id: Joi.string().optional().uuid(),
         firstName: Joi.string().required().min(2).max(100).trim(),
         lastName: Joi.string().required().min(2).max(100).trim(),
         email: Joi.string().required().email().max(255).lowercase().trim(),
-        password: Joi.string().required().min(6).max(100),
-        phone: Joi.string().optional().max(20).pattern(/^[\d\-\+\(\)\s]+$/),
-        roleId: Joi.number().optional().valid(1, 2, 3),
-        isActive: Joi.boolean().optional(),
-        emailVerified: Joi.boolean().optional()
-    });
-
+        password: Joi.string().required().min(6).max(255),
+        created_at: Joi.string().optional()
+    }).unknown(true);
     private static updateValidationSchema = Joi.object({
         id: Joi.string().required().uuid(),
         firstName: Joi.string().required().min(2).max(100).trim(),
         lastName: Joi.string().required().min(2).max(100).trim(),
         email: Joi.string().required().email().max(255).lowercase().trim(),
-        phone: Joi.string().optional().allow('').max(20).pattern(/^[\d\-\+\(\)\s]*$/),
         isActive: Joi.boolean().optional(),
-        emailVerified: Joi.boolean().optional()
-    });
+        emailVerified: Joi.boolean().optional(),
+        lastLogin: Joi.string().optional(),
+        created_at: Joi.string().optional(),
+        updated_at: Joi.string().optional()
+    }).unknown(true);
 
     private static loginValidationSchema = Joi.object({
         email: Joi.string().required().email().max(255).lowercase().trim(),
         password: Joi.string().required().min(1).max(100)
-    });
+    }); // Only allow email and password fields
 
     public validateInsert(): void {
         const result = UserModel.insertValidationSchema.validate(this);
@@ -69,7 +68,21 @@ export class UserModel {
     }
 
     public validateLogin(): void {
-        const result = UserModel.loginValidationSchema.validate(this);
+        // Create a completely clean object with only email and password
+        const cleanLoginData = {
+            email: this.email,
+            password: this.password
+        };
+        
+        // Create a fresh schema for validation
+        const loginSchema = Joi.object({
+            email: Joi.string().required().email().max(255).lowercase().trim(),
+            password: Joi.string().required().min(1).max(100)
+        });
+        
+        console.log("Clean login data for validation:", cleanLoginData);
+        const result = loginSchema.validate(cleanLoginData);
+        console.log("Validation result:", result);
         if (result.error) throw new BadRequestError(result.error.message);
     }
 

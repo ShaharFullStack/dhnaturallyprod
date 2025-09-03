@@ -375,36 +375,46 @@
 
 .dafna-feature-card {
     background: var(--card-bg);
-    padding: 1.25rem 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid rgba(14, 165, 164, 0.06);
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(14, 165, 164, 0.08);
+    transition: all 0.3s ease;
+}
+
+.dafna-feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .dafna-feature-card .feature-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(14, 165, 164, 0.12), rgba(42, 127, 143, 0.08));
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, var(--dh-ocean), var(--dh-sky));
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--dh-ocean);
+    color: white;
     flex-shrink: 0;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(14, 165, 164, 0.3);
 }
 
-.dafna-feature-card h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.05rem;
+.dafna-feature-card .feature-title {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dh-navy);
+    line-height: 1.3;
 }
 
 .dafna-feature-card .feature-description {
     margin: 0;
     color: var(--muted);
-    font-size: 0.95rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
 }
 
 .about-mission::before {
@@ -673,78 +683,67 @@
 }
 
 /* Enhanced Certifications */
+.about-certifications {
+    background: linear-gradient(135deg, var(--dh-pale) 0%, rgba(255, 255, 255, 0.9) 100%);
+}
+
 .cert-grid {
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 2rem;
-    justify-items: center;
+    margin-top: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cert-thumb {
-    background: transparent;
+    background: white;
     border: 0;
     padding: 0;
-    text-align: center;
-    cursor: pointer;
+    text-align: left;
     width: 100%;
-    max-width: 200px;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(11, 59, 74, 0.08);
+    position: relative;
 }
 
 .cert-image-wrap {
     width: 100%;
-    aspect-ratio: 1;
-    margin: 0 auto 1rem;
-    border-radius: 1rem;
+    height: auto;
+    position: relative;
+    overflow: hidden;
     background: var(--dh-pale);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: var(--shadow-sm);
+    min-height: 150px;
 }
 
-.cert-overlay {
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-overlay);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    color: white;
-}
-
-.cert-thumb:hover .cert-overlay {
-    opacity: 1;
-}
-
-.cert-thumb:hover .cert-image-wrap {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: var(--shadow-lg);
-}
 
 .cert-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
     display: block;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease;
+    background: white;
 }
 
-.cert-thumb:hover .cert-image {
-    transform: scale(1.1);
-}
 
 .cert-thumb-caption {
-    margin-top: 1rem;
-    font-size: 1rem;
+    padding: 1.5rem;
+    font-size: 1.1rem;
     color: var(--dh-navy);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.4;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    border-top: 3px solid var(--dh-sky);
 }
 
 /* Enhanced Lightbox */
@@ -967,7 +966,9 @@
     }
 
     .cert-grid {
-        grid-template-columns: repeat(3, 1fr)
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 350px;
     }
 
     .cta-buttons {
@@ -1016,8 +1017,9 @@
     }
 
     .cert-grid {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 1.5rem
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 700px;
     }
 
     .about-section {
@@ -1062,4 +1064,282 @@
 .testimonial-card,
 .cert-thumb {
     animation: slideInUp 0.6s ease-out both;
+}
+
+/* Medicine Making Process Section */
+.about-process {
+    background: linear-gradient(135deg, var(--dh-pale) 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+.process-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-top: 3rem;
+}
+
+/* Traditional Medicine Making */
+.process-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.process-images-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.process-image-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.process-image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.process-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.process-image-card:hover .image-overlay {
+    transform: translateY(0);
+}
+
+.image-overlay h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.process-description h3 {
+    color: var(--dh-navy);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.process-description p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Ingredients Showcase */
+.ingredients-showcase,
+.lab-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.ingredients-content h3,
+.lab-content h3 {
+    color: var(--dh-navy);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.ingredients-content p,
+.lab-content p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.ingredients-images,
+.lab-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.ingredient-image-card,
+.lab-image-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.ingredient-image-card:hover,
+.lab-image-card:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.ingredient-image-card img,
+.lab-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ingredient-label,
+.lab-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: white;
+    padding: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Video Showcase */
+.video-showcase {
+    margin-top: 2rem;
+}
+
+.video-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.video-header h3 {
+    color: var(--dh-navy);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.video-header p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.video-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.process-video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9/16;
+    background: var(--dh-pale);
+    border-radius: 0.5rem;
+}
+
+.video-caption {
+    padding: 1.5rem;
+}
+
+.video-caption h4 {
+    color: var(--dh-navy);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.video-caption p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .process-intro,
+    .ingredients-showcase,
+    .lab-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .process-images-grid,
+    .ingredients-images,
+    .lab-images {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-grid {
+        gap: 1rem;
+        max-width: 100%;
+    }
+    
+    
+    .process-description h3,
+    .ingredients-content h3,
+    .lab-content h3,
+    .video-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .process-description p,
+    .ingredients-content p,
+    .lab-content p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .process-content {
+        gap: 2.5rem;
+    }
+    
+    .video-grid {
+        gap: 0.5rem;
+        max-width: 100%;
+    }
+    
+    .video-caption {
+        padding: 1rem;
+    }
+    
+    .video-caption h4 {
+        font-size: 1.1rem;
+    }
+    
+    .video-caption p {
+        font-size: 0.9rem;
+    }
 }

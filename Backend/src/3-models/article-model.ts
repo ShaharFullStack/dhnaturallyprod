@@ -38,7 +38,7 @@ export class ArticleModel {
         content_he: Joi.string().min(10).max(20000).required(),
         imageName: Joi.string().max(500).optional().allow(null, ""),
         is_published: Joi.boolean().optional()
-    });
+    }).unknown(true);
 
     private static updateSchema = Joi.object({
         id: Joi.string().uuid().required(),
@@ -50,7 +50,7 @@ export class ArticleModel {
         content_he: Joi.string().min(10).max(20000).required(),
         imageName: Joi.string().max(500).optional().allow(null, ""),
         is_published: Joi.boolean().optional()
-    });
+    }).unknown(true);
 
     public validateInsert(): void {
         const result = ArticleModel.insertSchema.validate(this);

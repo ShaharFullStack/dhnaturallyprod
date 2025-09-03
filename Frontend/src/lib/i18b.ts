@@ -135,6 +135,7 @@ export const translations: Translations = {
   // Articles page
   'articles.title': { he: 'מדריך מקצועי לרפואה טבעית', en: 'Professional Natural Medicine Guide' },
   'articles.description': { he: 'מאמרים מקצועיים, מדריכים מעמיקים וחדשות עדכניות בתחום הנטורופתיה, הומיאופתיה ורפואה משלימה. מידע מבוסס מחקר למטפלים ולמעוניינים בבריאות טבעית', en: 'Professional articles, in-depth guides and latest news in naturopathy, homeopathy and complementary medicine. Research-based information for practitioners and natural health enthusiasts' },
+  'articles.hero.cta': { he: 'קרא מאמרים מומלצים', en: 'Read Featured Articles' },
   'articles.featured': { he: 'מאמר מומלץ השבוע', en: 'Featured Article This Week' },
   'articles.readMore': { he: 'קרא מאמר מלא', en: 'Read Full Article' },
   'articles.readTime': { he: 'דקות קריאה', en: 'min read' },
@@ -148,6 +149,50 @@ export const translations: Translations = {
   'articles.newsletter.description': { he: 'קבלו מאמרים מקצועיים, טיפים בריאותיים ומידע על מוצרים חדשים ישירות למייל שלכם', en: 'Receive professional articles, health tips and new product updates directly to your email' },
   'articles.newsletter.placeholder': { he: 'הכניסו כתובת מייל לקבלת ייעוץ מקצועי', en: 'Enter email for professional health guidance' },
   'articles.newsletter.subscribe': { he: 'הירשמו לעדכונים מקצועיים', en: 'Subscribe to Professional Updates' },
+
+  // Add Article
+  'addArticle.title': { he: 'הוספת מאמר חדש', en: 'Add New Article' },
+  'addArticle.back': { he: 'חזרה למאמרים', en: 'Back to Articles' },
+  
+  'addArticle.image.title': { he: 'תמונה ראשית', en: 'Featured Image' },
+  'addArticle.image.upload': { he: 'לחץ להעלאת תמונה', en: 'Click to upload image' },
+  
+  'addArticle.english.title': { he: 'תוכן באנגלית', en: 'English Content' },
+  'addArticle.hebrew.title': { he: 'תוכן בעברית', en: 'Hebrew Content' },
+  'addArticle.settings.title': { he: 'הגדרות מאמר', en: 'Article Settings' },
+  
+  'addArticle.title.en': { he: 'כותרת באנגלית', en: 'English Title' },
+  'addArticle.title.en.placeholder': { he: 'הכנס כותרת באנגלית...', en: 'Enter English title...' },
+  'addArticle.title.he': { he: 'כותרת בעברית', en: 'Hebrew Title' },
+  'addArticle.title.he.placeholder': { he: 'הכנס כותרת בעברית...', en: 'Enter Hebrew title...' },
+  
+  'addArticle.subtitle.en': { he: 'תת-כותרת באנגלית', en: 'English Subtitle' },
+  'addArticle.subtitle.en.placeholder': { he: 'הכנס תת-כותרת באנגלית...', en: 'Enter English subtitle...' },
+  'addArticle.subtitle.he': { he: 'תת-כותרת בעברית', en: 'Hebrew Subtitle' },
+  'addArticle.subtitle.he.placeholder': { he: 'הכנס תת-כותרת בעברית...', en: 'Enter Hebrew subtitle...' },
+  
+  'addArticle.content.en': { he: 'תוכן באנגלית', en: 'English Content' },
+  'addArticle.content.en.placeholder': { he: 'כתוב את תוכן המאמר באנגלית...', en: 'Write article content in English...' },
+  'addArticle.content.he': { he: 'תוכן בעברית', en: 'Hebrew Content' },
+  'addArticle.content.he.placeholder': { he: 'כתוב את תוכן המאמר בעברית...', en: 'Write article content in Hebrew...' },
+  
+  'addArticle.category': { he: 'קטגוריה', en: 'Category' },
+  'addArticle.category.select': { he: 'בחר קטגוריה...', en: 'Select category...' },
+  'addArticle.slug': { he: 'כתובת URL', en: 'URL Slug' },
+  'addArticle.slug.placeholder': { he: 'my-article-url', en: 'my-article-url' },
+  'addArticle.excerpt': { he: 'תקציר', en: 'Excerpt' },
+  'addArticle.excerpt.placeholder': { he: 'תקציר קצר של המאמר...', en: 'Short summary of the article...' },
+  'addArticle.readTime': { he: 'זמן קריאה (דקות)', en: 'Read Time (minutes)' },
+  'addArticle.readTime.placeholder': { he: '5', en: '5' },
+  'addArticle.featured': { he: 'מאמר מומלץ', en: 'Featured Article' },
+  'addArticle.published': { he: 'פורסם', en: 'Published' },
+  
+  'addArticle.cancel': { he: 'ביטול', en: 'Cancel' },
+  'addArticle.save': { he: 'שמירת מאמר', en: 'Save Article' },
+  'addArticle.saving': { he: 'שומר...', en: 'Saving...' },
+  
+  'addArticle.success.title': { he: 'המאמר נשמר בהצלחה!', en: 'Article Saved Successfully!' },
+  'addArticle.success.message': { he: 'המאמר החדש נוסף למערכת ומועבר לעמוד המאמרים...', en: 'The new article has been added to the system and redirecting to articles page...' },
   'articles.loading': { he: 'טוען מאמרים...', en: 'Loading articles...' },
   'articles.expert.authored': { he: 'נכתב על ידי מומחים', en: 'Expert Authored' },
   'articles.evidence.based': { he: 'מבוסס ראיות', en: 'Evidence Based' },
@@ -184,14 +229,14 @@ export const translations: Translations = {
   'about.values.individualized': { he: 'טיפול מותאם אישית', en: 'Individualized Treatment' },
   'about.work.title': { he: 'הגישה הטיפולית המקצועית שלנו', en: 'Our Professional Treatment Approach' },
   'about.work.subtitle': { he: 'התכשירים שלנו מפותחים בקפידה מתוך הבנה מעמיקה של עקרונות הרפואה ההומיאופתית, בשילוב מחקר מודרני ובקרת איכות מחמירה', en: 'Our formulations are carefully developed from deep understanding of homeopathic principles, combined with modern research and strict quality control' },
-  'about.certifications.title': { he: 'הסמכות והכשרות מקצועיות', en: 'Professional Certifications & Qualifications' },
-  'about.certifications.subtitle': { he: 'הכשרה מקצועית מקיפה ברפואה טבעית והומיאופתיה המבוססת על לימודים אקדמיים ורישיונות מוכרים', en: 'Comprehensive professional training in natural medicine and homeopathy based on academic studies and recognized certifications' },
-  'about.certifications.naturopathy.title': { he: 'הסמכה בנטורופתיה מקיפה', en: 'Comprehensive Naturopathy Certification' },
-  'about.certifications.naturopathy.description': { he: 'הסמכה מלאה מ"מעינות" ברפואה טבעית כוללת למעלה מ-100 שעות לימוד בתחומי רפואת צמחים, תזונה טבעית, רפלקסולוגיה ועוד', en: 'Complete certification from "Matnot" in natural medicine including over 100 hours of study in herbal medicine, natural nutrition, reflexology and more' },
-  'about.certifications.integrative.title': { he: 'רישיון ברפואה משולבת', en: 'Integrative Medicine Authorization' },
-  'about.certifications.integrative.description': { he: 'תעודות הסמכה וכשירות ממכון אוניברסיטאי לרפואה משולבת המעידות על מקצועיות והכשרה ברמה אקדמית', en: 'Authorization and competency certificates from Integrative Medicine University Institute demonstrating academic-level professionalism and training' },
-  'about.certifications.homeopathy.title': { he: 'הכשרה בהומיאופתיה ואירידולוגיה', en: 'Homeopathy & Iridology Training' },
-  'about.certifications.homeopathy.description': { he: 'תעודות BSY בהומיאופתיה ואירידולוגיה המעידות על הכשרה מקצועית בתחומי האבחון והטיפול הטבעיים', en: 'BSY certificates in Homeopathy and Iridology demonstrating professional training in natural diagnosis and treatment methods' },
+  // Educational Institutes
+  'about.institutes.title': { he: 'מוסדות ההכשרה המקצועיים', en: 'Professional Educational Institutes' },
+  'about.institutes.subtitle': { he: 'הכשרה מקצועית ברפואה טבעית והומיאופתיה ממוסדות מוביל ומוכרים', en: 'Professional training in natural medicine and homeopathy from leading and recognized institutions' },
+  'about.institutes.bsya.title': { he: 'מכון BSYA להומיאופתיה', en: 'BSYA Institute of Homeopathy' },
+  'about.institutes.bsya.description': { he: 'מכון מוביל להכשרה בהומיאופתיה ואירידולוגיה, המעניק תעודות מקצועיות מוכרות בתחום הרפואה הטבעית', en: 'Leading institute for homeopathy and iridology training, providing recognized professional certificates in natural medicine' },
+  'about.institutes.maayanot.title': { he: 'מכללת מעינות ירושלים', en: 'Maayanot Jerusalem College' },
+  'about.institutes.maayanot.description': { he: 'מכללה מקצועית לרפואה טבעית ונטורופתיה, המעניקה הכשרה מקיפה ברפואת צמחים, תזונה טבעית ושיטות ריפוי טבעיות', en: 'Professional college for natural medicine and naturopathy, providing comprehensive training in herbal medicine, natural nutrition and natural healing methods' },
+  'about.institutes.alt': { he: 'לוגו מוסד השכלה', en: 'Educational institute logo' },
   'about.team.title': { he: 'הצוות המקצועי', en: 'Professional Team' },
   'about.values.title': { he: 'ערכי הליבה שלנו', en: 'Our Core Values' },
   'about.values.prevention.description': { he: 'מניעה דרך חיזוק מערכות הגוף ואורח חיים בריא', en: 'Focusing on prevention by strengthening body systems ' },
@@ -240,6 +285,48 @@ export const translations: Translations = {
   // About CTA
   'about.cta.title': { he: 'התחילו את מסע ההבראה שלכם', en: 'Start Your Healing Journey' },
   'about.cta.subtitle': { he: 'פגישה מקצועית תתחיל את התהליך לעבר בריאות מיטבית וטיפול מותאם אישית.', en: 'A professional consultation will begin the process toward optimal health and personalized care.' },
+
+  // Medicine Making Process
+  'about.process.title': { he: 'תהליך הכנת התרופות הטבעיות שלנו', en: 'Our Natural Medicine Making Process' },
+  'about.process.subtitle': { he: 'שילוב ייחודי של שיטות מסורתיות ומחקר מתקדם ליצירת תכשירים איכותיים ויעילים', en: 'A unique blend of traditional methods and advanced research to create high-quality, effective formulations' },
+  
+  // Traditional Methods
+  'about.process.tradition.title': { he: 'חכמה מסורתית ושיטות עתיקות', en: 'Traditional Wisdom and Ancient Methods' },
+  'about.process.tradition.description': { he: 'אנו נשענים על שיטות הכנה מסורתיות בנות מאות שנים, תוך שימוש בכלים ותהליכים מקוריים שמבטיחים שמירה על התכונות הטיפוליות של הצמחים והמינרלים', en: 'We rely on traditional preparation methods spanning hundreds of years, using authentic tools and processes that preserve the therapeutic properties of plants and minerals' },
+  'about.process.traditional.title': { he: 'הכנה מסורתית', en: 'Traditional Preparation' },
+  'about.process.traditional.imageAlt': { he: 'תמונה של הכנת תרופות בשיטות מסורתיות', en: 'Traditional medicine preparation methods' },
+  'about.process.mortar.title': { he: 'כתישה במכתש', en: 'Mortar Grinding' },
+  'about.process.mortar.imageAlt': { he: 'מכתש ועלי מרקחת מסורתיים', en: 'Traditional mortar and pestle with herbs' },
+  
+  // Ingredients
+  'about.process.ingredients.title': { he: 'רכיבים טבעיים איכותיים', en: 'Premium Natural Ingredients' },
+  'about.process.ingredients.description': { he: 'אנו בוחרים בקפידה את הצמחים, המינרלים והחומרים הגלמיים הטובים ביותר מרחבי העולם, תוך הקפדה על איכות, טוהר ומקור אורגני', en: 'We carefully select the finest plants, minerals and raw materials from around the world, ensuring quality, purity and organic sourcing' },
+  'about.process.herbs.title': { he: 'צמחי מרפא נבחרים', en: 'Selected Medicinal Plants' },
+  'about.process.herbs.imageAlt': { he: 'מגוון צמחי מרפא צבעוניים', en: 'Variety of colorful medicinal plants' },
+  'about.process.powders.title': { he: 'אבקות ותמציות טבעיות', en: 'Natural Powders and Extracts' },
+  'about.process.powders.imageAlt': { he: 'אבקות צבעוניות בכלים עגולים', en: 'Colorful powders in round bowls' },
+  
+  // Modern Laboratory
+  'about.process.lab.title': { he: 'מעבדה מתקדמת ובקרת איכות', en: 'Advanced Laboratory and Quality Control' },
+  'about.process.lab.description': { he: 'למרות השימוש בשיטות מסורתיות, אנו משלבים טכנולוגיה מודרנית ובדיקות מדעיות קפדניות כדי להבטיח עוצמה, טוהר ובטיחות מקסימלית', en: 'Despite using traditional methods, we incorporate modern technology and rigorous scientific testing to ensure maximum potency, purity and safety' },
+  'about.process.lab.workspace.title': { he: 'סביבת עבודה מקצועית', en: 'Professional Work Environment' },
+  'about.process.lab.workspace.imageAlt': { he: 'מעבדה עם כלי עבודה וחומרים', en: 'Laboratory workspace with tools and materials' },
+  'about.process.lab.equipment.title': { he: 'ציוד מתקדם', en: 'Advanced Equipment' },
+  'about.process.lab.equipment.imageAlt': { he: 'ציוד מעבדה מתקדם', en: 'Advanced laboratory equipment' },
+  
+  // Videos
+  'about.process.videos.title': { he: 'תיעוד תהליך ההכנה', en: 'Process Documentation' },
+  'about.process.videos.description': { he: 'צפו בתהליך ההכנה המקורי שלנו - מהחומר הגלמי ועד למוצר הגמור', en: 'Watch our authentic preparation process - from raw materials to finished product' },
+  'about.process.video1.title': { he: 'שלב ראשון: הכנת החומרים', en: 'Stage One: Material Preparation' },
+  'about.process.video1.description': { he: 'תהליך בחירה והכנה ראשונית של חומרי הגלם', en: 'Selection and initial preparation of raw materials' },
+  'about.process.video1.alt': { he: 'וידאו המציג הכנת חומרי גלם', en: 'Video showing raw material preparation' },
+  'about.process.video2.title': { he: 'שלב שני: עיבוד וחילוץ', en: 'Stage Two: Processing and Extraction' },
+  'about.process.video2.description': { he: 'שיטות עיבוד וחילוץ התכונות הפעילות', en: 'Processing methods and active compound extraction' },
+  'about.process.video2.alt': { he: 'וידאו המציג תהליכי עיבוד', en: 'Video showing processing procedures' },
+  'about.process.video3.title': { he: 'שלב שלישי: גמר והכנה סופית', en: 'Stage Three: Finishing and Final Preparation' },
+  'about.process.video3.description': { he: 'השלמת התהליך והכנה לאריזה סופית', en: 'Process completion and final packaging preparation' },
+  'about.process.video3.alt': { he: 'וידאו המציג גמר התהליך', en: 'Video showing process completion' },
+  'about.process.video.notSupported': { he: 'הדפדפן שלך לא תומך בהשמעת וידאו', en: 'Your browser does not support video playback' },
 
   // Contact page
   'contact.title': { he: 'ייעוץ מקצועי ותמיכה', en: 'Professional Consultation & Support' },

@@ -28,21 +28,28 @@ class UserService {
         user.password = cyber.hash(user.password);
         
         // Validate user data
+        // Debug: log the user object being validated to diagnose unexpected fields
+        try {
+            console.log("Validating user keys:", Object.keys(user as any));
+            console.log("Validating user object:", JSON.stringify(user, (_k, v) => (typeof v === 'function' ? undefined : v)));
+        }
+        catch (err) {
+            console.log("Error stringifying user for debug:", err);
+        }
         user.validateInsert();
 
         // Insert user into database
         const sql = `
-            INSERT INTO users (id, firstName, lastName, email, password, phone, roleId, isActive, emailVerified) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO users (id, firstName, lastName, email, password, roleId, isActive, emailVerified) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `;
         const values = [
-            user.id, 
-            user.firstName, 
-            user.lastName, 
-            user.email, 
-            user.password, 
-            user.phone || null,
-            user.roleId, 
+            user.id,
+            user.firstName,
+            user.lastName,
+            user.email,
+            user.password,
+            user.roleId,
             user.isActive,
             user.emailVerified
         ];
@@ -59,31 +66,48 @@ class UserService {
     }
 
     public async login(credentials: CredentialsModel): Promise<{ token: string, user: Partial<UserModel> }> {
-        // Validate credentials
-        const tempUser = new UserModel({ ...credentials } as UserModel);
+        console.log("=== LOGIN SERVICE START ===");
+        console.log("Credentials received:", JSON.stringify(credentials, null, 2));
+        
+        // Validate credentials - only create UserModel with email and password
+        const tempUser = new UserModel({ 
+            email: credentials.email, 
+            password: credentials.password 
+        } as UserModel);
+        console.log("Temp user created for validation:", JSON.stringify(tempUser, null, 2));
         tempUser.validateLogin();
+        console.log("Login validation passed");
         
         const hashedPassword = cyber.hash(credentials.password);
+        console.log("Password hashed");
 
         const sql = `
-            SELECT id, firstName, lastName, email, phone, roleId, isActive, emailVerified, lastLogin, created_at, updated_at 
+            SELECT id, firstName, lastName, email, roleId, isActive, emailVerified, lastLogin, created_at, updated_at 
             FROM users 
             WHERE email = ? AND password = ? AND isActive = 1
         `;
+        console.log("Executing SQL query");
         const users = await dal.execute(sql, [credentials.email, hashedPassword]);
+        console.log("SQL query result:", users);
 
         if (users.length === 0) {
             throw new ForbiddenError("Incorrect email or password.");
         }
 
+        console.log("Creating user from DB result");
         const user = new UserModel(users[0]);
+        console.log("User created from DB:", JSON.stringify(user, null, 2));
         
         // Update last login
+        console.log("Updating last login");
         await this.updateLastLogin(user.id);
 
         // Generate token and create session
+        console.log("Generating token");
         const token = cyber.getNewToken(user);
+        console.log("Creating session");
         await this.createSession(user.id, token);
+        console.log("=== LOGIN SERVICE END ===");
 
         return { 
             token, 
@@ -117,7 +141,7 @@ class UserService {
 
     public async getUserById(userId: string): Promise<UserModel> {
         const sql = `
-            SELECT id, firstName, lastName, email, phone, roleId, isActive, emailVerified, lastLogin, created_at, updated_at 
+            SELECT id, firstName, lastName, email, roleId, isActive, emailVerified, lastLogin, created_at, updated_at 
             FROM users 
             WHERE id = ? AND isActive = 1
         `;
@@ -145,14 +169,13 @@ class UserService {
 
         const sql = `
             UPDATE users 
-            SET firstName = ?, lastName = ?, email = ?, phone = ?, isActive = ?, emailVerified = ?
+            SET firstName = ?, lastName = ?, email = ?, isActive = ?, emailVerified = ?
             WHERE id = ?
         `;
         const values = [
             updatedUser.firstName,
             updatedUser.lastName,
             updatedUser.email,
-            updatedUser.phone,
             updatedUser.isActive,
             updatedUser.emailVerified,
             userId
@@ -221,7 +244,7 @@ class UserService {
 
         const tokenHash = crypto.createHash('sha256').update(token).digest('hex');
         const sql = `
-            SELECT u.id, u.firstName, u.lastName, u.email, u.phone, u.roleId, u.isActive, u.emailVerified, u.lastLogin, u.created_at, u.updated_at
+            SELECT u.id, u.firstName, u.lastName, u.email, u.roleId, u.isActive, u.emailVerified, u.lastLogin, u.created_at, u.updated_at
             FROM user_sessions s
             JOIN users u ON s.user_id = u.id
             WHERE s.token_hash = ? AND s.expires_at > CURRENT_TIMESTAMP AND u.isActive = 1
@@ -260,7 +283,7 @@ class UserService {
         const offset = (page - 1) * limit;
         
         const sql = `
-            SELECT id, firstName, lastName, email, phone, roleId, isActive, emailVerified, lastLogin, created_at, updated_at
+            SELECT id, firstName, lastName, email, roleId, isActive, emailVerified, lastLogin, created_at, updated_at
             FROM users
             ORDER BY created_at DESC
             LIMIT ? OFFSET ?
