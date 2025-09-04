@@ -92,13 +92,18 @@ const SheetTrigger: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 const SheetClose: React.FC<{ 
   onClose?: () => void;
   className?: string;
-}> = ({ onClose, className }) => (
+  children?: React.ReactNode;
+}> = ({ onClose, className, children }) => (
   <button
     onClick={onClose}
     className={cn("sheet-close", className)}
   >
-    <X className="sheet-close-icon" />
-    <span className="sr-only">Close</span>
+    {children ? children : (
+      <>
+        <X className="sheet-close-icon" />
+        <span className="sr-only">Close</span>
+      </>
+    )}
   </button>
 );
 

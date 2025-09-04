@@ -73,9 +73,6 @@ export function Home(): JSX.Element {
           
           homeElement?.setAttribute('data-scroll', scrollState);
           
-          // Debug: log scroll state changes
-          console.log('Scroll percent:', scrollPercent.toFixed(2), 'State:', scrollState);
-          
           ticking = false;
         });
         ticking = true;

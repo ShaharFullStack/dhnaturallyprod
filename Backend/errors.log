@@ -1986,3 +1986,13 @@ Error: Access denied. Invalid or expired token.
 
 -----------------------------------------------------
 
+Time: 5.9.2025, 2:17:20
+Error: Access denied. Session not found or expired.
+
+-----------------------------------------------------
+
+Time: 5.9.2025, 2:23:51
+Error: "description_he" length must be at least 10 characters long
+
+-----------------------------------------------------
+

@@ -23,11 +23,11 @@ export const translations: Translations = {
   'home.hero.cta.about': { he: 'למד על טיפול טבעי', en: 'Learn Natural Healing' },
 
   // Expertise Section - Updated with Dafna's story
-  'home.expertise.title': { he: ' דפנה חליוה-מרקוס: הלב הפועם של DHnaturally', en: 'Meet Dafna Haliwa-Marcus: The Heart Behind DHnaturally' },
+  'home.expertise.title': { he: ' דפנה חליוה-מרקוס: הלב הפועם של DHnaturally', en: 'Dafna Haliwa-Marcus: The Heart Behind DHnaturally' },
   'home.expertise.description': { he: 'דפנה חליוה-מרקוס, נטורופתית מוסמכת עם למעלה מ-15 שנות ניסיון, הקימה את DHnaturally מתוך הבנה עמוקה בצורך בפתרונות טבעיים יעילים. לאחר חוויה אישית עם מגבלות הרפואה המודרנית, היא יצרה תכשירים המחברים בין חכמת הרפואה המסורתית לבין מחקר מדעי עדכני', en: 'Dafna Haliwa-Marcus, a certified naturopath with over 15 years of experience, founded DHnaturally from a deep understanding of the need for effective natural solutions. After a personal experience with modern medicine\'s limitations, she created formulations that bridge traditional healing wisdom with current scientific research' },
   'home.expertise.dafna.education': { he: 'השכלה והכשרה מקצועית', en: 'Professional Education & Training' },
   'home.expertise.dafna.education.desc': { he: 'בוגרת אוניברסיטת דורצ\'סטר אנגליה ומכללת מעינות ירושלים. מומחית בהומיאופתיה, אירידיולוגיה, רפואה קוריאנית ופתולוגיה', en: 'Graduate of University of Dorset England and Maayanot Jerusalem College. Expert in homeopathy, iridology, Korean medicine, and pathology' },
-  'home.expertise.personal.journey': { he: 'מנסיוני האישי לטובת הרבית', en: 'Personal Journey to Vision' },
+  'home.expertise.personal.journey': { he: 'מנסיוני האישי לטובת הרבית', en: 'Personal Experience to Vision' },
   'home.expertise.personal.journey.desc': { he: 'חוותה בעצמה את מגבלות הרפואה המודרנית והקימה קליניקה פרטית המספקת פתרונות טבעיים יעילים מאז 2006', en: 'Experienced modern medicine\'s limitations firsthand and established a private clinic providing effective natural solutions since 2006' },
   'home.expertise.unique.formulas': { he: 'נוסחאות ייחודיות', en: 'Unique Formulations' },
   'home.expertise.unique.formulas.desc': { he: 'פיתחה נוסחאות מתקדמות המטפלות במגוון בעיות נפוצות בו-זמנית, כולל סוכרת, בעיות כבד וקשב וריכוז', en: 'Developed advanced formulations addressing multiple concurrent health issues, including diabetes, liver problems, and attention/focus' },
@@ -147,7 +147,7 @@ export const translations: Translations = {
   'articles.category.wellness': { he: 'אורח חיים בריא', en: 'Healthy Lifestyle' },
   'articles.category.research': { he: 'מחקרים ועדכונים', en: 'Research & Updates' },
   'articles.newsletter.title': { he: 'הישארו מעודכנים בחדשות הבריאות הטבעית', en: 'Stay Updated with Natural Health News' },
-  'articles.newsletter.description': { he: 'קבלו מאמרים מקצועיים, טיפים בריאותיים ומידע על מוצרים חדשים ישירות למייל שלכם', en: 'Receive professional articles, health tips and new product updates directly to your email' },
+  'articles.newsletter.description': { he: 'קבלו מאמרים מקצועיים, טיפים בריאותיים ומידע על מוצרים חדשים ישירות למייל', en: 'Receive professional articles, health tips and new product updates directly to your email' },
   'articles.newsletter.placeholder': { he: 'הכניסו כתובת מייל לקבלת ייעוץ מקצועי', en: 'Enter email for professional health guidance' },
   'articles.newsletter.subscribe': { he: 'הירשמו לעדכונים מקצועיים', en: 'Subscribe to Professional Updates' },
 
@@ -284,7 +284,7 @@ export const translations: Translations = {
   'about.testimonials.3.text': { he: 'שירות מקצועי, יחס אישי ותוצאות ברורות לאורך הטיפול.', en: 'Professional service, personal attention and clear results over the course of treatment.' },
 
   // About CTA
-  'about.cta.title': { he: 'התחילו את מסע ההבראה שלכם', en: 'Start Your Healing Journey' },
+  'about.cta.title': { he: 'התחילו את תהליך ההבראה היום!', en: 'Start your healing process today!' },
   'about.cta.subtitle': { he: 'פגישה מקצועית תתחיל את התהליך לעבר בריאות מיטבית וטיפול מותאם אישית.', en: 'A professional consultation will begin the process toward optimal health and personalized care.' },
 
   // Medicine Making Process
@@ -433,10 +433,10 @@ export const translations: Translations = {
   'success.consultation.booked': { he: 'הייעוץ נקבע בהצלחה! נשלח לכם אישור ופרטים נוספים.', en: 'Consultation successfully booked! We\'ll send you confirmation and additional details.' },
 
   // Call to Action
-  'cta.shopNow': { he: 'קנו עכשיו', en: 'Shop Now' },
+  'cta.shopNow': { he: 'לחנות', en: 'Shop Now' },
   'cta.learnMore': { he: 'למדו עוד', en: 'Learn More' },
-  'cta.getConsultation': { he: 'קבלו ייעוץ מקצועי', en: 'Get Professional Consultation' },
-  'cta.startHealing': { he: 'התחילו את המסע לבריאות', en: 'Start Your Healing Journey' },
+  'cta.getConsultation': { he: 'לייעוץ מקצועי', en: 'Get Professional Consultation' },
+  'cta.startHealing': { he: 'התחילו את תהליך ההבראה כבר היום!', en: 'Start Your Healing Process Today!' },
   'cta.discoverNatural': { he: 'גלו רפואה טבעית', en: 'Discover Natural Medicine' },
   'cta.freeShippingOffer': { he: 'משלוח חינם מעל ₪150', en: 'Free shipping over ₪150' },
 
@@ -527,7 +527,7 @@ export const translations: Translations = {
   'error.passwordTooShort': { he: 'סיסמה קצרה מדי (מינימום 8 תווים)', en: 'Password too short (minimum 8 characters)' },
   'error.passwordMismatch': { he: 'הסיסמאות אינן תואמות', en: 'Passwords do not match' },
   'error.invalidPhone': { he: 'מספר טלפון לא תקין', en: 'Invalid phone number' },
-  'error.loginFailed': { he: 'התחברות נכשלה. בדקו את הפרטים שלכם', en: 'Login failed. Please check your credentials' },
+  'error.loginFailed': { he: 'התחברות נכשלה. בדקו את הפרטים', en: 'Login failed. Please check your credentials' },
   'error.emailExists': { he: 'כתובת האימייל כבר קיימת במערכת', en: 'Email address already exists' },
   'error.networkError': { he: 'בעיה בחיבור לשרת. נסו שוב', en: 'Network error. Please try again' },
   'error.sessionExpired': { he: 'ההתחברות פגה. התחברו שוב', en: 'Session expired. Please login again' },

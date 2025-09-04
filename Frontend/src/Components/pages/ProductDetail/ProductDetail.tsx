@@ -1,6 +1,7 @@
 import { JSX, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../Contexts/language-context";
+import { useCart } from "../../../hooks/use-cart";
 import { t } from "../../../lib/i18b";
 import { appConfig } from "../../../Utils/AppConfig";
 import "./ProductDetail.css";
@@ -20,6 +21,7 @@ export function ProductDetail(): JSX.Element {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const { language } = useLanguage();
+    const { addToCart } = useCart();
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -112,15 +114,39 @@ export function ProductDetail(): JSX.Element {
                         </span>
                     </div>
                     <div className="product-detail-description">
-                        <h3>{t("store.description", language) || "Description"}</h3>
-                        <p>{currentDescription}</p>
+                            <p>{currentDescription}</p>
                     </div>
 
                     <div className="product-detail-actions">
-                        <button className="add-to-cart-btn-large">
+                        <button 
+                            className="add-to-cart-btn-large"
+                            onClick={() => {
+                                const productForCart = {
+                                    id: product.id,
+                                    name: currentName,
+                                    description: currentDescription,
+                                    price: product.price,
+                                    imageUrl: product.imageUrl
+                                };
+                                addToCart(productForCart);
+                            }}
+                        >
                             {t("store.addToCart", language) || "Add to Cart"}
                         </button>
-                        <button className="buy-now-btn">
+                        <button 
+                            className="buy-now-btn"
+                            onClick={() => {
+                                const productForCart = {
+                                    id: product.id,
+                                    name: currentName,
+                                    description: currentDescription,
+                                    price: product.price,
+                                    imageUrl: product.imageUrl
+                                };
+                                addToCart(productForCart);
+                                navigate('/checkout');
+                            }}
+                        >
                             {t("store.buyNow", language) || "Buy Now"}
                         </button>
                     </div>

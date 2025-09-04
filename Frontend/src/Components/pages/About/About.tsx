@@ -1,4 +1,4 @@
-import { ArrowRight, Award, BookOpen, CheckCircle, Heart, Microscope, Quote, RefreshCw, Scale, ShieldCheck, Star, User, Users } from 'lucide-react';
+import { ArrowRight, Award, BookOpen, CheckCircle, Heart, Microscope, RefreshCw, Scale, ShieldCheck, User, Users } from 'lucide-react';
 import { JSX, useEffect } from "react";
 import bsyaLogo from '../../../Assets/Images/certifications/BSYA.png';
 import maayanotLogo from '../../../Assets/Images/certifications/Maayanot2.png';
@@ -84,27 +84,6 @@ export function About(): JSX.Element {
         }
     ];
 
-    const testimonials = [
-        {
-            name: t("about.testimonials.1.name", language),
-            role: t("about.testimonials.1.role", language),
-            text: t("about.testimonials.1.text", language),
-            rating: 5
-        },
-        {
-            name: t("about.testimonials.2.name", language),
-            role: t("about.testimonials.2.role", language),
-            text: t("about.testimonials.2.text", language),
-            rating: 5
-        },
-        {
-            name: t("about.testimonials.3.name", language),
-            role: t("about.testimonials.3.role", language),
-            text: t("about.testimonials.3.text", language),
-            rating: 5
-        }
-    ];
-
     return (
         <div className="about">
             {/* Hero Section */}
@@ -183,15 +162,15 @@ export function About(): JSX.Element {
                 </div>
             </section>
 
-                        {/* Mission Section */}
-                <div className="about-mission" data-scroll-animate id="mission">
-                    <div className="container">
-                        <div className="section-inner text-center">
-                            <h2 className="section-title">{t("about.mission.title", language)}</h2>
-                            <p className="section-subtitle large">{t("about.mission.subtitle", language)}</p>
-                        </div>
+            {/* Mission Section */}
+            <div className="about-mission" data-scroll-animate id="mission">
+                <div className="container">
+                    <div className="section-inner text-center">
+                        <h2 className="section-title">{t("about.mission.title", language)}</h2>
+                        <p className="section-subtitle large">{t("about.mission.subtitle", language)}</p>
                     </div>
-                    </div>
+                </div>
+            </div>
 
             {/* Medicine Making Process Section */}
             <section className="about-section about-process" data-scroll-animate id="process">
@@ -416,7 +395,7 @@ export function About(): JSX.Element {
                                         </h4>
                                         <p className="feature-description">
                                             {language === 'he'
-                                                ? 'תכשירים טבעיים מותאמים לצרכים האישיים שלכם'
+                                                ? 'תכשירים טבעיים מותאמים אישית'
                                                 : 'Natural remedies tailored to your individual needs'
                                             }
                                         </p>
@@ -457,51 +436,11 @@ export function About(): JSX.Element {
                             </div>
                         </div>
                     </div>
-
-                    {/* Call to Action in testimonials */}
-                    <div className="text-center mt-16">
-                        <h3 className="section-subtitle">
-                            {language === 'he' ? 'התחילו את הדרך לבריאות טובה יותר.' : 'Begin your path to better health.'}
-                        </h3>
-                        <Button className="primary" data-testid="testimonials-consultation-cta">
-                            {language === 'he' ? 'קבלו ייעוץ מקצועי חינם' : 'Get Free Professional Consultation'}
-                        </Button>
-                        <Button className="outline" data-testid="testimonials-shop-cta">
-                            {language === 'he' ? 'החיים הטבעיים שלך מחכים' : 'Your Natural Life Awaits'}
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
-            {/* Testimonials */}
-            <section className="about-section about-testimonials" data-scroll-animate id="testimonials">
-                <div className="container">
-                    <div className="section-header">
-                        <h2 className="section-title text-center">{t("home.testimonials.title", language)}</h2>
-                        <div className="section-divider center"></div>
-                    </div>
-                    <div className="testimonials-grid">
-                        {testimonials.map((testimonial, index) => (
-                            <div key={index} className="testimonial-card" style={{ animationDelay: `${index * 0.15}s` }}>
-                                <div className="testimonial-quote">
-                                    <Quote size={24} />
-                                </div>
-                                <div className="testimonial-rating">{[...Array(testimonial.rating)].map((_, i) => (
-                                    <Star key={i} size={16} className="testimonial-star" />
-                                ))}</div>
-                                <p className="testimonial-text">"{testimonial.text}"</p>
-                                <div className="testimonial-meta">
-                                    <div className="testimonial-name">{testimonial.name}</div>
-                                    <div className="testimonial-role">{testimonial.role}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </section>
 
             {/* CTA Section */}
-            {/* <section className="about-cta" data-scroll-animate id="cta">
+            <section className="about-cta" data-scroll-animate id="cta">
                 <div className="cta-background"></div>
                 <div className="container text-center">
                     <h2 className="cta-title">{t("about.cta.title", language)}</h2>
@@ -514,7 +453,7 @@ export function About(): JSX.Element {
                         <Button className="outline lg">{t("cta.shopNow", language)}</Button>
                     </div>
                 </div>
-            </section> */}
+            </section>
         </div>
     );
 }

@@ -87,6 +87,10 @@ export function Admin(): JSX.Element {
             loadProducts();
         } else if (activeTab === 'articles') {
             loadArticles();
+        } else if (activeTab === 'overview') {
+            // Load both products and articles for overview statistics
+            loadProducts();
+            loadArticles();
         }
     }, [activeTab, loadProducts, loadArticles]);
 
