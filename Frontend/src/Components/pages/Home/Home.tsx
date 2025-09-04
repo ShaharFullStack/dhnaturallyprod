@@ -20,6 +20,7 @@ import { t } from "../../../lib/i18b";
 import { AnimatedLogo } from "../../Speacials/AnimatedLogo/AnimatedLogo";
 import { Button } from "../../UI/Button/Button";
 import "./Home.css";
+import TestimonialsCarousel from "../../LayoutArea/UI/Carousel/Carousel";
 
 export function Home(): JSX.Element {
 
@@ -194,6 +195,49 @@ export function Home(): JSX.Element {
         </div>
       </section>
 
+      {/* Testimonials Carousel */}
+      <section className="hero-section testimonials-section" data-testid="testimonials-section">
+        <div className="hero-container" data-scroll-animate>
+          <TestimonialsCarousel />
+        </div>
+      </section>
+
+      {/* Expertise & Authority Section */}
+      <section className="features-section" data-testid="expertise-section" data-scroll-animate>
+        <div className="hero-container">
+          <div className="section-header">
+            <h1 className="features-headline">
+              {language === 'he' ? ' DHnaturally מובילה בטיפול טבעי' : 'Why DHnaturally is Considered the Leading Authority in Natural Treatment?'}
+            </h1>
+            <p className="section-description features-description">
+              {language === 'he'
+                ? 'עשרות שנות מחקר, פיתוח ולמידה בתחום הנטורופתיה וההומיאופתיה הביאו אותנו למעמד של מומחים מובילים בישראל ובעולם'
+                : 'Decades of research, development and learning in naturopathy and homeopathy have brought us to the status of leading experts in Israel and worldwide'
+              }
+            </p>
+          </div>
+        
+          <div className="features-grid">
+            {expertiseFeatures.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <div
+                  key={index}
+                  className="feature-card"
+                  data-testid={`expertise-${index}`}
+                >
+                  <div className="feature-icon">
+                    <IconComponent className="icon" />
+                  </div>
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-description">{feature.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
             {/* Trust & Safety Section */}
       <section className="trust-section" data-testid="trust-section" data-scroll-animate>
         <div className="hero-container">
@@ -247,46 +291,8 @@ export function Home(): JSX.Element {
         </div>
       </section>
 
-      {/* Expertise & Authority Section */}
-      <section className="features-section" data-testid="expertise-section" data-scroll-animate>
-        <div className="hero-container">
-          <div className="section-header">
-            <h1 className="section-title features-headline">
-              {language === 'he' ? ' DHnaturally מובילה בטיפול טבעי' : 'Why DHnaturally is Considered the Leading Authority in Natural Treatment?'}
-            </h1>
-            <p className="section-description features-description">
-              {language === 'he'
-                ? 'עשרות שנות מחקר, פיתוח ולמידה בתחום הנטורופתיה וההומיאופתיה הביאו אותנו למעמד של מומחים מובילים בישראל ובעולם'
-                : 'Decades of research, development and learning in naturopathy and homeopathy have brought us to the status of leading experts in Israel and worldwide'
-              }
-            </p>
-          </div>
-        
-          <div className="features-grid">
-            {expertiseFeatures.map((feature, index) => {
-              const IconComponent = feature.icon;
-              return (
-                <div
-                  key={index}
-                  className="feature-card"
-                  data-testid={`expertise-${index}`}
-                >
-                  <div className="feature-icon">
-                    <IconComponent className="icon" />
-                  </div>
-                  <h3 className="feature-title">{feature.title}</h3>
-                  <p className="feature-description">{feature.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-
-
       {/* Treatment Approach */}
-      <section className="about-section" data-scroll-animate id="approach">
+      <section className="approach-section" data-scroll-animate id="approach">
         <div className="container">
           <div className="section-inner">
             <div className="section-header">

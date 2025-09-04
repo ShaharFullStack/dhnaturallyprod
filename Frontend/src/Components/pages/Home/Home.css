@@ -19,19 +19,31 @@
   padding: 0;
 }
 
-/* Hero Section */
+/* Scroll reveal used by Home.tsx */
+[data-scroll-animate] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-scroll-animate].animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================================
+   Hero
+   ===================================== */
 .hero-section {
   background: url('../../../Assets/Images/HeroBrightImage1.png');
   background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
   min-height: 50vh;
-  padding: 3rem 0;
-  position: relative;
   display: flex;
   align-items: center;
+  position: relative;
   overflow: hidden;
+  padding: 1rem 0;
+  margin: 0;
   z-index: 1;
 }
 
@@ -43,14 +55,13 @@
 
 .hero-container {
   max-width: 1280px;
-  height: auto;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
 .hero-content {
-  margin-bottom: 2.5rem;
-  margin-top: 7.6rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .hero-logo-container {
@@ -64,20 +75,20 @@
 
 .hero-logo {
   margin-bottom: 1rem;
-  filter: brightness(1.1) contrast(2.1);
 }
 
 .hero-title {
   color: var(--dh-navy);
   margin-bottom: 1.25rem;
   line-height: 1.2;
+  text-align: center;
 }
 
 .hero-title-text {
   display: block;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
   color: var(--dh-light);
   font-size: 2.2rem;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.65);
   margin-top: 0.5rem;
 }
 
@@ -193,6 +204,17 @@
 .hero-cta-secondary:hover {
   background-color: white;
   color: var(--dh-ocean);
+}
+
+/* Testimonials section */
+.testimonials-section {
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, var(--dh-pale) 10%, rgba(255, 255, 255, 0.8) 70%);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  backdrop-filter: blur(4px)
+
 }
 
 /* Feature Cards */
@@ -611,7 +633,8 @@
   text-align: center;
   max-width: 100%;
   color: var(--dh-sage);
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 1px rgb(250, 176, 176, 0.3);
+  font-weight: semibold;
 }
 
 @media (min-width: 768px) {
@@ -1042,8 +1065,8 @@
 
 /* Timeline Styles */
 .approach-section {
+  background-image: linear-gradient(230deg, hsla(193, 74%, 94%, 0.7) 40%, hsla(194, 62%, 49%, 0.342));
   padding: 4rem 0;
-  background-color: white;
   position: relative;
   z-index: 5;
 }
@@ -1094,13 +1117,6 @@
   position: relative;
   z-index: 5;
   
-}
-
-.about-section {
-  padding: 2rem 0;
-  position: relative;
-  z-index: 5;
-  backdrop-filter: blur(1px);
 }
 
 .container {
@@ -1236,7 +1252,7 @@
 
 /* Force stacked approach layout for tablets and narrow desktops */
 @media (max-width: 1024px) {
-  .about-section .cards-grid {
+  .approach-section .cards-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
     padding: 0 0 0 3rem !important;
@@ -1245,7 +1261,7 @@
   }
 
   /* Use a left-aligned timeline line instead of the centered desktop line */
-  .about-section .cards-grid::before {
+  .approach-section .cards-grid::before {
     display: block !important;
     left: 1rem !important;
     top: 1rem !important;
@@ -1256,7 +1272,7 @@
     border-radius: 2px !important;
   }
 
-  .about-section .cards-grid .approach-card {
+  .approach-section .cards-grid .approach-card {
     float: none !important;
     position: relative !important;
     left: auto !important;
@@ -1273,14 +1289,14 @@
   }
 
   /* ensure card markers sit correctly */
-  .about-section .cards-grid .approach-card::before {
+  .approach-section .cards-grid .approach-card::before {
     left: -2.25rem !important;
     top: 1.25rem !important;
     display: block !important;
   }
 
   /* ensure card-number is inline inside the card on smaller screens */
-  .about-section .cards-grid .approach-card .card-number {
+  .approach-section .cards-grid .approach-card .card-number {
     position: relative !important;
     left: 0 !important;
     transform: none !important;
@@ -1288,3 +1304,4 @@
     display: inline-block !important;
   }
 }
+

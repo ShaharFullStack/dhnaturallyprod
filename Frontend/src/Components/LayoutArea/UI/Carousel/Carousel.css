@@ -1,0 +1,191 @@
+/* Carousel CSS - scoped styles only */
+
+.carousel {
+  --slide-count: 5;
+  --slide-width: 20rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  border: 2px solid #ddd;
+  background-color: #fafafa;
+}
+
+.carousel__wrap {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.carousel__inner {
+    width: 25rem;
+    position: relative;
+    height: 100%;
+    max-height: calc(var(--slide-width) * 3);
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    min-height: 25rem;
+}
+
+.carousel__container {
+    height: 100%;
+    overflow: visible;
+    position: relative;
+    width: 100%;
+}
+
+.carousel__slide-list {
+    width: 100%;
+    top: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: 100%;
+}
+
+.carousel__slide-item {
+    display: block;
+    width: var(--slide-width);
+    padding: 1rem;
+    position: absolute;
+    transition: all 0.5s ease;
+    height: var(--slide-width);
+    left: 50%;
+    top: 50%;
+    transform-origin: center;
+}
+
+.carousel__slide-item.active {
+    z-index: 2;
+}
+
+.carousel__slide-item-img-link {
+    cursor: zoom-in;
+    display: flex;
+    height: calc(100% - 2rem);
+    overflow: hidden;
+    position: relative;
+    width: calc(100% - 2rem);
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+
+.carousel__slide-item-img-link img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+}
+
+.carousel__slide-item-img-link:hover img {
+    transform: scale(1.1);
+}
+
+.carousel__btn {
+    align-items: center;
+    background: 0;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.carousel__btn--prev {
+    top: -5rem;
+}
+
+.carousel__btn--next {
+    bottom: -5rem;
+}
+
+.carousel__btn-arrow {
+    border: solid #333;
+    border-width: 0 0.3rem 0.3rem 0;
+    height: 3rem;
+    padding: 2px;
+    width: 3rem;
+    z-index: 10;
+}
+
+.carousel__btn-arrow--left {
+    transform: rotate(45deg);
+}
+
+.carousel__btn-arrow--right {
+    transform: rotate(225deg);
+}
+
+.carousel__dots {
+    display: flex;
+    flex-direction: column;
+    right: -3rem;
+    top: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+.carousel__dots .dot {
+    background: #ccc;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 2rem;
+    margin: 0.3rem 0;
+    outline: none;
+    transform: scale(0.5);
+    width: 2rem;
+}
+
+.carousel__dots .dot.active {
+    background: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .carousel {
+    --slide-width: 16rem;
+    padding: 1rem 0.5rem;
+  }
+  
+  .carousel__inner {
+    width: 20rem;
+  }
+  
+  .carousel__btn--prev,
+  .carousel__btn--next {
+    display: none; /* Hide arrows on mobile for cleaner look */
+  }
+  
+  .carousel__btn-arrow {
+    height: 2rem;
+    width: 2rem;
+  }
+  
+  .carousel__dots {
+    right: -2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel {
+    --slide-width: 14rem;
+  }
+  
+  .carousel__inner {
+    width: 18rem;
+  }
+  
+  .carousel__dots {
+    right: -1.5rem;
+  }
+}

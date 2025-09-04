@@ -4,6 +4,7 @@ import { useCart } from '../../../hooks/use-cart';
 import { t } from '../../../lib/i18b';
 import { Button } from '../../UI/Button/Button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../../UI/Sheet/Sheet';
+import './ShoppingCart.css';
 
 interface ShoppingCartSidebarProps {
   isOpen: boolean;
@@ -26,12 +27,13 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
   if (isLoading) {
     return (
       <Sheet open={isOpen} onOpenChange={onClose}>
-        <SheetContent side={language === 'he' ? 'left' : 'right'} className="w-[400px] sm:w-[540px]">
-          <SheetHeader>
-            <SheetTitle data-testid="cart-title">{t('cart.title', language)}</SheetTitle>
+        <SheetContent side={language === 'he' ? 'left' : 'right'} className="w-[400px] sm:w-[540px] shopping-cart">
+          <SheetHeader className="cart-header">
+            <SheetTitle data-testid="cart-title" className="cart-title">{t('cart.title', language)}</SheetTitle>
           </SheetHeader>
-          <div className="flex items-center justify-center h-full">
-            <p data-testid="cart-loading">{t('common.loading', language)}</p>
+          <div className="cart-loading">
+            <div className="loading-spinner"></div>
+            <p data-testid="cart-loading" className="text-dh-navy font-medium">{t('common.loading', language)}</p>
           </div>
         </SheetContent>
       </Sheet>
@@ -40,21 +42,24 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent side={language === 'he' ? 'left' : 'right'} className="w-[400px] sm:w-[540px]">
-        <SheetHeader>
-          <SheetTitle data-testid="cart-title">{t('cart.title', language)}</SheetTitle>
+      <SheetContent side={language === 'he' ? 'left' : 'right'} className="w-[400px] sm:w-[540px] shopping-cart">
+        <SheetHeader className="cart-header">
+          <SheetTitle data-testid="cart-title" className="cart-title">{t('cart.title', language)}</SheetTitle>
         </SheetHeader>
         
         <div className="flex flex-col h-full">
           {cartItems.length === 0 ? (
-            <div className="flex-1 flex items-center justify-center">
-              <p className="text-gray-500" data-testid="cart-empty">
+            <div className="flex-1 empty-cart">
+              <div className="empty-cart-icon">
+                🛒
+              </div>
+              <p className="empty-cart-text" data-testid="cart-empty">
                 {t('cart.empty', language)}
               </p>
             </div>
           ) : (
             <>
-              <div className="flex-1 overflow-y-auto py-4">
+              <div className="flex-1 overflow-y-auto py-4 dh-scroll">
                 <div className="space-y-4">
                   {cartItems.map((item) => {
                     const productName = item.product.name;
@@ -62,42 +67,43 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                     return (
                       <div 
                         key={item.id} 
-                        className="flex items-center space-x-4 rtl:space-x-reverse p-4 border rounded-lg"
+                        className="cart-item flex items-center space-x-4 rtl:space-x-reverse"
                         data-testid={`cart-item-${item.id}`}
                       >
                         <img
                           src={item.product.imageUrl || '/images/products/default.jpg'}
                           alt={productName}
-                          className="w-16 h-16 object-cover rounded-md bg-gray-200"
+                          className="cart-item-image"
                           data-testid={`cart-item-image-${item.id}`}
                         />
                         
-                        <div className="flex-1">
+                        <div className="cart-item-details">
                           <h4 
-                            className="font-medium text-sm"
+                            className="cart-item-name"
                             data-testid={`cart-item-name-${item.id}`}
                           >
                             {productName}
                           </h4>
                           <p 
-                            className="text-dh-ocean font-semibold"
+                            className="cart-item-price"
                             data-testid={`cart-item-price-${item.id}`}
                           >
                             {t('common.currency', language)}{item.product.price}
                           </p>
                         </div>
                         
-                        <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                        <div className="quantity-controls">
                           <Button
                             onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
                             disabled={item.quantity <= 1}
+                            className="quantity-btn"
                             data-testid={`decrease-quantity-${item.id}`}
                           >
                             <Minus className="h-3 w-3" />
                           </Button>
                           
                           <span 
-                            className="w-8 text-center"
+                            className="quantity-display"
                             data-testid={`cart-item-quantity-${item.id}`}
                           >
                             {item.quantity}
@@ -105,6 +111,7 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                           
                           <Button
                             onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                            className="quantity-btn"
                             data-testid={`increase-quantity-${item.id}`}
                           >
                             <Plus className="h-3 w-3" />
@@ -113,7 +120,7 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                         
                         <Button
                           onClick={() => handleRemoveItem(item.id)}
-                          className="text-red-500 hover:text-red-700"
+                          className="remove-btn"
                           data-testid={`remove-item-${item.id}`}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -124,24 +131,24 @@ export function ShoppingCartSidebar({ isOpen, onClose }: ShoppingCartSidebarProp
                 </div>
               </div>
               
-              <div className="border-t pt-4 space-y-4">
-                <div className="flex justify-between items-center text-lg font-semibold">
+              <div className="cart-summary">
+                <div className="cart-total">
                   <span data-testid="cart-total-label">{t('cart.total', language)}</span>
-                  <span data-testid="cart-total-price">
+                  <span data-testid="cart-total-price" className="cart-total-amount">
                     {t('common.currency', language)}{totalPrice.toFixed(2)}
                   </span>
                 </div>
                 
-                <div className="space-y-2">
+                <div className="cart-actions">
                   <Button 
-                    className="w-full bg-dh-ocean hover:bg-dh-navy"
+                    className="checkout-btn"
                     data-testid="checkout-button"
                   >
                     {t('cart.checkout', language)}
                   </Button>
                   
                   <Button 
-                    className="w-full"
+                    className="clear-cart-btn"
                     onClick={() => clearCart()}
                     data-testid="clear-cart-button"
                   >

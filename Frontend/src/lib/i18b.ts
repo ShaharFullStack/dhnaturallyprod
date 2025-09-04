@@ -42,6 +42,7 @@ export const translations: Translations = {
   'home.featured.cta': { he: 'צפה בכל התרופות הטבעיות', en: 'View All Natural Medicines' },
 
   'home.testimonials.title': { he: 'מה אומרים מטופלינו ומטפלים מקצועיים', en: 'What Our Patients and Professional Practitioners Say' },
+  'home.testimonials.subtitle': { he: 'הצלחות מוכחות מלקוחותינו היקרים', en: 'Proven Successes from Our Valued Customers' },
 
   // Store page
   'store.title': { he: 'תרופות טבעיות ותכשירים הומיאופתיים', en: 'Natural Medicines & Homeopathic Remedies' },

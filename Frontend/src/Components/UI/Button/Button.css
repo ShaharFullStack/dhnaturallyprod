@@ -21,6 +21,8 @@
   cursor: pointer;
   border: 1px solid transparent;
   transition: background-color 180ms ease, box-shadow 180ms ease, transform 120ms ease;
+  position: relative;
+  overflow: hidden;
 }
 
 /* sizes */
@@ -51,7 +53,95 @@
   text-decoration: underline;
 }
 
-.dh-button:disabled { opacity: 0.6; cursor: not-allowed; }
+/* Special cart button styles */
+.dh-button.quantity-btn {
+  background: white;
+  color: var(--dh-navy);
+  border: 1px solid var(--dh-pale);
+  padding: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dh-button.quantity-btn:hover:not(:disabled) {
+  background: var(--dh-ocean);
+  color: white;
+  border-color: var(--dh-ocean);
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dh-button.remove-btn {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 0.625rem;
+  padding: 0.5rem;
+}
+
+.dh-button.remove-btn:hover {
+  background: #dc2626;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.dh-button.checkout-btn {
+  background: white;
+  color: var(--dh-navy);
+  font-weight: 700;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.75rem;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.dh-button.checkout-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.dh-button.checkout-btn:hover::before {
+  left: 100%;
+}
+
+.dh-button.checkout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background: var(--dh-light);
+}
+
+.dh-button.clear-cart-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.dh-button.clear-cart-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.dh-button:disabled { 
+  opacity: 0.6; 
+  cursor: not-allowed; 
+  transform: none !important;
+}
 
 /* utility */
 .dh-button.full-width { width: 100%; }
